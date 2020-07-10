@@ -1,27 +1,37 @@
 import React from 'react';
+import {Route} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const Login = (props) => {
-  
+
+     const history = useHistory();
+
+
     let account = {
         username: "",
         password: ""
+
     }
 
     const submitButton = (event) => {
         event.preventDefault();
         props.authenticate(account.username, account.password);
         document.getElementById("addForm").reset();
+
     }
 
     const studentRegistration = (event) => {
         event.preventDefault();
+        history.push("/registration")
     }
 
     const professorRegistration = (event) => {
         event.preventDefault();
+        history.push("/professorregistration")
     }
 
     return (
+
         <form id = "addForm">
             <div >
                 <h2>Sign In</h2>
@@ -32,11 +42,13 @@ const Login = (props) => {
             <input type="text" placeholder="Enter Username" 
                 onChange = {
                     event => account.username = (event.target.value)
+
                 }
             />
             <input type="text" placeholder="Enter Password" 
                 onChange = {
                     event => account.password = (event.target.value)
+
                 }
             />
             <button onSubmit = {submitButton}>Submit</button>
@@ -44,6 +56,8 @@ const Login = (props) => {
             <button onClick = {professorRegistration}>Register as a Professor</button>
         </form>
     );
+
+
 
 };
 
