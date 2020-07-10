@@ -69,7 +69,7 @@ const ProfessorRegister = (props) => {
                 onChange = { event => account.department = (event.target.value) }
             />
             <br/>
-            <input className="inputHalf" type="text" placeholder="Username" 
+            <input className="inputHalf" type="text" placeholder="Desired Username" 
                 onChange = { event => account.username = (event.target.value) }
             />
             <input className="inputHalf" type="text" placeholder="Password" 
