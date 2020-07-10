@@ -14,16 +14,16 @@ const db = require('./config/keys').mongoURI;
 //Connect to Mongo
 //promise based so added .then
 mongoose.connect(db)
-    .then(()=>console.log('MongoDB Connected!'))
+    .then(() => console.log('MongoDB Connected!'))
     .catch(err => console.log(err));
 
 //home route
-app.get('/', (req, res) => {
+app.get('/', (req, res) =>
+{
     console.log("homepage");
     res.send("SUP");
 });
 
+const port = process.env.PORT || 5000;
 
-// const port = process.env.PORT || 5000;
-const port = 5000;
-app.listen(port, ()=>console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`server listening on: http://localhost:${port}`));
