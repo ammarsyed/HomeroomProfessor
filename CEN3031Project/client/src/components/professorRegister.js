@@ -1,7 +1,10 @@
 import React from 'react';
+import Login from './Login';
+import { useHistory } from "react-router-dom";
 
-const professorRegister = (props) => {
-
+const ProfessorRegister = (props) => {
+    
+    const history = useHistory();
 
     let account = {
         name: "",
@@ -10,17 +13,21 @@ const professorRegister = (props) => {
         department: ""
     }
 
+    //if form fields are filled, push to home page
     const submitButton = (event) => {
         event.preventDefault();
-        props.authenticate(account.username, account.password);
+        //props.authenticate(account.username, account.password);
         document.getElementById("addForm").reset();
+    }
 
+    const backButton = (event) => {
+        event.preventDefault();
+        history.push("/")
     }
 
 
     return (
-
-        <form id = "addForm">
+        <form id = "addForm" className="column1">
             <div >
                 <h2>Professor Registration</h2>
                 <b>
@@ -29,7 +36,7 @@ const professorRegister = (props) => {
             </div>
 
 
-            <input type="text" placeholder="Enter full name" 
+            <input className="loginInput" type="text" placeholder="Enter full name" 
                 onChange = {
                     event => account.name = (event.target.value)
 
@@ -37,7 +44,7 @@ const professorRegister = (props) => {
             />
 
 
-            <input type="text" placeholder="Enter email" 
+            <input className="loginInput" type="text" placeholder="Enter email" 
                 onChange = {
                     event => account.email = (event.target.value)
 
@@ -45,7 +52,7 @@ const professorRegister = (props) => {
             />
 
 
-            <input type="text" placeholder="Enter university" 
+            <input className="loginInput" type="text" placeholder="Enter university" 
                 onChange = {
                     event => account.university = (event.target.value)
 
@@ -53,13 +60,14 @@ const professorRegister = (props) => {
             />
 
 
-            <input type="text" placeholder="Enter department (i.e. Engineering, Liberal Arts, etc) " 
+            <input className="loginInput" type="text" placeholder="Enter department" 
                 onChange = {
                     event => account.department = (event.target.value)
 
                 }
             />
-
+            <br/>
+            <button onClick = {backButton}>Back</button>
             <button onSubmit = {submitButton}>Submit</button>
         </form>
     );
@@ -68,4 +76,4 @@ const professorRegister = (props) => {
 
 };
 
-export default professorRegister;
+export default ProfessorRegister;

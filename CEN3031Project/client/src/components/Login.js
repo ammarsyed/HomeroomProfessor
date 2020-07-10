@@ -13,6 +13,7 @@ const Login = (props) => {
 
     }
 
+    //This should be updated so when authenticated correctly, redirected to home page, otherwise stay at login
     const submitButton = (event) => {
         event.preventDefault();
         props.authenticate(account.username, account.password);
@@ -22,35 +23,37 @@ const Login = (props) => {
 
     const studentRegistration = (event) => {
         event.preventDefault();
-        history.push("/registration")
+        history.push("/StudentRegistration")
     }
 
     const professorRegistration = (event) => {
         event.preventDefault();
-        history.push("/professorregistration")
+        history.push("/ProfessorRegistration")
     }
 
     return (
 
-        <form id = "addForm">
+        <form id = "addForm" className="column1"> 
             <div >
                 <h2>Sign In</h2>
                 <b>
                     Please enter your Username and Password to log in.
                 </b>
             </div>
-            <input type="text" placeholder="Enter Username" 
+            <input className="loginInput" type="text" placeholder="Enter Username" 
                 onChange = {
                     event => account.username = (event.target.value)
 
                 }
             />
-            <input type="text" placeholder="Enter Password" 
+            <br/>
+            <input className="loginInput" type="text" placeholder="Enter Password" 
                 onChange = {
                     event => account.password = (event.target.value)
 
                 }
             />
+            <br/>
             <button onSubmit = {submitButton}>Submit</button>
             <button onClick = {studentRegistration}>Register as a Student</button>
             <button onClick = {professorRegistration}>Register as a Professor</button>
