@@ -11,3 +11,97 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ##### general ##### */
+* {
+	box-sizing: border-box;
+}
+
+main {
+	padding: 0 2rem;
+}
+
+.background{
+  background: #ffffff
+}
+
+/* ##### Columns ##### */
+.column1 {
+	float: left;
+	width: 50%;
+	padding: 10px;
+}
+.column2 {
+	padding: 1 0rem;
+	float: left;
+	width: 50%;
+	padding: 20px;
+	background-color: #e9984d;
+}
+.column2_gap{
+	float: left;
+	width: 50%;
+	padding: 5px;
+	background-color: #1c5ec0;
+}
+
+/* ##### Rows ##### */
+.row {
+	margin: 1rem;
+}
+
+.row:after {
+	padding: 1 0rem;
+	content: '';
+	display: table;
+	clear: both;
+}
+
+/* ##### Tables ##### */
+.tableWrapper {
+	min-height: 800px;
+	max-height: 800px;
+	overflow: auto;
+	scroll-behavior: smooth;
+	color:#ffffff;
+	height: auto;
+	border: dotted #e9984d;
+}
+
+/* ##### Buttons ##### */
+button {
+	background: #ffffff;
+	color: #000000;
+  padding: 0.3rem 0.5rem;
+	font-size: 0.8rem;
+	border: thick double #000000;
+	margin: 0.5rem 0.5rem;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 3px;
+	outline: none;
+}
+
+button:hover {
+	background: #e9984d;
+	color: #1c5ec0;
+	border: thick double#1c5ec0;
+}
+
+/* ##### Search ##### */
+header {
+	background: #3498db;
+	margin-bottom: 2rem;
+}
+
+input[type='text'] {
+	margin: 0.5rem;
+	background: rgb(255, 255, 255);
+	font-size: 1.3rem;
+	border: #000000;
+	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+	border-radius: 3px;
+	padding: 0 1rem;
+	width: calc(100% - 2rem);
+	height: 3rem;
+	color:#000000;
+}
