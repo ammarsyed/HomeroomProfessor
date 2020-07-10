@@ -7,10 +7,15 @@ const StudentRegister = (props) => {
     const history = useHistory();
 
     let account = {
-        name: "",
+        firstName: "",
+        lastName: "",
+        username: "",
         email: "",
-        dob: "",
-        school: ""
+        age: "",
+        phoneNumber: "",
+        city: "",
+        state: "",
+        subjects: [],
     }
 
     //if form fields are filled, push to home page
@@ -28,46 +33,45 @@ const StudentRegister = (props) => {
 
     return (
 
-        <form id = "addForm" className="column1">
+        <form id = "addForm">
             <div >
                 <h2>Student Registration</h2>
                 <b>
-                    Please enter your information to register as a student.
+                    Please enter your information below to register as a student.
                 </b>
             </div>
 
-
-            <input className="loginInput" type="text" placeholder="Enter full name" 
-                onChange = {
-                    event => account.name = (event.target.value)
-
-                }
+            <input className="inputThird" type="text" placeholder="First Name" 
+                onChange = { event => account.firstName = (event.target.value) }
             />
-
-
-            <input className="loginInput" type="text" placeholder="Enter Email" 
-                onChange = {
-                    event => account.email = (event.target.value)
-
-                }
+            <input className="inputThird" type="text" placeholder="Last Name" 
+                onChange = { event => account.lastName = (event.target.value) }
             />
-
-
-            <input className="loginInput" type="text" placeholder="Enter date of birth" 
-                onChange = {
-                    event => account.dob = (event.target.value)
-
-                }
+            <input className="inputThird" type="text" placeholder="Phone Number" 
+                onChange = { event => account.phoneNumber = (event.target.value) }
             />
-
-
-            <input className="loginInput" type="text" placeholder="Enter school name" 
-                onChange = {
-                    event => account.school = (event.target.value)
-
-                }
+            <input className="inputEigth" type="text" placeholder="Age" 
+                onChange = { event => account.age = (event.target.value) }
             />
             <br/>
+            <input className="inputThird" type="text" placeholder="City" 
+                onChange = { event => account.city = (event.target.value) }
+            />
+            <input className="inputThird" type="text" placeholder="State" 
+                onChange = { event => account.state = (event.target.value) }
+            />
+            <input className="inputHalf" type="text" placeholder="E-mail" 
+                onChange = { event => account.email = (event.target.value) }
+            />
+            <br/>
+            <input className="inputHalf" type="text" placeholder="Desired Username" 
+                onChange = { event => account.username = (event.target.value) }
+            />
+            <input className="inputHalf" type="text" placeholder="Password" 
+                onChange = { event => account.password = (event.target.value) }
+            />
+            <br/>
+
             <button onClick = {backButton}>Back</button>
             <button onSubmit = {submitButton}>Submit</button>
 
