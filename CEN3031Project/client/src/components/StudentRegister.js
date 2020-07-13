@@ -21,9 +21,18 @@ const StudentRegister = (props) => {
     //if form fields are filled, push to home page
     const submitButton = (event) => {
         event.preventDefault();
-        //props.authenticate(account.username, account.password);
-        document.getElementById("addForm").reset();
-        history.push("/")
+        //if form checkbox fields are filled, push into subjects
+        let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+        //pushing into account.subjects the checkbox values
+        for (var i = 0; i < checkboxes.length; i++) {
+            account.subjects.push(checkboxes[i].value);
+        }
+
+        //passing the account to registration
+        props.registration(account);
+
+        //set to Home page
+        history.push("/Home")
     }
 
     const backButton = (event) => {
@@ -64,6 +73,33 @@ const StudentRegister = (props) => {
                 onChange = { event => account.email = (event.target.value) }
             />
             <br/>
+            <p className="inputCheckboxes"><strong>Select Subjects To Be Tutored In:</strong>
+                <br/>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="computerscience"/>Computer Science</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="english"/>English</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="spanish"/>Spanish</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="french"/>French</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="latin"/>Latin</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="algebra"/>Algebra</label>
+                <br/>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="geometry"/>Geometry</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="precalculus"/>Precalculus</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="statistics"/>Statistics</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="calculus"/>Calculus</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="biology"/>Biology</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="chemistry"/>Chemistry</label>
+                <br/>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="physics"/>Physics</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="healthscience"/>Health Science</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="environmentalscience"/>Environmental Science</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="earthscience"/>Earth Science</label>
+                <br/>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="history"/>History</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="economics"/>Economics</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="psychology"/>Psychology</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="government"/>Government</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject" value="geography"/>Geography</label>
+            </p>
             <input className="inputHalf" type="text" placeholder="Desired Username" 
                 onChange = { event => account.username = (event.target.value) }
             />

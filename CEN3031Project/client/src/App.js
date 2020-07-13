@@ -13,6 +13,10 @@ const App = (props) => {
       
   };
 
+  const registration = (account) => {
+      
+  };
+
   return (
 
     <Router>
@@ -20,10 +24,21 @@ const App = (props) => {
            <div className="row">
             <h1><Link to="/" style={{textDecoration: 'none', color: 'black'}}>Homeroom Professor</Link></h1>
             <Switch>
-              <Route exact path = "/" component  = {Login} />
-              <Route exact path = "/Home" component  = {Home} />
-              <Route exact path = "/StudentRegistration" component  = {StudentRegister} />
-              <Route exact path = "/ProfessorRegistration" component  = {ProfessorRegister} />
+              <Route exact path = "/" render={(props) => <Login 
+                    props={props} 
+                    authenticate={authenticate}
+              /> } />
+              <Route exact path = "/Home" render={(props)=><Home 
+                props={props} 
+              /> } />
+              <Route exact path = "/StudentRegistration" render={(props)=><StudentRegister
+                props={props} 
+                registration={registration} 
+              /> } />
+              <Route exact path = "/ProfessorRegistration" render={(props)=><ProfessorRegister 
+                props={props} 
+                registration={registration}
+              /> } />
             </Switch>
           </div>
         </div>
