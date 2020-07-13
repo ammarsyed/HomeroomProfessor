@@ -157,3 +157,7 @@ input[type='text'] {
 	height: 3rem;
 	color:#000000;
 }
+
+.inputCheckboxes {
+	margin: 0.5rem;
+}
