@@ -18,7 +18,6 @@ const Login = (props) => {
         event.preventDefault();
         props.authenticate(account.username, account.password);
         document.getElementById("addForm").reset();
-
     }
 
     const studentRegistration = (event) => {
