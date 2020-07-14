@@ -60,35 +60,47 @@ const Login = (props) => {
     }
 
     return (
-
-        <form id="addForm" className="column1" onSubmit={handleSubmit}> 
-            <div >
-                <h2>Sign In</h2>
-                <b>
-                    Please enter your Username and Password to log in.
-                </b>
+        <>
+        <div class="row">
+            <div class="col">
+                <img src="../../1200px-Florida_Gators_gator_logo.png" class="img-max" alt="Gator Image"></img>
             </div>
-            <input
-                className="inputFormHalf"
-                type="text"
-                placeholder="Enter Username" 
-                value={username}
-                onChange={event => setUsername(event.target.value)}
-            />
-            <br/>
-            <input
-                className="inputFormHalf"
-                type="text"
-                placeholder="Enter Password"
-                value={hash}
-                onChange={event => setHash(event.target.value)}
-            />
-            <br />
+            <div class="col">
+                <form id="addForm" onSubmit={handleSubmit}>
+                    <div >
+                        <h2>Sign In</h2>
+                        <b>
+                            Please enter your Username and Password to log in.
+                </b>
+                    </div>
+                    <input
+                        className="inputFormHalf"
+                        type="text"
+                        placeholder="Enter Username"
+                        value={username}
+                        onChange={event => setUsername(event.target.value)}
+                    />
+                    <br />
+                    <input
+                        className="inputFormHalf"
+                        type="text"
+                        placeholder="Enter Password"
+                        value={hash}
+                        onChange={event => setHash(event.target.value)}
+                    />
+                    <br />
 
-            <input id="button" type="submit" value="Submit" />            
-            <button onClick = {studentRegistration}>Register as a Student</button>
-            <button onClick = {professorRegistration}>Register as a Professor</button>
-        </form>
+                    <input id="button" type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-2">
+                <button class="ml-5" onClick={studentRegistration}>Register as a Student</button>
+                <button class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
+            </div>
+        </div>
+        </>
     );
 
 

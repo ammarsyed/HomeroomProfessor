@@ -12,6 +12,28 @@ code {
     monospace;
 }
 
+/* ##### header ##### */
+.bd-navbar {
+	min-height: 4rem;
+	background-color: #0021A5;
+	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+
+.orange {
+	color: #FA4616;
+}
+
+header a:hover {
+	color: white !important;
+}
+
+/* ##### images ##### */
+.img-max {
+	max-width: 475px;
+	width: 100%;
+	height: auto;
+}
+
 /* ##### general ##### */
 * {
 	box-sizing: border-box;
@@ -72,7 +94,7 @@ main {
 button {
 	background: #ffffff;
 	color: #000000;
-  padding: 0.3rem 0.5rem;
+	padding: 0.3rem 0.5rem;
 	font-size: 0.8rem;
 	border: thick double #000000;
 	margin: 0.5rem 0.5rem;
@@ -91,7 +113,7 @@ button:hover {
 	background: #ffffff;
 	color: #000000;
 	padding: 0.3rem 0.5rem;
-	font-size: 0.8rem;
+	font-size: inherit;
 	border: thick double #000000;
 	margin: 0.5rem 0.5rem;
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);

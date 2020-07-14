@@ -24,27 +24,33 @@ const App = (props) => {
   return (
 
     <Router>
-        <div className="background">
-           <div className="row">
-            <h1><Link to="/" style={{textDecoration: 'none', color: 'black'}}>Homeroom Professor</Link></h1>
+        <div>
+            <header class="navbar navbar-dark navbar-expand bd-navbar">
+                  <h1>
+                      <Link to="/" class="text-decoration-none orange">
+                          Homeroom Professor
+                      </Link>
+                  </h1>
+              </header>
+        </div>
+        <div class="container">
             <Switch>
-              <Route exact path = "/" 
-                     render={(props) => <Login props={props} authenticate={authenticate} /> }
-              />
-              <Route path="/HomeStudent" 
-                     render={(props) => <HomeStudent props={props} /> }
-              />
-              <Route path="/HomeProfessor" 
-                     render={(props) => <HomeProfessor props={props} /> }
-              />  
-              <Route path="/StudentRegistration"
-                     render={(props) => <StudentRegister props={props} registration={registration} /> } 
-              />
-              <Route path="/ProfessorRegistration"
-                     render={ (props) => <ProfessorRegister props={props} registration={registration} /> } 
-              />
+                <Route exact path = "/" 
+                        render={(props) => <Login props={props} authenticate={authenticate} /> }
+                />
+                <Route path="/HomeStudent" 
+                        render={(props) => <HomeStudent props={props} /> }
+                />
+                <Route path="/HomeProfessor" 
+                        render={(props) => <HomeProfessor props={props} /> }
+                />  
+                <Route path="/StudentRegistration"
+                        render={(props) => <StudentRegister props={props} registration={registration} /> } 
+                />
+                <Route path="/ProfessorRegistration"
+                        render={ (props) => <ProfessorRegister props={props} registration={registration} /> } 
+                />
             </Switch>
-          </div>
         </div>
     </Router> 
   );
