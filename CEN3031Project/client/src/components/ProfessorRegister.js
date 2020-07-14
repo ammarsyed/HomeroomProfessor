@@ -102,6 +102,16 @@ const ProfessorRegister = (props) => {
         browse_history.push("/")
     }
 
+    function showPassword(){
+        let x = document.getElementById("passwordID");
+
+        if (x.type === "password") {
+            x.className = "inputFormHalfPassword"
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
     return (
         <form id="addForm" onSubmit={handleSubmit}>
@@ -230,9 +240,16 @@ const ProfessorRegister = (props) => {
             <input
                 type="password"
                 placeholder="Password"
+                id="passwordID"
                 value={hash}
                 onChange={event => setHash(event.target.value)}
             />
+            <label className="registrationPasswordCheckbox">
+                <input type="checkbox"
+                    onChange={event => showPassword(event.target.value)} 
+                /> Show Password
+            </label>
+
             <br />
 
             <div className="break">

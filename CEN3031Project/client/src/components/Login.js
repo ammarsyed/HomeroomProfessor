@@ -60,9 +60,20 @@ const Login = (props) => {
         history.push("/ProfessorRegistration")
     }
 
+    function showPassword(){
+        let x = document.getElementById("passwordID");
+
+        if (x.type === "password") {
+            x.className = "inputFormHalfPassword"
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
     return (
 
-        <form id="addForm" className="column1" onSubmit={handleSubmit}> 
+        <form id="addForm" onSubmit={handleSubmit}> 
             <div >
                 <h2>Sign In</h2>
                 <b>
@@ -80,10 +91,17 @@ const Login = (props) => {
             <strong className="fontMedium">Password:</strong> <input
                 type="password"
                 placeholder="Enter Password"
+                id="passwordID"
                 value={hash}
                 onChange={event => setHash(event.target.value)}
             />
-            <br />   
+            <br/>
+            <label>
+                <input type="checkbox"
+                    onChange={event => showPassword(event.target.value)} 
+                /> Show Password
+            </label>
+            <br/>   
             <div className="break">
                 <Button animated className="button_animated">
                     <Button.Content visible>
