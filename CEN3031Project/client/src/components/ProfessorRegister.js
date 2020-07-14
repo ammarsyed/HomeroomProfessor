@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import {Button, Icon} from 'semantic-ui-react';
 
 const API_URL = 'http://localhost:5000/api/professors';
 
@@ -127,13 +128,6 @@ const ProfessorRegister = (props) => {
             />
             <br/>
             <input
-                className="input38"
-                type="text"
-                placeholder="Phone Number"
-                value={phoneNumber}
-                onChange={event => setPhoneNumber(event.target.value)}
-            />
-            <input
                 className="inputHalf"
                 type="text"
                 placeholder="City"
@@ -146,6 +140,13 @@ const ProfessorRegister = (props) => {
                 placeholder="State"
                 value={state}
                 onChange={event => setState(event.target.value)}
+            />
+            <input
+                className="input38"
+                type="text"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={event => setPhoneNumber(event.target.value)}
             />
             <br />
             <input
@@ -171,9 +172,9 @@ const ProfessorRegister = (props) => {
                 onChange={event => setDepartment(event.target.value)}
             />
             <br />
-            <p className="inputCheckboxes"><strong>Select Subjects To Be Tutored In:</strong>
+            <p className="inputCheckboxes"><strong>Select Tutor Subjects:</strong>
                 <br />
-                <label><input type="checkbox" name="subject"
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
                     checked={computerscience} onChange={() => setComputerScience(!computerscience)} />Computer Science</label>
                 <label><input className="inputCheckboxes" type="checkbox" name="subject"
                     value="{english}" onChange={event => setEnglish(event.target.value)} />English</label>
@@ -227,16 +228,32 @@ const ProfessorRegister = (props) => {
                 onChange={event => setUsername(event.target.value)}
             />
             <input
-                className="inputFormHalf"
-                type="text"
+                type="password"
                 placeholder="Password"
                 value={hash}
                 onChange={event => setHash(event.target.value)}
             />
             <br />
 
-            <button onClick={backButton}>Back</button>
-            <input id="button" type="submit" value="Submit" />
+            <div className="break">
+                <Button animated className="button_animated" onClick = {backButton}>
+                    <Button.Content visible>
+                        Back
+                    </Button.Content>
+                    <Button.Content hidden>
+                        <i class="sign-out icon"/>
+                    </Button.Content>
+                </Button>  
+
+                <Button animated className="button_animated">
+                    <Button.Content visible>
+                        Submit
+                    </Button.Content>
+                    <Button.Content hidden>
+                        <i class="sign-in icon"/>
+                    </Button.Content>
+                </Button>  
+            </div>
 
         </form>
     );

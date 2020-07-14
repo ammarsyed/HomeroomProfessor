@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import {Button, Icon} from 'semantic-ui-react';
 
 const STUDENT_API_URL = 'http://localhost:5000/api/students';
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
@@ -68,7 +69,7 @@ const Login = (props) => {
                     Please enter your Username and Password to log in.
                 </b>
             </div>
-            <input
+            <strong className="fontMedium">Username:</strong> <input
                 className="inputFormHalf"
                 type="text"
                 placeholder="Enter Username" 
@@ -76,18 +77,43 @@ const Login = (props) => {
                 onChange={event => setUsername(event.target.value)}
             />
             <br/>
-            <input
-                className="inputFormHalf"
-                type="text"
+            <strong className="fontMedium">Password:</strong> <input
+                type="password"
                 placeholder="Enter Password"
                 value={hash}
                 onChange={event => setHash(event.target.value)}
             />
-            <br />
+            <br />   
+            <div className="break">
+                <Button animated className="button_animated">
+                    <Button.Content visible>
+                        Submit
+                    </Button.Content>
+                    <Button.Content hidden>
+                        <i class="sign-in icon"/>
+                    </Button.Content>
+                </Button>
 
-            <input id="button" type="submit" value="Submit" />            
-            <button onClick = {studentRegistration}>Register as a Student</button>
-            <button onClick = {professorRegistration}>Register as a Professor</button>
+                <div className="break">
+                    <Button animated className="button_animated" onClick = {studentRegistration}>
+                        <Button.Content visible>
+                            Register as a Student
+                        </Button.Content>
+                        <Button.Content hidden>
+                            <i class="sign-in icon"/>
+                        </Button.Content>
+                    </Button>
+                    
+                    <Button animated className="button_animated" onClick = {professorRegistration}>
+                        <Button.Content visible>
+                            Register as a Professor
+                        </Button.Content>
+                        <Button.Content hidden>
+                            <i class="sign-in icon"/>
+                        </Button.Content>
+                    </Button>    
+                </div>       
+            </div>
         </form>
     );
 
