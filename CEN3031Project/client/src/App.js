@@ -14,7 +14,10 @@ const App = (props) => {
   };
 
   const registration = (account) => {
-      
+      /* The variable 'account' has all the data from registration forms for use, 
+      *  and I was going to use some if-else statements to differentiate if it was professor
+      *  or if it was a student registration and put it into the appropriate database.
+      */
   };
 
   return (
