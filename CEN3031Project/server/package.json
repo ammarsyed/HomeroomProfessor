@@ -2,6 +2,7 @@
   "name": "homeroomprofessor",
   "version": "1.0.0",
   "description": "Software Engineering Project using MERN Stack",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -18,7 +19,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.22",
     "mongoose-unique-validator": "^2.0.3",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "cors": "2.8.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

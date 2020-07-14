@@ -1,39 +1,110 @@
-import React from 'react';
-import Login from './Login';
+import React, { useState } from 'react';
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+const API_URL = 'http://localhost:5000/api/students';
+
 const StudentRegister = (props) => {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [hash, setHash] = useState("");
+    const [salt, setSalt] = useState("TempSalt");
+    const [email, setEmail] = useState("");
+    const [age, setAge] = useState(null);
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
 
-    const history = useHistory();
+    // Subjects can be done using an array, but i don't know how
+    // to do it exactly. Requires more time, so individual
+    // states for each subject for now
+    // const [subjects, setSubjects] = useState([]);
 
-    let account = {
-        firstName: "",
-        lastName: "",
-        username: "",
-        email: "",
-        age: "",
-        phoneNumber: "",
-        city: "",
-        state: "",
-        subjects: [],
-    }
+    const [computerscience, setComputerScience] = useState(false);
+    const [english, setEnglish] = useState(false);
+    const [spanish, setSpanish] = useState(false);
+    const [french, setFrench] = useState(false);
+    const [latin, setLatin] = useState(false);
+    const [algebra, setAlgebra] = useState(false);
+    const [geometry, setGeometry] = useState(false);
+    const [precalculus, setPrecalculus] = useState(false);
+    const [statistics, setStatistics] = useState(false);
+    const [calculus, setCalculus] = useState(false);
+    const [biology, setBiology] = useState(false);
+    const [chemistry, setChemistry] = useState(false);
+    const [physics, setPhysics] = useState(false);
+    const [healthscience, setHealthScience] = useState(false);
+    const [environmentalscience, setEnvironmentalScience] = useState(false);
+    const [earthscience, setEarthScience] = useState(false);
+    const [history, setHistory] = useState(false);
+    const [economics, setEconomics] = useState(false);
+    const [psychology, setPsychology] = useState(false);
+    const [government, setGovernment] = useState(false);
+    const [geography, setGeography] = useState(false);
 
-    //if form fields are filled, push to home page
-    const submitButton = (event) => {
+    //const [checked, setChecked] = useState(false);
+
+    const browse_history = useHistory();
+
+
+    const handleSubmit = (event) => {
         event.preventDefault();
-        //props.authenticate(account.username, account.password);
-        document.getElementById("addForm").reset();
-        history.push("/")
-    }
+
+        const newstudent =
+            {
+                "firstName": firstName,
+                "lastName": lastName,
+                "username": username,
+                "hash": hash,
+                "salt": salt,
+                "email": email,
+                "age": age,
+                "phoneNumber": phoneNumber,
+                "city": city,
+                "state": state,
+                "subjects ": {
+                    "computerscience": computerscience,
+                    "english": english,
+                    "spanish": spanish,
+                    "french": french,
+                    "latin": latin,
+                    "algebra": algebra,
+                    "geometry": geometry,
+                    "precalculus": precalculus,
+                    "statistics": statistics,
+                    "calculus": calculus,
+                    "biology": biology,
+                    "chemistry": chemistry,
+                    "physics": physics,
+                    "healthscience": healthscience,
+                    "environmentalscience": environmentalscience,
+                    "earthscience": earthscience,
+                    "history": history,
+                    "economics": economics,
+                    "psychology": psychology,
+                    "government": government,
+                    "geography": geography
+                }        
+            };
+
+        axios.post(API_URL, newstudent)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+
+        browse_history.push("/")
+    };
 
     const backButton = (event) => {
         event.preventDefault();
-        history.push("/")
+        browse_history.push("/")
     }
 
     return (
 
-        <form id = "addForm">
+        <form id="addForm" onSubmit={handleSubmit}>
             <div >
                 <h2>Student Registration</h2>
                 <b>
@@ -41,44 +112,117 @@ const StudentRegister = (props) => {
                 </b>
             </div>
 
-            <input className="inputThird" type="text" placeholder="First Name" 
-                onChange = { event => account.firstName = (event.target.value) }
+            <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={event => setFirstName(event.target.value)}
             />
-            <input className="inputThird" type="text" placeholder="Last Name" 
-                onChange = { event => account.lastName = (event.target.value) }
+            <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={event => setLastName(event.target.value)}
             />
-            <input className="inputThird" type="text" placeholder="Phone Number" 
-                onChange = { event => account.phoneNumber = (event.target.value) }
+            <input
+                type="text"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={event => setPhoneNumber(event.target.value)}
             />
-            <input className="inputEigth" type="text" placeholder="Age" 
-                onChange = { event => account.age = (event.target.value) }
+            <input
+                type="text"
+                placeholder="Age"
+                value={age}
+                onChange={event => setAge(event.target.value)}
             />
             <br/>
-            <input className="inputThird" type="text" placeholder="City" 
-                onChange = { event => account.city = (event.target.value) }
+            <input
+                type="text"
+                placeholder="City"
+                value={city}
+                onChange={event => setCity(event.target.value)}
             />
-            <input className="inputThird" type="text" placeholder="State" 
-                onChange = { event => account.state = (event.target.value) }
+            <input
+                type="text"
+                placeholder="State"
+                value={state}
+                onChange={event => setState(event.target.value)}
             />
-            <input className="inputHalf" type="text" placeholder="E-mail" 
-                onChange = { event => account.email = (event.target.value) }
+            <input
+                type="text"
+                placeholder="E-mail"
+                value={email}
+                onChange={event => setEmail(event.target.value)}
             />
             <br/>
-            <input className="inputHalf" type="text" placeholder="Desired Username" 
-                onChange = { event => account.username = (event.target.value) }
+            <p className="inputCheckboxes"><strong>Select Subjects To Be Tutored In:</strong>
+                <br/>
+                <label><input type="checkbox" name="subject"
+                    checked={computerscience} onChange={() => setComputerScience(!computerscience)} />Computer Science</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{english}" onChange={event => setEnglish(event.target.value)} />English</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{spanish}" onChange={event => setSpanish(event.target.value)} />Spanish</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{french}" onChange={event => setFrench(event.target.value)} />French</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{latin}" onChange={event => setLatin(event.target.value)} />Latin</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{algebra}" onChange={event => setAlgebra(event.target.value)} />Algebra</label>
+                <br />
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{geometry}" onChange={event => setGeometry(event.target.value)} />Geometry</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{precalculus}" onChange={event => setPrecalculus(event.target.value)} />Precalculus</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{statistics}" onChange={event => setStatistics(event.target.value)} />Statistics</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{calculus}" onChange={event => setCalculus(event.target.value)}/>Calculus</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{biology}" onChange={event => setBiology(event.target.value)} />Biology</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{chemistry}" onChange={event => setChemistry(event.target.value)} />Chemistry</label>
+                <br />
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{physics}" onChange={event => setPhysics(event.target.value)} />Physics</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{healthscience}" onChange={event => setHealthScience(event.target.value)} />Health Science</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{environmentalscience}" onChange={event => setEnvironmentalScience(event.target.value)} />Environmental Science</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{earthscience}" onChange={event => setEarthScience(event.target.value)} />Earth Science</label>
+                <br />
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{history}" onChange={event => setHistory(event.target.value)} />History</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{economics}" onChange={event => setEconomics(event.target.value)} />Economics</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{psychology}" onChange={event => setPsychology(event.target.value)}/>Psychology</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{government}" onChange={event => setGovernment(event.target.value)} />Government</label>
+                <label><input className="inputCheckboxes" type="checkbox" name="subject"
+                    value="{geography}" onChange={event => setGeography(event.target.value)} />Geography</label>
+            </p>
+            <input
+                type="text"
+                placeholder="Desired Username"
+                value={username}
+                onChange={event => setUsername(event.target.value)}
             />
-            <input className="inputHalf" type="text" placeholder="Password" 
-                onChange = { event => account.password = (event.target.value) }
+            <input
+                type="text"
+                placeholder="Password"
+                value={hash}
+                onChange={event =>setHash(event.target.value) }
             />
             <br/>
 
             <button onClick = {backButton}>Back</button>
-            <button onSubmit = {submitButton}>Submit</button>
+            <input type="submit" value="Submit" />
 
         </form>
     );
-
-
 
 };
 

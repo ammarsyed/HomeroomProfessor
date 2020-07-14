@@ -13,6 +13,13 @@ const App = (props) => {
       
   };
 
+  const registration = (account) => {
+      /* The variable 'account' has all the data from registration forms for use, 
+      *  and I was going to use some if-else statements to differentiate if it was professor
+      *  or if it was a student registration and put it into the appropriate database.
+      */
+  };
+
   return (
 
     <Router>
@@ -20,10 +27,21 @@ const App = (props) => {
            <div className="row">
             <h1><Link to="/" style={{textDecoration: 'none', color: 'black'}}>Homeroom Professor</Link></h1>
             <Switch>
-              <Route exact path = "/" component  = {Login} />
-              <Route exact path = "/Home" component  = {Home} />
-              <Route exact path = "/StudentRegistration" component  = {StudentRegister} />
-              <Route exact path = "/ProfessorRegistration" component  = {ProfessorRegister} />
+              <Route exact path = "/" render={(props) => <Login 
+                    props={props} 
+                    authenticate={authenticate}
+              /> } />
+              <Route exact path = "/Home" render={(props)=><Home 
+                props={props} 
+              /> } />
+              <Route exact path = "/StudentRegistration" render={(props)=><StudentRegister
+                props={props} 
+                registration={registration} 
+              /> } />
+              <Route exact path = "/ProfessorRegistration" render={(props)=><ProfessorRegister 
+                props={props} 
+                registration={registration}
+              /> } />
             </Switch>
           </div>
         </div>
