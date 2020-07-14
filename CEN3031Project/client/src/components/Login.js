@@ -69,6 +69,7 @@ const Login = (props) => {
                 </b>
             </div>
             <input
+                className="inputFormHalf"
                 type="text"
                 placeholder="Enter Username" 
                 value={username}
@@ -76,6 +77,7 @@ const Login = (props) => {
             />
             <br/>
             <input
+                className="inputFormHalf"
                 type="text"
                 placeholder="Enter Password"
                 value={hash}

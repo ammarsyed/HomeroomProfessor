@@ -112,37 +112,44 @@ const ProfessorRegister = (props) => {
             </div>
 
             <input
+                className="inputHalf"
                 type="text"
                 placeholder="First Name"
                 value={firstName}
                 onChange={event => setFirstName(event.target.value)}
             />
             <input
+                className="inputHalf"
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={event => setLastName(event.target.value)}
             />
+            <br/>
             <input
+                className="input38"
                 type="text"
                 placeholder="Phone Number"
                 value={phoneNumber}
                 onChange={event => setPhoneNumber(event.target.value)}
             />
-            <br />
             <input
+                className="inputHalf"
                 type="text"
                 placeholder="City"
                 value={city}
                 onChange={event => setCity(event.target.value)}
             />
             <input
+                className="inputThird"
                 type="text"
                 placeholder="State"
                 value={state}
                 onChange={event => setState(event.target.value)}
             />
+            <br />
             <input
+                className="inputForm"
                 type="text"
                 placeholder="E-mail"
                 value={email}
@@ -150,12 +157,14 @@ const ProfessorRegister = (props) => {
             />
             <br />
             <input
+                className="inputFormHalf"
                 type="text"
                 placeholder="University"
                 value={university}
                 onChange={event => setUniversity(event.target.value)}
             />
             <input
+                className="inputFormHalf"
                 type="text"
                 placeholder="Department"
                 value={department}
@@ -212,11 +221,13 @@ const ProfessorRegister = (props) => {
             </p>
             <input
                 type="text"
+                className="inputFormHalf"
                 placeholder="Desired Username"
                 value={username}
                 onChange={event => setUsername(event.target.value)}
             />
             <input
+                className="inputFormHalf"
                 type="text"
                 placeholder="Password"
                 value={hash}

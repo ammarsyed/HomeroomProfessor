@@ -132,7 +132,20 @@ input[type='text'] {
 	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
 	padding: 0 1rem;
-	width: calc(100% - 12rem);
+	width: 61rem;
+	height: 3rem;
+	color:#000000;
+}
+
+.inputFormHalf[type='text'] {
+	margin: 0.5rem;
+	background: rgb(255, 255, 255);
+	font-size: 1.3rem;
+	border: #000000;
+	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+	border-radius: 3px;
+	padding: 0 1rem;
+	width: 30rem;
 	height: 3rem;
 	color:#000000;
 }
@@ -145,7 +158,20 @@ input[type='text'] {
 	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
 	padding: 0 1rem;
-	width: calc(33% - 12rem);
+	width: 14rem;
+	height: 3rem;
+	color:#000000;
+}
+
+.input38[type='text'] {
+	margin: 0.5rem;
+	background: rgb(255, 255, 255);
+	font-size: 1.3rem;
+	border: #000000;
+	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+	border-radius: 3px;
+	padding: 0 1rem;
+	width: 18rem;
 	height: 3rem;
 	color:#000000;
 }
@@ -158,7 +184,7 @@ input[type='text'] {
 	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
 	padding: 0 1rem;
-	width: calc(50% - 12rem);
+	width: 27rem;
 	height: 3rem;
 	color:#000000;
 }
@@ -171,7 +197,7 @@ input[type='text'] {
 	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
 	padding: 0 1rem;
-	width: calc(21% - 12rem);
+	width: 5rem;
 	height: 3rem;
 	color:#000000;
 }
