@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Search from './components/Search';
 import Login from './components/Login';
-import Home from './components/Home';
+import HomeStudent from './components/HomeStudent';
+import HomeProfessor from './components/HomeProfessor';
 import StudentRegister from './components/StudentRegister';
 import ProfessorRegister from './components/ProfessorRegister';
 import { BrowserRouter as Router, Link, Switch } from 'react-router-dom';
@@ -27,21 +28,21 @@ const App = (props) => {
            <div className="row">
             <h1><Link to="/" style={{textDecoration: 'none', color: 'black'}}>Homeroom Professor</Link></h1>
             <Switch>
-              <Route exact path = "/" render={(props) => <Login 
-                    props={props} 
-                    authenticate={authenticate}
-              /> } />
-              <Route exact path = "/Home" render={(props)=><Home 
-                props={props} 
-              /> } />
-              <Route exact path = "/StudentRegistration" render={(props)=><StudentRegister
-                props={props} 
-                registration={registration} 
-              /> } />
-              <Route exact path = "/ProfessorRegistration" render={(props)=><ProfessorRegister 
-                props={props} 
-                registration={registration}
-              /> } />
+              <Route exact path = "/" 
+                     render={(props) => <Login props={props} authenticate={authenticate} /> }
+              />
+              <Route path="/HomeStudent" 
+                     render={(props) => <HomeStudent props={props} /> }
+              />
+              <Route path="/HomeProfessor" 
+                     render={(props) => <HomeProfessor props={props} /> }
+              />  
+              <Route path="/StudentRegistration"
+                     render={(props) => <StudentRegister props={props} registration={registration} /> } 
+              />
+              <Route path="/ProfessorRegistration"
+                     render={ (props) => <ProfessorRegister props={props} registration={registration} /> } 
+              />
             </Switch>
           </div>
         </div>

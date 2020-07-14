@@ -87,6 +87,24 @@ button:hover {
 	border: thick double#1c5ec0;
 }
 
+#button {
+	background: #ffffff;
+	color: #000000;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.8rem;
+	border: thick double #000000;
+	margin: 0.5rem 0.5rem;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 3px;
+	outline: none;
+}
+
+#button:hover {
+	background: #e9984d;
+	color: #1c5ec0;
+	border: thick double#1c5ec0;
+}
+
 /* ##### Search ##### */
 header {
 	background: #3498db;

@@ -219,7 +219,7 @@ const StudentRegister = (props) => {
             <br/>
 
             <button onClick = {backButton}>Back</button>
-            <input type="submit" value="Submit" />
+            <input id="button" type="submit" value="Submit" />
 
         </form>
     );

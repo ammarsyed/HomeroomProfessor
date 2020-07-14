@@ -5,4 +5,6 @@ const studentRouter = express.Router();
 
 studentRouter.post('/', students.create);
 
+studentRouter.get('/', students.checkLogin);
+
 export default studentRouter;
