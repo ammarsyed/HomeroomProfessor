@@ -62,8 +62,14 @@ const Login = (props) => {
     return (
         <>
         <div class="row">
-            <div class="col">
-                <img src="../../1200px-Florida_Gators_gator_logo.png" class="img-max" alt="Gator Image"></img>
+            <div class="col pr-0">
+                <div class="row">
+                        <img src="../../1200px-Florida_Gators_gator_logo.png" class="ml-3 img-max" alt="Gator Image"></img>
+                </div>
+                <div class="row">
+                        <button class="ml-5" onClick={studentRegistration}>Register as a Student</button>
+                        <button class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
+                </div>
             </div>
             <div class="col">
                 <form id="addForm" onSubmit={handleSubmit}>
@@ -92,12 +98,6 @@ const Login = (props) => {
 
                     <input id="button" type="submit" value="Submit" />
                 </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col mt-2">
-                <button class="ml-5" onClick={studentRegistration}>Register as a Student</button>
-                <button class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
             </div>
         </div>
         </>
