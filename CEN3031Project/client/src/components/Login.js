@@ -58,7 +58,7 @@ const Login = (props) => {
         event.preventDefault();
         history.push("/ProfessorRegistration")
     }
-
+    
     return (
         <>
         <div class="row">
@@ -67,8 +67,8 @@ const Login = (props) => {
                         <img src="../../1200px-Florida_Gators_gator_logo.png" class="ml-3 img-max" alt="Gator Image"></img>
                 </div>
                 <div class="row">
-                        <button class="ml-5" onClick={studentRegistration}>Register as a Student</button>
-                        <button class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
+                        <button id="button" class="ml-5" onClick={studentRegistration}>Register as a Student</button>
+                        <button id="button" class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
                 </div>
             </div>
             <div class="col">
@@ -79,22 +79,20 @@ const Login = (props) => {
                             Please enter your Username and Password to log in.
                 </b>
                     </div>
-                    <input
-                        className="inputFormHalf"
+                    <strong>Username: </strong><input
                         type="text"
                         placeholder="Enter Username"
                         value={username}
                         onChange={event => setUsername(event.target.value)}
                     />
                     <br />
-                    <input
-                        className="inputFormHalf"
-                        type="text"
+                    <strong>Password:</strong><input
+                        type="password"
                         placeholder="Enter Password"
                         value={hash}
                         onChange={event => setHash(event.target.value)}
                     />
-                    <br />
+                    <br/> 
 
                     <input id="button" type="submit" value="Submit" />
                 </form>

@@ -47,6 +47,17 @@ const StudentRegister = (props) => {
 
     const browse_history = useHistory();
 
+    //Function to change the input type for password entries to allow for show/hide checkbox
+    function showPassword(){
+        let x = document.getElementById("passwordID");
+
+        if (x.type === "password") {
+            x.className = "inputFormHalfPassword"
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -102,6 +113,18 @@ const StudentRegister = (props) => {
         browse_history.push("/")
     }
 
+    //Function to change the input type for password entries to allow for show/hide checkbox
+    function showPassword(){
+        let x = document.getElementById("inputPassword");
+
+        if (x.type === "password") {
+            x.className = "inputFormHalfPassword"
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    
     return (
         <>
         <div class="row">
@@ -298,17 +321,24 @@ const StudentRegister = (props) => {
                     <label for="inputPassword" class="ml-2 mb-0">Password</label>
                     <input
                         id="inputPassword"
-                        type="text"
+                        type="password"
                         placeholder="Password"
                         value={hash}
                         onChange={event => setHash(event.target.value)}
                     />
+                    <br/>
+                    <label>
+                        <input type="checkbox" class="ml-2"
+                            onChange={event => showPassword(event.target.value)} 
+                        /> Show Password
+                    </label>
+                    <br/>   
                 </div>
             </div>
             <br/>
             <div class="form-row">
                 <div class="form-group col-md-6 ml-3">
-                        <button onClick={backButton}>Back</button>
+                        <button id="button" onClick={backButton}>Back</button>
                         <input id="button" type="submit" value="Submit" />
                 </div>
             </div>
