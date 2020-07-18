@@ -58,6 +58,18 @@ const Login = (props) => {
         event.preventDefault();
         history.push("/ProfessorRegistration")
     }
+
+    //Function to change the input type for password entries to allow for show/hide checkbox
+   function showPassword(){
+        let x = document.getElementById("inputPassword");
+    
+        if (x.type === "password") {
+            x.className = "inputFormHalfPassword"
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
     
     return (
         <>
@@ -71,30 +83,34 @@ const Login = (props) => {
                         <button id="button" class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
                 </div>
             </div>
-            <div class="col">
-                <form id="addForm" onSubmit={handleSubmit}>
+            <div class="col pr-0">
+                <form id="login" onSubmit={handleSubmit}>
                     <div >
                         <h2>Sign In</h2>
-                        <b>
-                            Please enter your Username and Password to log in.
-                </b>
                     </div>
-                    <strong>Username: </strong><input
+                    <strong class="ml-2 mb-0">Username: </strong><input
                         type="text"
                         placeholder="Enter Username"
                         value={username}
                         onChange={event => setUsername(event.target.value)}
                     />
                     <br />
-                    <strong>Password:</strong><input
+                    <input
+                        id="inputPassword"
                         type="password"
-                        placeholder="Enter Password"
+                        placeholder="Password"
                         value={hash}
                         onChange={event => setHash(event.target.value)}
                     />
+                    <br/>
+                    <label>
+                        <input type="checkbox" class="ml-2"
+                            onChange={event => showPassword(event.target.value)} 
+                        /> Show Password
+                    </label>
                     <br/> 
 
-                    <input id="button" type="submit" value="Submit" />
+                    <input id="button" type="submit" value="Login" />
                 </form>
             </div>
         </div>

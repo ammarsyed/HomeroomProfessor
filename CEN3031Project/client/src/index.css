@@ -122,6 +122,20 @@ button:hover {
 	outline: none;
 }
 
+#buttonForm {
+	background: #ffffff;
+	color: #000000;
+	transition-duration: 0.4s;
+	font-size: inherit;
+	border-radius: 5px;
+	border: solid #9c9c9c;
+	outline: none;
+}
+
+#buttonForm:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
 #button:hover {
 	background: #ff5e00;
 	color: #ffffff;
@@ -144,7 +158,7 @@ input[type='text'] {
 	border-radius: 3px;
 	padding: 0 1rem;
 	width: calc(100% - 2rem);
-	height: 3rem;
+	height: 2.5rem;
 	color:#000000;
 }
 
@@ -157,7 +171,7 @@ input[type='password'] {
 	border-radius: 3px;
 	padding: 0 1rem;
 	width: calc(100% - 2rem);
-	height: 3rem;
+	height: 2.5rem;
 	color:#000000;
 }
 
@@ -260,3 +274,9 @@ input[type='password'] {
 .loginPasswordField {
 	width: 30;
 }
+
+/* #### Dropdown ####*/
+
+.dropdownbutton:hover .dropdown:hover .dropdown-menu {
+	display: block;
+  }

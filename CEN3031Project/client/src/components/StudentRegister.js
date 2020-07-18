@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const API_URL = 'http://localhost:5000/api/students';
 
@@ -12,6 +14,8 @@ const StudentRegister = (props) => {
     const [salt, setSalt] = useState("TempSalt");
     const [email, setEmail] = useState("");
     const [age, setAge] = useState(null);
+    const [grade, setGrade] = useState(null);
+    const [gradeDisplay, setGradeDisplay] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -72,6 +76,7 @@ const StudentRegister = (props) => {
                 "email": email,
                 "age": age,
                 "phoneNumber": phoneNumber,
+                "grade": grade,
                 "city": city,
                 "state": state,
                 "subjects ": {
@@ -124,7 +129,18 @@ const StudentRegister = (props) => {
             x.type = "password";
         }
     }
-    
+
+    //function to handle the drowndown select for grade
+    const handleSelect=(event)=>{
+        console.log(event);
+        setGrade(event);
+
+        if(event == "0")
+            setGradeDisplay("K");
+        else
+            setGradeDisplay(event);
+    }
+
     return (
         <>
         <div class="row">
@@ -137,7 +153,7 @@ const StudentRegister = (props) => {
         </div>
         <form onSubmit={handleSubmit} class="card p-3">
             <div class="form-row">
-                <div class="form-group col-md-5 mb-0">
+                <div class="form-group col-md-6 mb-0">
                     <label for="inputFName" class="ml-2 mb-0">First Name</label>
                     <input
                         id="inputFName"
@@ -147,7 +163,7 @@ const StudentRegister = (props) => {
                         onChange={event => setFirstName(event.target.value)}
                     />
                 </div>
-                <div class="form-group col-md-5 mb-0">
+                <div class="form-group col-md-6 mb-0">
                     <label for="inputLName" class="ml-2 mb-0">Last Name</label>
                     <input
                         id="inputLName"
@@ -155,16 +171,6 @@ const StudentRegister = (props) => {
                         placeholder="Last Name"
                         value={lastName}
                         onChange={event => setLastName(event.target.value)}
-                    />
-                </div>
-                <div class="form-group col-md-2 mb-0">
-                    <label for="inputAge" class="ml-2 mb-0">Age</label>
-                    <input
-                        id="inputAge"
-                        type="text"
-                        placeholder="Age"
-                        value={age}
-                        onChange={event => setAge(event.target.value)}
                     />
                 </div>
             </div>
@@ -212,6 +218,46 @@ const StudentRegister = (props) => {
                     />
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-sl-1 mb-0 ml-2">
+                    <label for="inputGrade" class="ml-0 mb-2">Grade</label>
+                    <DropdownButton 
+                            title={gradeDisplay}
+                            variant="secondary"
+                            onSelect={handleSelect}
+                            id="buttonForm"
+                    >
+                            <Dropdown.Item eventKey='0'>Kindergarten</Dropdown.Item>
+                            <Dropdown.Divider/>
+                            <Dropdown.Item eventKey="1">First</Dropdown.Item>
+                            <Dropdown.Item eventKey="2">Second</Dropdown.Item>
+                            <Dropdown.Item eventKey="3">Third</Dropdown.Item>
+                            <Dropdown.Item eventKey="4">Fourth</Dropdown.Item>
+                            <Dropdown.Item eventKey="5">Fifth</Dropdown.Item>
+                            <Dropdown.Divider/>
+                            <Dropdown.Item eventKey="6">Sixth</Dropdown.Item>
+                            <Dropdown.Item eventKey="7">Seventh</Dropdown.Item>
+                            <Dropdown.Item eventKey="8">Eighth</Dropdown.Item>
+                            <Dropdown.Divider/>
+                            <Dropdown.Item eventKey="9">Ninth (freshman)</Dropdown.Item>
+                            <Dropdown.Item eventKey="10">Tenth (sophomore)</Dropdown.Item>
+                            <Dropdown.Item eventKey="11">Eleventh (junior)</Dropdown.Item>
+                            <Dropdown.Item eventKey="12">Twelfth (senior)</Dropdown.Item>                     
+                    </DropdownButton>
+                </div>
+                
+                <div class="form-group col-sm-2 mb-0">
+                    <label for="inputAge" class="ml-5 mb-0">Age</label>
+                    <input
+                        class="ml-5 mb-0"
+                        id="inputAge"
+                        type="text"
+                        placeholder="Age"
+                        value={age}
+                        onChange={event => setAge(event.target.value)}
+                    />
+                </div>
+            </div>           
             
 
             <br/>

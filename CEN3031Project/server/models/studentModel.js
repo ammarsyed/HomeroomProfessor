@@ -20,6 +20,7 @@ const StudentSchema = new Schema({
     email: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true },
     age: { type: Number, min: 0, max: 100, required: true },
     phoneNumber: { type: String, minlength: 10, maxlength: 11, required: true },
+    grade: { type: Number, min: 0, max: 12, required: true },
     city: { type: String, uppercase: true, required: true },
     state: { type: String, uppercase: true, required: true },
     subjects: {
