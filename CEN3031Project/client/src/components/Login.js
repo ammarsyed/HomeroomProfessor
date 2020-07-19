@@ -24,7 +24,7 @@ const Login = (props) => {
 
                     if (res.data[i].username === username && res.data[i].hash === hash) {
                         console.log("Log In Succeed, Student")
-                        history.push("/HomeStudent")
+                        history.push("/HomeStudent/dashboard")
                     }
                 }
 
