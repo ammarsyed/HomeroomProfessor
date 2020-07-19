@@ -17,13 +17,19 @@ npm start from the directory with server.js will start the backend server (won't
 **Starting Server and Client**
 
 (7/6/20)
+
 --**npm run server** from the directory with server.js will start the backend server using nodemon so you won't have to restart server when changes are done, just refresh
+
 --**npm run client** from the directory with server.js will start the frontend(client)
+
 --**npm run dev** from the directory with server.js will start both frontend and server (backend)
 
 (7/19/20)
+
 --Backend and Frontend are now connected, two terminals will need to be ran for server and client.
+
 --**npm start** from inside directory /client/ will launch the server connected to MongoDB.
+
 --**npm start** from inside directory /client/ will launch the web app.
    --There seems to be an image issue with the gator picture if using safari, use google chrome for now.
-   
+
