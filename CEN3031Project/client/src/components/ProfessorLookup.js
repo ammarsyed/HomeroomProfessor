@@ -1,49 +1,91 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
-import { Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl } from 'react-bootstrap';
+import { Button, Container, Row, Col, Card, Form, FormControl, Table } from 'react-bootstrap';
+import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+
+const MySearch = (props) => {
+    let input;
+    const handleClick = () => {
+        console.log(input.value);
+        props.onSearch(input.value);
+    };
+    return (
+        <div>
+            <Form inline>
+                <FormControl type="text" ref={n => input = n} placeholder="Search" />
+                <Button variant="outline-primary" onClick={handleClick}>Search</Button>
+            </Form>
+        </div>
+    );
+};
+
+const products = [
+    {
+        firstName: 'Mark',
+        lastName: 'Smith',
+        department: 'english',
+        university: 'UF',
+        subject: 'Creative Writing',
+        request: <Button>Request</Button>
+    }, {
+        firstName: 'Daniel',
+        lastName: 'Labes',
+        department: 'math',
+        university: 'UF',
+        subject: 'Calculus'
+    }];
+
+
 
 const ProfessorLookup = (props) => {
 
-    const history = useHistory();
+    let fullName = props.firstName + " " + props.lastName;
 
-    console.log("in lookup");
+    const columns = [{
+        dataField: 'firstName',
+        text: 'Professor'
+    }, {
+        dataField: 'university',
+        text: 'University'
+    }, {
+        dataField: 'department',
+        text: 'Department'
+    }, {
+        dataField: 'subject',
+        text: 'Tutoring Subjects'
+    }
+    , {
+        dataField: 'request',
+        text: 'Request Professor'
+    }];
 
     return (
         <>
-
-            <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-success">Search</Button>
-            </Form>
-
-            <Card
-                border="primary"
-                style={{ width: '18rem' }}
-                bg="primary"
-                text="white"
-            >
-                <Card.Body>
-                    <Card.Title>Tutor Suggestions</Card.Title>
-                </Card.Body>
-            </Card>
-
-            <Card border="primary" bg="white" text="black" style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>Professor Name</Card.Title>
-                    <Card.Text>
-                        University: <br />
-                                Department: <br />
-                                Tutoring Subjects: <br />
-                        <br />
-                                Summary: <br />
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            
+            <Container>
+                <ToolkitProvider
+                    keyField='firstName'
+                    data={products}
+                    columns={columns}
+                    search
+                >
+                    {
+                        props => (
+                            <div>
+                                <br />
+                                <h5>Professor Lookup</h5>
+                                <MySearch {...props.searchProps} />
+                                <hr />
+                                <BootstrapTable
+                                    {...props.baseProps}
+                                />
+                            </div>
+                        )
+                    }
+                </ToolkitProvider>
+            </Container>
         </>
-
-
     );
 };
 

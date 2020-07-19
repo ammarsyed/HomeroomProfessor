@@ -98,7 +98,6 @@ button {
 	font-size: 0.8rem;
 	border: thick double #000000;
 	margin: 0.5rem 0.5rem;
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
 	outline: none;
 }
@@ -106,7 +105,7 @@ button {
 button:hover {
 	background: #e9984d;
 	color: #1c5ec0;
-	border: thick double#1c5ec0;
+	border: #1c5ec0;
 }
 
 #button {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import { Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl } from 'react-bootstrap';
+import { Button, Navbar, Nav, Form } from 'react-bootstrap';
 
 const HomeStudent = (props) => {
 
