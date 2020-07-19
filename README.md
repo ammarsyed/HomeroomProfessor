@@ -31,5 +31,8 @@ npm start from the directory with server.js will start the backend server (won't
 --**npm start** from inside directory /client/ will launch the server connected to MongoDB.
 
 --**npm start** from inside directory /client/ will launch the web app.
-   --There seems to be an image issue with the gator picture if using safari, use google chrome for now.
+
+** Misc. Notes **
+
+--There seems to be an image issue with the gator picture if using safari, use google chrome for now.
 
