@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl } from 'react-bootstrap';
+import {useHistory} from "react-router-dom";
+import {Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl} from 'react-bootstrap';
 
 const API_URL = 'http://localhost:5000/api/professors';
 
-const ProfessorRegister = (props) => {
+const ProfessorRegister = (props) =>
+{
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -47,7 +48,8 @@ const ProfessorRegister = (props) => {
 
     const browse_history = useHistory();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event) =>
+    {
         event.preventDefault();
 
         const newprofessor =
@@ -63,7 +65,7 @@ const ProfessorRegister = (props) => {
             "department": department,
             "city": city,
             "state": state,
-            "subjects ": {
+            "subjects": {
                 "computerscience": computerscience,
                 "english": english,
                 "spanish": spanish,
@@ -89,7 +91,8 @@ const ProfessorRegister = (props) => {
         };
 
         axios.post(API_URL, newprofessor)
-            .then(res => {
+            .then(res =>
+            {
                 console.log(res);
                 console.log(res.data);
             })
@@ -97,18 +100,22 @@ const ProfessorRegister = (props) => {
         browse_history.push("/")
     };
 
-    const backButton = (event) => {
+    const backButton = (event) =>
+    {
         event.preventDefault();
         browse_history.push("/")
     }
 
     //Function to change the input type for password entries to allow for show/hide checkbox
-    function showPassword() {
+    function showPassword()
+    {
         let x = document.getElementById("inputPassword");
 
-        if (x.type === "password") {
+        if(x.type === "password")
+        {
             x.type = "text";
-        } else {
+        } else
+        {
             x.type = "password";
         }
     }
@@ -225,86 +232,86 @@ const ProfessorRegister = (props) => {
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{english}" onChange={event => setEnglish(event.target.value)} />English</label>
+                                value="{english}" onChange={event => setEnglish(!english)} />English</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{spanish}" onChange={event => setSpanish(event.target.value)} />Spanish</label>
+                                value="{spanish}" onChange={event => setSpanish(!spanish)} />Spanish</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{french}" onChange={event => setFrench(event.target.value)} />French</label>
+                                value="{french}" onChange={event => setFrench(!french)} />French</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{latin}" onChange={event => setLatin(event.target.value)} />Latin</label>
+                                value="{latin}" onChange={event => setLatin(!latin)} />Latin</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{algebra}" onChange={event => setAlgebra(event.target.value)} />Algebra</label>
-                        </div>
-                        <br />
-                        <div class="form-check form-check-inline">
-                            <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{geometry}" onChange={event => setGeometry(event.target.value)} />Geometry</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{precalculus}" onChange={event => setPrecalculus(event.target.value)} />Precalculus</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{statistics}" onChange={event => setStatistics(event.target.value)} />Statistics</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{calculus}" onChange={event => setCalculus(event.target.value)} />Calculus</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{biology}" onChange={event => setBiology(event.target.value)} />Biology</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{chemistry}" onChange={event => setChemistry(event.target.value)} />Chemistry</label>
+                                value="{algebra}" onChange={event => setAlgebra(!algebra)} />Algebra</label>
                         </div>
                         <br />
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{physics}" onChange={event => setPhysics(event.target.value)} />Physics</label>
+                                value="{geometry}" onChange={event => setGeometry(!geometry)} />Geometry</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{healthscience}" onChange={event => setHealthScience(event.target.value)} />Health Science</label>
+                                value="{precalculus}" onChange={event => setPrecalculus(!precalculus)} />Precalculus</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{environmentalscience}" onChange={event => setEnvironmentalScience(event.target.value)} />Environmental Science</label>
+                                value="{statistics}" onChange={event => setStatistics(!statistics)} />Statistics</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{earthscience}" onChange={event => setEarthScience(event.target.value)} />Earth Science</label>
+                                value="{calculus}" onChange={event => setCalculus(!calculus)} />Calculus</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label><input type="checkbox" name="subject" class="form-check-input"
+                                value="{biology}" onChange={event => setBiology(!biology)} />Biology</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label><input type="checkbox" name="subject" class="form-check-input"
+                                value="{chemistry}" onChange={event => setChemistry(!chemistry)} />Chemistry</label>
                         </div>
                         <br />
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{history}" onChange={event => setHistory(event.target.value)} />History</label>
+                                value="{physics}" onChange={event => setPhysics(!physics)} />Physics</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{economics}" onChange={event => setEconomics(event.target.value)} />Economics</label>
+                                value="{healthscience}" onChange={event => setHealthScience(!healthscience)} />Health Science</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{psychology}" onChange={event => setPsychology(event.target.value)} />Psychology</label>
+                                value="{environmentalscience}" onChange={event => setEnvironmentalScience(!environmentalscience)} />Environmental Science</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{government}" onChange={event => setGovernment(event.target.value)} />Government</label>
+                                value="{earthscience}" onChange={event => setEarthScience(!earthscience)} />Earth Science</label>
+                        </div>
+                        <br />
+                        <div class="form-check form-check-inline">
+                            <label><input type="checkbox" name="subject" class="form-check-input"
+                                value="{history}" onChange={event => setHistory(!history)} />History</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label><input type="checkbox" name="subject" class="form-check-input"
-                                value="{geography}" onChange={event => setGeography(event.target.value)} />Geography</label>
+                                value="{economics}" onChange={event => setEconomics(!economics)} />Economics</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label><input type="checkbox" name="subject" class="form-check-input"
+                                value="{psychology}" onChange={event => setPsychology(!psychology)} />Psychology</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label><input type="checkbox" name="subject" class="form-check-input"
+                                value="{government}" onChange={event => setGovernment(!government)} />Government</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label><input type="checkbox" name="subject" class="form-check-input"
+                                value="{geography}" onChange={event => setGeography(!geography)} />Geography</label>
                         </div>
                     </p>
 
