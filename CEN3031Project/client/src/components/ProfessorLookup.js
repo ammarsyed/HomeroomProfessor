@@ -104,15 +104,12 @@ const ProfessorLookup = (props) => {
 
     const columns = [{
         dataField: 'fullName',
-        formatter: nameFormatter,
         text: 'Professor'
     }, {
         dataField: 'university',
-        formatter: universityFormatter,
         text: 'University'
     }, {
         dataField: 'department',
-        formatter: departmentFormatter,
         text: 'Department'
     }, {
         dataField: "subjects",
