@@ -20,16 +20,16 @@ const Login = (props) =>
         axios.get(STUDENT_API_URL)
             .then(res =>
             {
-
+                //setProfessorProps()
                 for(var i = 0; i < res.data.length; i++)
                 {
-                    console.log(res.data[i].username);
-                    console.log(res.data[i].hash);
+                    //console.log(res.data[i].username);
+                    //console.log(res.data[i].hash);
 
                     if(res.data[i].username === username && res.data[i].hash === hash)
                     {
                         console.log("Log In Succeed, Student")
-                        history.push("/HomeStudent/dashboard")
+                        history.push("/StudentDashboard")
                     }
                 }
 
@@ -41,8 +41,8 @@ const Login = (props) =>
 
                 for(var i = 0; i < res.data.length; i++)
                 {
-                    console.log(res.data[i].username);
-                    console.log(res.data[i].hash);
+                    //console.log(res.data[i].username);
+                    //console.log(res.data[i].hash);
 
                     if(res.data[i].username === username && res.data[i].hash === hash)
                     {
@@ -94,7 +94,7 @@ const Login = (props) =>
                 <div class="row">
                     <div class="col pr-0">
                         <div class="row">
-                            <img src="../../1200px-Florida_Gators_gator_logo.png" class="ml-3 img-max" alt="Gator Image"></img>
+                            <img src="../../1200px-Florida_Gators_gator_logo.png" class="ml-3" className="img-max" alt="Gator Image"></img>
                         </div>
                         <div class="row">
                             <button id="button" class="ml-5" onClick={studentRegistration}>Register as a Student</button>

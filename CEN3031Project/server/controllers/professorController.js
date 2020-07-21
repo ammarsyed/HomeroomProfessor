@@ -38,3 +38,26 @@ export const checkLogin = (req, res) =>
     });
 
 };
+
+export const addStudentToProfessor = (req, res) => {
+
+    var query = Professor.findOneAndUpdate(
+        { "_id": req.params.id },
+        {
+            $push: {
+                students: {
+                    studentFirstName: req.firstName,
+                    studentLastName: req.lastName
+                }
+            }
+        });
+
+    query.exec(function (err, result) {
+        if (err) {
+            res.status(404).send(err);
+        }
+        else {
+            console.log(result)
+        }
+    });
+};

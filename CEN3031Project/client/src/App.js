@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Search from './components/Search';
+import CustomSearch from './components/CustomSearch';
 import Login from './components/Login';
-import HomeStudent from './components/HomeStudent';
 import HomeProfessor from './components/HomeProfessor';
 import StudentRegister from './components/StudentRegister';
 import ProfessorRegister from './components/ProfessorRegister';
@@ -32,14 +31,11 @@ const App = (props) =>
             <Route exact path="/"
                 render={(props) => <Login props={props} authenticate={authenticate} />}
             />
-            <Route path="/HomeStudent"
-                render={(props) => <HomeStudent props={props} />}
-            />
-            <Route path="/HomeStudent/dashboard"
+            <Route path="/StudentDashboard"
                 render={(props) => <StudentDashboard props={props} />}
             />
-            <Route path="/HomeStudent/professor-lookup"
-                render={(props) => <ProfessorLookup props={props} />}
+            <Route path="/StudentDashboard/professor-lookup"
+                render={(props) => <ProfessorLookup props={props} location={props.location} />}
             />
             <Route path="/HomeProfessor"
                 render={(props) => <HomeProfessor props={props} />}

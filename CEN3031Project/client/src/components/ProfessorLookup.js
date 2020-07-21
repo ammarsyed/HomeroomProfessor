@@ -1,50 +1,49 @@
-import React from 'react';
-import { Route } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Route, useHistory } from 'react-router-dom'
 import { Button, Container, Row, Col, Card, Form, FormControl, Table } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-
-const MySearch = (props) => {
-    let input;
-    const handleClick = () => {
-        console.log(input.value);
-        props.onSearch(input.value);
-    };
-    return (
-        <div>
-            <Form inline>
-                <FormControl type="text" ref={n => input = n} placeholder="Search" />
-                <Button variant="outline-primary" onClick={handleClick}>Search</Button>
-            </Form>
-        </div>
-    );
-};
-
-const products = [
-    {
-        firstName: 'Mark',
-        lastName: 'Smith',
-        department: 'english',
-        university: 'UF',
-        subject: 'Creative Writing',
-        request: <Button>Request</Button>
-    }, {
-        firstName: 'Daniel',
-        lastName: 'Labes',
-        department: 'math',
-        university: 'UF',
-        subject: 'Calculus'
-    }];
-
+//import CustomSearch from './CustomSearch';
 
 
 const ProfessorLookup = (props) => {
+    //const [filterText, setFilterText] = useState('');
+    const [professorArray, setProfessorArray] = useState(props.location.state.detail);
 
-    let fullName = props.firstName + " " + props.lastName;
+    const { SearchBar } = Search;
+
+    //const filterUpdate = (value) => {
+    //    setFilterText(value);
+    //};
+    
+    useEffect(() => {
+        console.log(props.location.state.detail)
+    }, [])
+
+    function subjectFormatter(cell, row, rowIndex) {
+        var arr = [];
+
+        var keys = Object.keys(professorArray[rowIndex].subjects)
+
+        var filtered = keys.filter(function (key) {
+            return professorArray[rowIndex].subjects[key]
+        });
+
+        for (var key in filtered) {
+            arr.push(<tr key={key}><td>{filtered[key]}</td></tr>)
+        }
+
+        return (
+            <table>
+                <tbody>
+                    {arr}
+                </tbody>
+            </table>
+            )
+    }
 
     const columns = [{
-        dataField: 'firstName',
+        dataField: 'fullName',
         text: 'Professor'
     }, {
         dataField: 'university',
@@ -53,12 +52,16 @@ const ProfessorLookup = (props) => {
         dataField: 'department',
         text: 'Department'
     }, {
-        dataField: 'subject',
+        dataField: "subjects",
+        formatter: subjectFormatter,
         text: 'Tutoring Subjects'
-    }
-    , {
+    }, {
         dataField: 'request',
-        text: 'Request Professor'
+        text: 'Request Professor',
+        isDummyField: true,
+        formatter: (cellContent, row) => (
+            <Button>Make Appointment</Button>
+            )
     }];
 
     return (
@@ -66,7 +69,7 @@ const ProfessorLookup = (props) => {
             <Container>
                 <ToolkitProvider
                     keyField='firstName'
-                    data={products}
+                    data={professorArray}
                     columns={columns}
                     search
                 >
@@ -75,7 +78,7 @@ const ProfessorLookup = (props) => {
                             <div>
                                 <br />
                                 <h5>Professor Lookup</h5>
-                                <MySearch {...props.searchProps} />
+                                <SearchBar { ...props.searchProps } />
                                 <hr />
                                 <BootstrapTable
                                     {...props.baseProps}
@@ -90,3 +93,8 @@ const ProfessorLookup = (props) => {
 };
 
 export default ProfessorLookup;
+
+//<CustomSearch
+//    {...props.searchProps}
+//    sendUpdate={filterUpdate}
+///>

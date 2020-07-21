@@ -43,6 +43,10 @@ const ProfessorSchema = new Schema({
         psychology: {type: Boolean, default: false},
         government: {type: Boolean, default: false},
         geography: {type: Boolean, default: false}
+    },
+    students: {
+        studentFirstName: { type: String },
+        studentLastName: { type: String }
     }
 });
 
