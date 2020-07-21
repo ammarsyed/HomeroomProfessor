@@ -1,14 +1,12 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import StudentNavbar from './StudentNavbar'
 import { Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl } from 'react-bootstrap';
 
 const StudentDashboard = (props) => {
 
-    const history = useHistory();
-
     return (
-        <>
+        <>  
+            <StudentNavbar data={props.data}/>
             <Container>
                     <Card border="primary" bg="white" text="primary">
                         <Card.Body>
@@ -19,8 +17,6 @@ const StudentDashboard = (props) => {
                     </Card>
             </Container>
         </>
-
-
     );
 };
 

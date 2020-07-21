@@ -1,94 +1,66 @@
-import React from 'react';
-import axios from "axios";
-import { Route } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Route, useHistory } from 'react-router-dom'
 import { Button, Container, Row, Col, Card, Form, FormControl, Table } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
-const MySearch = (props) => {
-
-    let input;
-    const handleClick = () => {
-
-        console.log(props);
-        //props.onSearch(input.value);
-    };
-    return (
-        <div>
-            <Form inline>
-                <FormControl type="text" ref={n => input = n} placeholder="Search" />
-                <Button variant="outline-primary" onClick={handleClick}>Search</Button>
-            </Form>
-        </div>
-    );
-};
-
-let realData;
-
-const products = [
-    //     {
-    //         firstName: 'Mark',
-    //         lastName: 'Smith',
-    //         department: 'english',
-    //         university: 'UF',
-    //         subject: 'Creative Writing',
-    //         request: <Button>Request</Button>
-    //     }, {
-    //         firstName: 'Daniel',
-    //         lastName: 'Labes',
-    //         department: 'math',
-    //         university: 'UF',
-    //         subject: 'Calculus'
-    //     }
-]
-
-const profData = () => {
-    axios.get(PROFESSOR_API_URL).then(
-        res => {
-            realData = res;
-            console.log(realData);
-            for (let i in realData.data) {
-                let packet = {
-                    fullName: realData.data[i].fullName,
-                    department: realData.data[i].department,
-                    university: realData.data[i].university,
-                    subjects: realData.data[i].subjects,
-                }
-                console.log(packet);
-                products.push(packet);
-            }
-            return products;
-        });
-}
-
 const ProfessorLookup = (props) => {
+    
+    const [professorArray] = useState(props.location.state.detail);
+    const { SearchBar } = Search;
 
-    console.log(props.data);
+    function subjectFormatter(cell, row, rowIndex) {
+        var arr = [];
+
+        var keys = Object.keys(professorArray[rowIndex].subjects)
+
+        var filtered = keys.filter(function (key) {
+            return professorArray[rowIndex].subjects[key]
+        });
+
+        for (var key in filtered) {
+            arr.push(<tr key={key}><td>{filtered[key]}</td></tr>)
+        }
+
+        return (
+            <table>
+                <tbody>
+                    {arr}
+                </tbody>
+            </table>
+            )
+    }
 
     const columns = [{
         dataField: 'fullName',
         text: 'Professor'
-        // }, {
-        //     dataField: 'firstName',
-        //     text: 'University'
-        // }, {
-        //     dataField: 'firstName',
-        //     text: 'Department'
-        // }, {
-        //     dataField: 'firstName',
-        //     text: 'Tutoring Subjects'
-        // 
+    }, {
+        dataField: 'university',
+        text: 'University'
+    }, {
+        dataField: 'department',
+        text: 'Department'
+    }, {
+        dataField: "subjects",
+        formatter: subjectFormatter,
+        text: 'Tutoring Subjects'
+    }, {
+        dataField: 'request',
+        text: 'Request Professor',
+        isDummyField: true,
+        formatter: (cellContent, row) => (
+            <Button>Make Appointment</Button>
+            )
     }];
 
     return (
         <>
             <Container>
                 <ToolkitProvider
-                    keyField='fullName'
-                    data={props.data}
+                    keyField='firstName'
+                    data={professorArray}
                     columns={columns}
                     search
                 >
@@ -97,7 +69,7 @@ const ProfessorLookup = (props) => {
                             <div>
                                 <br />
                                 <h5>Professor Lookup</h5>
-                                <MySearch {...props.searchProps} />
+                                <SearchBar { ...props.searchProps } />
                                 <hr />
                                 <BootstrapTable
                                     {...props.baseProps}
