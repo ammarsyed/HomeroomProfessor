@@ -7,7 +7,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
 const ProfessorLookup = (props) => {
-    
+
     const [professorArray] = useState(props.location.state.detail);
     const { SearchBar } = Search;
 
@@ -15,55 +15,25 @@ const ProfessorLookup = (props) => {
     function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
         for (var i = 0; i < splitStr.length; i++) {
-            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
-        return splitStr.join(' '); 
-     }
-
-    function nameFormatter(cellContent, row, rowIndex) {
-        let dep = titleCase(professorArray[rowIndex].fullName);
-
-        return (
-            <table>
-                <tbody>
-                    {dep}
-                </tbody>
-            </table>
-        )
+        return splitStr.join(' ');
     }
 
-    function universityFormatter(cellContent, row, rowIndex) {
-        let dep = professorArray[rowIndex].university;
+    for( let i = 0; i < professorArray.length; i++)
+    {
+        professorArray[i].fullName = titleCase(professorArray[i].fullName);
 
-        if(dep.length > 4)
-            dep = titleCase(dep);
-        else
-            dep = dep.toUpperCase();
+        if(professorArray[i].university.length > 4) professorArray[i].university = titleCase(professorArray[i].university);
+        else professorArray[i].university = professorArray[i].university.toUpperCase();
 
-        return (
-            <table>
-                <tbody>
-                    {dep}
-                </tbody>
-            </table>
-        )
-    }
-
-    function departmentFormatter(cellContent, row, rowIndex) {
-        let dep = professorArray[rowIndex].department;
-
-        if(dep.length > 4)
-            dep = titleCase(dep);
-        else
-            dep = dep.toUpperCase();
-
-        return (
-            <table>
-                <tbody>
-                    {dep}
-                </tbody>
-            </table>
-        )
+        if(professorArray[i].department.length > 4) professorArray[i].department = titleCase(professorArray[i].department);
+        else professorArray[i].department = professorArray[i].department;
+        
+        for(let j = 0; j < professorArray[i].subjects.length; i++)
+        {
+            professorArray[i].subjects[j] = titleCase(professorArray[i].subjects[j]);
+        }
     }
 
     function subjectFormatter(cell, row, rowIndex) {
@@ -71,22 +41,21 @@ const ProfessorLookup = (props) => {
 
         var keys = Object.keys(professorArray[rowIndex].subjects)
 
+        console.log(keys)
+
         var filtered = keys.filter(function (key) {
             return professorArray[rowIndex].subjects[key]
         });
 
         for (var key in filtered) {
             let temp;
-            
-            if(filtered[key].includes('science'))
-            {
+
+            if (filtered[key].includes('science')) {
 
                 temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-                temp = temp.replace("science"," Science");
-                console.log(temp);
+                temp = temp.replace("science", " Science");
             }
-            else
-            {
+            else {
                 temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
             }
 
@@ -99,7 +68,7 @@ const ProfessorLookup = (props) => {
                     {arr}
                 </tbody>
             </table>
-            )
+        )
     }
 
     const columns = [{
@@ -114,14 +83,20 @@ const ProfessorLookup = (props) => {
     }, {
         dataField: "subjects",
         formatter: subjectFormatter,
-        text: 'Tutoring Subjects',
+        text: 'Tutoring Subjects'
+    }, {
+        dataField: 'phoneNumber',
+        text: 'Phone Number'
+    }, {
+        dataField: 'email',
+        text: 'Email'
     }, {
         dataField: 'request',
         text: 'Request Professor',
         isDummyField: true,
         formatter: (cellContent, row) => (
             <Button>Make Appointment</Button>
-            )
+        )
     }];
 
     return (
@@ -138,7 +113,7 @@ const ProfessorLookup = (props) => {
                             <div>
                                 <br />
                                 <h5>Professor Lookup</h5>
-                                <SearchBar { ...props.searchProps } />
+                                <SearchBar {...props.searchProps} />
                                 <hr />
                                 <BootstrapTable
                                     {...props.baseProps}

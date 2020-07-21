@@ -14,8 +14,6 @@ const StudentNavbar = (props) => {
         })
     }
 
-    console.log(props.data);
-
     return (
         <>
             <Navbar bg="primary" variant="dark">
