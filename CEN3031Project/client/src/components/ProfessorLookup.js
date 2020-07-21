@@ -11,6 +11,61 @@ const ProfessorLookup = (props) => {
     const [professorArray] = useState(props.location.state.detail);
     const { SearchBar } = Search;
 
+    //splits a string and capitalizes the first letter of every word
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+        }
+        return splitStr.join(' '); 
+     }
+
+    function nameFormatter(cellContent, row, rowIndex) {
+        let dep = titleCase(professorArray[rowIndex].fullName);
+
+        return (
+            <table>
+                <tbody>
+                    {dep}
+                </tbody>
+            </table>
+        )
+    }
+
+    function universityFormatter(cellContent, row, rowIndex) {
+        let dep = professorArray[rowIndex].university;
+
+        if(dep.length > 4)
+            dep = titleCase(dep);
+        else
+            dep = dep.toUpperCase();
+
+        return (
+            <table>
+                <tbody>
+                    {dep}
+                </tbody>
+            </table>
+        )
+    }
+
+    function departmentFormatter(cellContent, row, rowIndex) {
+        let dep = professorArray[rowIndex].department;
+
+        if(dep.length > 4)
+            dep = titleCase(dep);
+        else
+            dep = dep.toUpperCase();
+
+        return (
+            <table>
+                <tbody>
+                    {dep}
+                </tbody>
+            </table>
+        )
+    }
+
     function subjectFormatter(cell, row, rowIndex) {
         var arr = [];
 
@@ -21,7 +76,21 @@ const ProfessorLookup = (props) => {
         });
 
         for (var key in filtered) {
-            arr.push(<tr key={key}><td>{filtered[key]}</td></tr>)
+            let temp;
+            
+            if(filtered[key].includes('science'))
+            {
+
+                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+                temp = temp.replace("science"," Science");
+                console.log(temp);
+            }
+            else
+            {
+                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+            }
+
+            arr.push(<tr key={key}>{temp}</tr>)
         }
 
         return (
@@ -35,17 +104,20 @@ const ProfessorLookup = (props) => {
 
     const columns = [{
         dataField: 'fullName',
+        formatter: nameFormatter,
         text: 'Professor'
     }, {
         dataField: 'university',
+        formatter: universityFormatter,
         text: 'University'
     }, {
         dataField: 'department',
+        formatter: departmentFormatter,
         text: 'Department'
     }, {
         dataField: "subjects",
         formatter: subjectFormatter,
-        text: 'Tutoring Subjects'
+        text: 'Tutoring Subjects',
     }, {
         dataField: 'request',
         text: 'Request Professor',
