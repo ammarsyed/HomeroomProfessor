@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import {Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl} from 'react-bootstrap';
+import Register from './Registration/Register';
 
 const STUDENT_API_URL = 'http://localhost:5000/api/students';
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
@@ -58,16 +59,10 @@ const Login = (props) =>
 
     };
 
-    const studentRegistration = (event) =>
-    {
-        event.preventDefault();
-        history.push("/StudentRegistration")
-    }
 
-    const professorRegistration = (event) =>
-    {
+    const handleRegister = (event) => {
         event.preventDefault();
-        history.push("/ProfessorRegistration")
+        history.push("/Register")
     }
 
     //Function to change the input type for password entries to allow for show/hide checkbox
@@ -77,7 +72,6 @@ const Login = (props) =>
 
         if(x.type === "password")
         {
-            x.className = "inputFormHalfPassword"
             x.type = "text";
         } else
         {
@@ -87,49 +81,52 @@ const Login = (props) =>
 
     return (
         <>
-            <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="#home">HOMEROOM PROFESSOR</Navbar.Brand>
-            </Navbar>
             <div class="container">
                 <div class="row">
-                    <div class="col pr-0">
+                    <div class="col-md-6">
                         <div class="row">
                             <img src="../../1200px-Florida_Gators_gator_logo.png" class="ml-3" className="img-max" alt="Gator Image"></img>
                         </div>
-                        <div class="row">
-                            <button id="button" class="ml-5" onClick={studentRegistration}>Register as a Student</button>
-                            <button id="button" class="ml-5" onClick={professorRegistration}>Register as a Professor</button>
-                        </div>
                     </div>
-                    <div class="col pr-0">
-                        <form id="login" onSubmit={handleSubmit}>
-                            <div >
-                                <h2>Sign In</h2>
-                            </div>
-                            <strong class="ml-2 mb-0">Username: </strong><input
-                                type="text"
-                                placeholder="Enter Username"
-                                value={username}
-                                onChange={event => setUsername(event.target.value)}
-                            />
-                            <br />
-                            <input
-                                id="inputPassword"
-                                type="password"
-                                placeholder="Password"
-                                value={hash}
-                                onChange={event => setHash(event.target.value)}
-                            />
-                            <br />
-                            <label>
-                                <input type="checkbox" class="ml-2"
-                                    onChange={event => showPassword(event.target.value)}
-                                /> Show Password
-                        </label>
-                            <br />
-
-                            <input id="button" type="submit" value="Login" />
-                        </form>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <form id="login" onSubmit={handleSubmit}>
+                                <div class="form-group">
+                                    <h2>Sign In</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUsername" class="font-weight-bold mb-0">Username:</label>
+                                    <input
+                                        class="ml-0"
+                                        type="text"
+                                        id="inputUsername"
+                                        placeholder="Enter Username"
+                                        value={username}
+                                        onChange={event => setUsername(event.target.value)}
+                                    />
+                                    <label for="inputPassword" class="font-weight-bold mb-0">Password:</label>
+                                    <input
+                                        class="ml-0"
+                                        id="inputPassword"
+                                        type="password"
+                                        placeholder="Enter Password"
+                                        value={hash}
+                                        onChange={event => setHash(event.target.value)}
+                                    />
+                                    <br />
+                                    <label>
+                                        <input type="checkbox" class="ml-1"
+                                            onChange={event => showPassword(event.target.value)}
+                                        /> Show Password
+                                    </label>
+                                    <br />
+                                </div>
+                                <div class="form-group">
+                                    <input id="button" type="submit" value="Login" />
+                                    <button id="button" onClick={handleRegister}>Register</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

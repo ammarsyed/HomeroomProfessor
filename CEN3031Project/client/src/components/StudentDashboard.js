@@ -3,7 +3,8 @@ import { Route } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl } from 'react-bootstrap';
-import StudentNavbar from './StudentNavbar';
+import StudentNavbar from '../common/headers/StudentNavbar';
+import ProfessorLookup from './ProfessorLookup';
 
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
@@ -35,7 +36,6 @@ const StudentDashboard = (props) => {
 
     return (
         <>  
-            <StudentNavbar />
             <Container>
                 <Card className="mt-3" border="primary" bg="white" text="primary">
                         <Card.Body>
@@ -53,3 +53,7 @@ const StudentDashboard = (props) => {
 };
 
 export default StudentDashboard;
+
+//<StudentNavbar />
+
+//{professorProps && <ProfessorLookup profs={professorProps} />}

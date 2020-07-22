@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import CustomSearch from './components/CustomSearch';
+import React from 'react';
 import Login from './components/Login';
 import HomeProfessor from './components/HomeProfessor';
-import StudentRegister from './components/StudentRegister';
-import ProfessorRegister from './components/ProfessorRegister';
+import Register from './components/Registration/Register';
+import StudentRegister from './components/Registration/StudentRegister';
+import ProfessorRegister from './components/Registration/ProfessorRegister';
 import ProfessorLookup from './components/ProfessorLookup';
 import StudentDashboard from './components/StudentDashboard';
 import {BrowserRouter as Router, Link, Switch} from 'react-router-dom';
-import {Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl} from 'react-bootstrap';
 import Route from 'react-router-dom/Route';
+import { Container } from 'react-bootstrap';
+import Footer from './common/Footer.js'
+import HomeNavbar from './common/headers/HomeNavbar.js'
 
 const App = (props) =>
 {
@@ -27,26 +29,29 @@ const App = (props) =>
     };
 
     return (
-        <Router>
-            <Route exact path="/"
-                render={(props) => <Login props={props} authenticate={authenticate} />}
-            />
-            <Route path="/StudentDashboard"
-                render={(props) => <StudentDashboard props={props} />}
-            />
-            <Route path="/StudentDashboard/professor-lookup"
-                render={(props) => <ProfessorLookup props={props} location={props.location} />}
-            />
-            <Route path="/HomeProfessor"
-                render={(props) => <HomeProfessor props={props} />}
-            />
-            <Route path="/StudentRegistration"
-                render={(props) => <StudentRegister props={props} registration={registration} />}
-            />
-            <Route path="/ProfessorRegistration"
-                render={(props) => <ProfessorRegister props={props} registration={registration} />}
-            />
-        </Router>
+        <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+            <Router>
+                <HomeNavbar />
+                <Switch>
+                    <Route exact path="/"
+                        render={(props) => <Login props={props} authenticate={authenticate} />}
+                    />
+                    <Route path="/Register" component={Register} />
+                    <Route path="/StudentDashboard"
+                        render={(props) => <StudentDashboard props={props} />}
+                    />
+                    <Route path="/StudentDashboard/professor-lookup"
+                        render={(props) => <ProfessorLookup props={props} location={props.location} />}
+                    />
+                    <Route path="/HomeProfessor"
+                        render={(props) => <HomeProfessor props={props} />}
+                    />
+
+                </Switch>
+            </Router>
+            <Footer />
+        </Container>
+
     );
 }
 

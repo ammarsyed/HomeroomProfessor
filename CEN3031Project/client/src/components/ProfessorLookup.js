@@ -8,7 +8,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const ProfessorLookup = (props) => {
     //const [filterText, setFilterText] = useState('');
-    const [professorArray, setProfessorArray] = useState(props.location.state.detail);
+    const [professorArray, setProfessorArray] = useState('');
 
     const { SearchBar } = Search;
 
@@ -17,7 +17,7 @@ const ProfessorLookup = (props) => {
     //};
     
     useEffect(() => {
-        console.log(props.location.state.detail)
+        console.log(props)
     }, [])
 
     function subjectFormatter(cell, row, rowIndex) {
@@ -53,7 +53,7 @@ const ProfessorLookup = (props) => {
         text: 'Department'
     }, {
         dataField: "subjects",
-        formatter: subjectFormatter,
+        //formatter: subjectFormatter,
         text: 'Tutoring Subjects'
     }, {
         dataField: 'request',
@@ -63,13 +63,15 @@ const ProfessorLookup = (props) => {
             <Button>Make Appointment</Button>
             )
     }];
+    
+    const data = [];
 
     return (
         <>
             <Container>
                 <ToolkitProvider
                     keyField='firstName'
-                    data={professorArray}
+                    data={props.profs}
                     columns={columns}
                     search
                 >
