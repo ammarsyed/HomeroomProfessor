@@ -1,5 +1,8 @@
 import Student from '../models/studentModel.js';
 
+import bcrypt from "bcryptjs";
+
+
 export const create = async (req, res) =>
 {
 
@@ -7,17 +10,31 @@ export const create = async (req, res) =>
 
     student.fullName = student.firstName + " " + student.lastName;
 
-    student.save(function (err, result)
+    bcrypt.genSalt(10, (err, salt) =>
     {
-        if(err)
+        // hash is the password
+        bcrypt.hash(student.hash, salt, (err, hash) =>
         {
-            res.send(err);
-        }
-        else
-        {
-            res.send({'success': true, 'message': 'Student retrieved for save', result});
-        }
-    });
+            if(err) throw err;
+            student.hash = hash;
+            console.log(student.hash);
+            console.log(hash);
+            student.save(function (err, result)
+            {
+                if(err)
+                {
+                    res.send(err);
+                }
+                else
+                {
+                    res.send({'success': true, 'message': 'Student retrieved for save', result});
+                }
+            });
+        })
+    })
+    console.log(student.hash);
+    // not sure if this should go inside the hashing function or not
+
 };
 
 export const checkLogin = (req, res) =>

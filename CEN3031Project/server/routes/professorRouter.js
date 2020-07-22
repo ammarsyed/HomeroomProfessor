@@ -7,4 +7,6 @@ professorRouter.post('/', professors.create);
 
 professorRouter.get('/', professors.checkLogin);
 
+professorRouter.get('/professorList', professors.professorList)
+
 export default professorRouter;
