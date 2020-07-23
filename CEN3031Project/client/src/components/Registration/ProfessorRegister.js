@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
-import {Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl} from 'react-bootstrap';
 
 const API_URL = 'http://localhost:5000/api/professors';
 
@@ -352,8 +351,8 @@ const ProfessorRegister = (props) =>
                     <br />
                     <div className="form-row">
                         <div className="form-group col-md-6 ml-3">
-                            <button id="button" onClick={backButton}>Back</button>
-                            <input id="button" type="submit" value="Submit" />
+                            <button className="button" onClick={backButton}>Back</button>
+                            <input className="button" type="submit" value="Submit" />
                         </div>
                     </div>
 

@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
-import {Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl} from 'react-bootstrap';
-import Register from './Registration/Register';
 
 const STUDENT_API_URL = 'http://localhost:5000/api/students';
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
@@ -11,6 +9,10 @@ const Login = (props) =>
 {
     const [username, setUsername] = useState("");
     const [hash, setHash] = useState("");
+
+    const updateLogin = (value) => {
+        props.sendLogin(value);
+    };
 
     const history = useHistory();
 
@@ -30,7 +32,8 @@ const Login = (props) =>
                     if(res.data[i].username === username && res.data[i].hash === hash)
                     {
                         console.log("Log In Succeed, Student")
-                        history.push("/StudentDashboard")
+                        updateLogin(true);
+                        history.push("/student")
                     }
                 }
 
@@ -48,7 +51,8 @@ const Login = (props) =>
                     if(res.data[i].username === username && res.data[i].hash === hash)
                     {
                         console.log("Log In Succeed, Professor")
-                        history.push("/HomeProfessor")
+                        updateLogin(true);
+                        history.push("/professor")
                     }
                 }
 
@@ -62,7 +66,7 @@ const Login = (props) =>
 
     const handleRegister = (event) => {
         event.preventDefault();
-        history.push("/Register")
+        history.push("/register")
     }
 
     //Function to change the input type for password entries to allow for show/hide checkbox
@@ -81,32 +85,32 @@ const Login = (props) =>
 
     return (
         <>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <img src="../../1200px-Florida_Gators_gator_logo.png" class="ml-3" className="img-max" alt="Gator Image"></img>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="row">
+                            <img src="../../1200px-Florida_Gators_gator_logo.png" className="img-max" alt="Florida Gator Logo"></img>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="row">
+                    <div className="col-md-6">
+                        <div className="row">
                             <form id="login" onSubmit={handleSubmit}>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <h2>Sign In</h2>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputUsername" class="font-weight-bold mb-0">Username:</label>
+                                <div className="form-group">
+                                    <label htmlFor="inputUsername" className="font-weight-bold mb-0">Username:</label>
                                     <input
-                                        class="ml-0"
+                                        className="ml-0"
                                         type="text"
                                         id="inputUsername"
                                         placeholder="Enter Username"
                                         value={username}
                                         onChange={event => setUsername(event.target.value)}
                                     />
-                                    <label for="inputPassword" class="font-weight-bold mb-0">Password:</label>
+                                    <label htmlFor="inputPassword" className="font-weight-bold mb-0">Password:</label>
                                     <input
-                                        class="ml-0"
+                                        className="ml-0"
                                         id="inputPassword"
                                         type="password"
                                         placeholder="Enter Password"
@@ -115,15 +119,15 @@ const Login = (props) =>
                                     />
                                     <br />
                                     <label>
-                                        <input type="checkbox" class="ml-1"
+                                        <input type="checkbox" className="ml-1"
                                             onChange={event => showPassword(event.target.value)}
                                         /> Show Password
                                     </label>
                                     <br />
                                 </div>
-                                <div class="form-group">
-                                    <input id="button" type="submit" value="Login" />
-                                    <button id="button" onClick={handleRegister}>Register</button>
+                                <div className="form-group">
+                                    <input className="button" type="submit" value="Login" />
+                                    <button className="button" onClick={handleRegister}>Register</button>
                                 </div>
                             </form>
                         </div>

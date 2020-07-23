@@ -1,24 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { Route, useHistory } from 'react-router-dom'
-import { Button, Container, Row, Col, Card, Form, FormControl, Table } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Container } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-//import CustomSearch from './CustomSearch';
-
 
 const ProfessorLookup = (props) => {
-    //const [filterText, setFilterText] = useState('');
-    const [professorArray, setProfessorArray] = useState('');
+
+    //Leaving setProfessorArray for now despite unused notice, state/hooks are usually
+    //defined this way and we may need to update it later
+    const [professorArray, setProfessorArray] = useState(props.location.state.detail);
 
     const { SearchBar } = Search;
 
-    //const filterUpdate = (value) => {
-    //    setFilterText(value);
-    //};
-    
-    useEffect(() => {
-        console.log(props)
-    }, [])
+    //splits a string and capitalizes the first letter of every word
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
+    }
+
+    for (let i = 0; i < professorArray.length; i++) {
+        professorArray[i].fullName = titleCase(professorArray[i].fullName);
+
+        if (professorArray[i].university.length > 4) {
+            professorArray[i].university = titleCase(professorArray[i].university)
+        }
+        else {
+            professorArray[i].university = professorArray[i].university.toUpperCase()
+        }
+
+        if (professorArray[i].department.length > 4) professorArray[i].department = titleCase(professorArray[i].department);
+
+        for (let j = 0; j < professorArray[i].subjects.length; i++) {
+            professorArray[i].subjects[j] = titleCase(professorArray[i].subjects[j]);
+        }
+    }
 
     function subjectFormatter(cell, row, rowIndex) {
         var arr = [];
@@ -30,57 +47,111 @@ const ProfessorLookup = (props) => {
         });
 
         for (var key in filtered) {
-            arr.push(<tr key={key}><td>{filtered[key]}</td></tr>)
+            let temp;
+
+            if (filtered[key].includes('science')) {
+
+                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+                temp = temp.replace("science", " Science");
+            }
+            else {
+                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+            }
+
+            arr.push(<td className="lookup" key={key}>{temp}</td>)
         }
 
         return (
-            <table>
+            <table className="lookup">
                 <tbody>
-                    {arr}
+                    <tr className="lookup">
+                        {arr}
+                    </tr>
                 </tbody>
             </table>
-            )
+        )
+    }
+
+    function newFilter(cell, row, rowIndex) {
+        var arr = [];
+        const keys = Object.keys(professorArray[row].subjects);
+        var filtered = keys.filter(function (key) {
+            return professorArray[rowIndex].subjects[key]
+        });
+        for (var key in filtered) {
+            let temp;
+
+            if (filtered[key].includes('science')) {
+
+                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+                temp = temp.replace("science", " Science");
+            }
+            else {
+                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+            }
+
+            arr.push(<td className="lookup" key={key}>{temp}</td>)
+        }
+        return arr;
     }
 
     const columns = [{
         dataField: 'fullName',
-        text: 'Professor'
+        text: 'Professor',
+        headerAlign: 'center',
+        style: {
+            textAlign: 'center',
+            verticalAlign: 'middle'
+        }
     }, {
         dataField: 'university',
-        text: 'University'
+        text: 'University',
+        headerAlign: 'center',
+        style: { 
+            textAlign: 'center',
+            verticalAlign: 'middle'
+        }
     }, {
         dataField: 'department',
-        text: 'Department'
+        text: 'Department',
+        headerAlign: 'center',
+        style: { 
+            textAlign: 'center',
+            verticalAlign: 'middle'
+        }
     }, {
         dataField: "subjects",
-        //formatter: subjectFormatter,
-        text: 'Tutoring Subjects'
+        formatter: subjectFormatter,
+        text: 'Tutoring Subjects',
+        headerAlign: 'center',
+        style: { textAlign: 'center' },
+        filterValue: newFilter
     }, {
         dataField: 'request',
         text: 'Request Professor',
+        headerAlign: 'center',
+        style: { textAlign: 'center' },
         isDummyField: true,
         formatter: (cellContent, row) => (
             <Button>Make Appointment</Button>
-            )
+        )
     }];
-    
-    const data = [];
 
     return (
         <>
             <Container>
                 <ToolkitProvider
                     keyField='firstName'
-                    data={props.profs}
+                    data={professorArray}
                     columns={columns}
-                    search
+                    search={ { searchFormatted: true } }
                 >
                     {
                         props => (
                             <div>
                                 <br />
                                 <h5>Professor Lookup</h5>
-                                <SearchBar { ...props.searchProps } />
+                                <SearchBar {...props.searchProps} />
                                 <hr />
                                 <BootstrapTable
                                     {...props.baseProps}
@@ -95,8 +166,3 @@ const ProfessorLookup = (props) => {
 };
 
 export default ProfessorLookup;
-
-//<CustomSearch
-//    {...props.searchProps}
-//    sendUpdate={filterUpdate}
-///>

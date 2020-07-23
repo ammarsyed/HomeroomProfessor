@@ -1,10 +1,10 @@
 import React from 'react';
-import {Route} from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+//import {Route} from 'react-router-dom'
+//import { useHistory } from "react-router-dom";
 
 const HomeProfessor = (props) => {
 
-    const history = useHistory();
+    //const history = useHistory();
 
     return (
 

@@ -1,53 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import HomeProfessor from './components/HomeProfessor';
 import Register from './components/Registration/Register';
-import StudentRegister from './components/Registration/StudentRegister';
-import ProfessorRegister from './components/Registration/ProfessorRegister';
 import ProfessorLookup from './components/ProfessorLookup';
 import StudentDashboard from './components/StudentDashboard';
-import {BrowserRouter as Router, Link, Switch} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
-import { Container } from 'react-bootstrap';
 import Footer from './common/Footer.js'
-import HomeNavbar from './common/headers/HomeNavbar.js'
+import HomeNavbar from './common/HomeNavbar.js'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import axios from "axios";
+
+const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
 const App = (props) =>
 {
+    const [professorProps, setProfessorProps] = useState("");
+    const [loginState, setLoginState] = useState(false);
 
-    const authenticate = (user, pw) =>
-    {
-
+    const professorUpdate = (profs) => {
+        setProfessorProps(profs);
     };
 
-    const registration = (account) =>
-    {
-        /* The variable 'account' has all the data from registration forms for use, 
-        *  and I was going to use some if-else statements to differentiate if it was professor
-        *  or if it was a student registration and put it into the appropriate database.
-        */
+    const loginStateUpdate = (value) => {
+        setLoginState(value);
     };
+
+    useEffect(() => {
+        axios.get(PROFESSOR_API_URL)
+            .then(res => {
+                setProfessorProps(res.data)
+            })
+    }, [])
 
     return (
-        <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className="h-100">
             <Router>
-                <HomeNavbar />
-                <Switch>
-                    <Route exact path="/"
-                        render={(props) => <Login props={props} authenticate={authenticate} />}
+                <HomeNavbar profs={professorProps} loginState={loginState} />
+                    <Route
+                        exact path="/"
+                        render={(props) => (
+                            <Login {...props} sendLogin={loginStateUpdate} />
+                        )}
                     />
-                    <Route path="/Register" component={Register} />
-                    <Route path="/StudentDashboard"
-                        render={(props) => <StudentDashboard props={props} />}
+                    <Route path="/register" component={Register} />
+                    <Route
+                        path="/student"
+                        render={(props) => (
+                            <StudentDashboard {...props} profs={professorProps} sendProfs={professorUpdate} />
+                        )}
                     />
-                    <Route path="/StudentDashboard/professor-lookup"
-                        render={(props) => <ProfessorLookup props={props} location={props.location} />}
+                    <Route
+                        path="/student/professor-lookup"
+                        render={(props) => (
+                            <ProfessorLookup {...props} profs={professorProps} location={props.location} />
+                        )}
                     />
-                    <Route path="/HomeProfessor"
-                        render={(props) => <HomeProfessor props={props} />}
+                    <Route
+                        path="/professor"
+                        render={(props) => (
+                            <HomeProfessor {...props} />
+                        )}
                     />
-
-                </Switch>
             </Router>
             <Footer />
         </Container>

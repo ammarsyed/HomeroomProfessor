@@ -1,50 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl } from 'react-bootstrap';
-import StudentNavbar from '../common/headers/StudentNavbar';
-import ProfessorLookup from './ProfessorLookup';
-
-const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
+import React from 'react';
+import { useHistory, Link } from "react-router-dom";
+import { Button, Container, Card } from 'react-bootstrap';
 
 const StudentDashboard = (props) => {
-    const [filterText, setFilterText] = useState('');
-    const [professorProps, setProfessorProps] = useState();
 
-    const filterUpdate = (value) => {
-        setFilterText(value);
-    };
+    // Can use profsUpdate to update professor props in App.js if needed.
+    
+    //const [professorProps, setProfessorProps] = useState("");
+
+    //const profsUpdate = (value) => {
+    //    props.sendProfs(value);
+    //};
 
     const history = useHistory();
 
     const handleClick = () => {
 
+        //profsUpdate(professorProps);
+
         history.push({
-            pathname: "/StudentDashboard/professor-lookup",
-            state: { detail: professorProps}
+            pathname: "/student/professor-lookup",
+            state: { detail: props.profs }
         })
     }
-
-    useEffect(() => {
-        axios.get(PROFESSOR_API_URL)
-            .then(res => {
-                setProfessorProps(res.data)
-            })
-    }, [])
-
 
     return (
         <>  
             <Container>
                 <Card className="mt-3" border="primary" bg="white" text="primary">
                         <Card.Body>
-                            <Card.Title>Student Dashboard</Card.Title>
+                            <Card.Title>
+                            <Link to="/student">Student Dashboard</Link>
+                            <Button className="float-right" onClick={handleClick}>Professor Lookup</Button>
+                            </Card.Title>
                             <Card.Text>
                             </Card.Text>
                         </Card.Body>
                 </Card>
-                <Button onClick={handleClick}>Professor Lookup</Button>
             </Container>
         </>
 
@@ -53,7 +45,3 @@ const StudentDashboard = (props) => {
 };
 
 export default StudentDashboard;
-
-//<StudentNavbar />
-
-//{professorProps && <ProfessorLookup profs={professorProps} />}

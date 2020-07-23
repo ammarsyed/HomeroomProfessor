@@ -3,7 +3,7 @@ import axios from "axios";
 import {useHistory} from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import {Button, Container, Row, Col, Navbar, Nav, NavDropdown, Card, Form, FormControl} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 
 const API_URL = 'http://localhost:5000/api/students';
@@ -53,21 +53,6 @@ const StudentRegister = (props) =>
     //const [checked, setChecked] = useState(false);
 
     const browse_history = useHistory();
-
-    //Function to change the input type for password entries to allow for show/hide checkbox
-    function showPassword()
-    {
-        let x = document.getElementById("passwordID");
-
-        if(x.type === "password")
-        {
-            x.className = "inputFormHalfPassword"
-            x.type = "text";
-        } else
-        {
-            x.type = "password";
-        }
-    }
 
     const handleSubmit = (event) =>
     {
@@ -148,7 +133,7 @@ const StudentRegister = (props) =>
         console.log(event);
         setGrade(event);
 
-        if(event == "0")
+        if(event === "0")
             setGradeDisplay("K");
         else
             setGradeDisplay(event);
@@ -403,8 +388,8 @@ const StudentRegister = (props) =>
                     <br />
                     <div className="form-row">
                         <div className="form-group col-md-6 ml-3">
-                            <button id="button" onClick={backButton}>Back</button>
-                            <input id="button" type="submit" value="Submit" />
+                            <button className="button" onClick={backButton}>Back</button>
+                            <input className="button" type="submit" value="Submit" />
                         </div>
                     </div>
 
