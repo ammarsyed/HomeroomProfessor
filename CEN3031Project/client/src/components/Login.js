@@ -10,7 +10,8 @@ const Login = (props) =>
     const [username, setUsername] = useState("");
     const [hash, setHash] = useState("");
 
-    const updateLogin = (value) => {
+    const updateLogin = (value) =>
+    {
         props.sendLogin(value);
     };
 
@@ -20,6 +21,25 @@ const Login = (props) =>
     {
         event.preventDefault();
         // will be moved to backend when we do authentication and protected routes. also looks like it wont work if professor and student have the same name
+        //changing NOW
+        // axios.get(STUDENT_API_URL)
+        //     .then(res =>
+        //     {
+        //         //setProfessorProps()
+        //         for(var i = 0; i < res.data.length; i++)
+        //         {
+        //             //console.log(res.data[i].username);
+        //             //console.log(res.data[i].hash);
+
+        //             if(res.data[i].username === username && res.data[i].hash === hash)
+        //             {
+        //                 console.log("Log In Succeed, Student")
+        //                 updateLogin(true);
+        //                 history.push("/student")
+        //             }
+        //         }
+
+        //     })
         axios.get(STUDENT_API_URL)
             .then(res =>
             {
@@ -38,7 +58,7 @@ const Login = (props) =>
                 }
 
             })
-
+        //to be updated later
         axios.get(PROFESSOR_API_URL)
             .then(res =>
             {
@@ -64,7 +84,8 @@ const Login = (props) =>
     };
 
 
-    const handleRegister = (event) => {
+    const handleRegister = (event) =>
+    {
         event.preventDefault();
         history.push("/register")
     }
