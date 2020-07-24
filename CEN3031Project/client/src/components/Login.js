@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Card, Container, Row, Button, Col } from 'react-bootstrap';
 
 const STUDENT_API_URL = 'http://localhost:5000/api/students';
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
-const Login = (props) =>
-{
+const Login = (props) => {
     const [username, setUsername] = useState("");
     const [hash, setHash] = useState("");
 
@@ -16,21 +16,17 @@ const Login = (props) =>
 
     const history = useHistory();
 
-    const handleSubmit = (event) =>
-    {
+    const handleSubmit = (event) => {
         event.preventDefault();
         // will be moved to backend when we do authentication and protected routes. also looks like it wont work if professor and student have the same name
         axios.get(STUDENT_API_URL)
-            .then(res =>
-            {
+            .then(res => {
                 //setProfessorProps()
-                for(var i = 0; i < res.data.length; i++)
-                {
+                for (var i = 0; i < res.data.length; i++) {
                     //console.log(res.data[i].username);
                     //console.log(res.data[i].hash);
 
-                    if(res.data[i].username === username && res.data[i].hash === hash)
-                    {
+                    if (res.data[i].username === username && res.data[i].hash === hash) {
                         console.log("Log In Succeed, Student")
                         updateLogin(true);
                         history.push("/student")
@@ -40,16 +36,13 @@ const Login = (props) =>
             })
 
         axios.get(PROFESSOR_API_URL)
-            .then(res =>
-            {
+            .then(res => {
 
-                for(var i = 0; i < res.data.length; i++)
-                {
+                for (var i = 0; i < res.data.length; i++) {
                     //console.log(res.data[i].username);
                     //console.log(res.data[i].hash);
 
-                    if(res.data[i].username === username && res.data[i].hash === hash)
-                    {
+                    if (res.data[i].username === username && res.data[i].hash === hash) {
                         console.log("Log In Succeed, Professor")
                         updateLogin(true);
                         history.push("/professor")
@@ -70,15 +63,12 @@ const Login = (props) =>
     }
 
     //Function to change the input type for password entries to allow for show/hide checkbox
-    function showPassword()
-    {
+    function showPassword() {
         let x = document.getElementById("inputPassword");
 
-        if(x.type === "password")
-        {
+        if (x.type === "password") {
             x.type = "text";
-        } else
-        {
+        } else {
             x.type = "password";
         }
     }
@@ -126,8 +116,14 @@ const Login = (props) =>
                                     <br />
                                 </div>
                                 <div className="form-group">
-                                    <input className="button" type="submit" value="Login" />
-                                    <button className="button" onClick={handleRegister}>Register</button>
+                                    <Row>
+                                        <Col xs={2}>
+                                            <Button type="submit" value="submit">Login</Button>
+                                        </Col>
+                                        <Col>
+                                            <Button onClick={handleRegister}>Register</Button>
+                                        </Col>
+                                    </Row>
                                 </div>
                             </form>
                         </div>

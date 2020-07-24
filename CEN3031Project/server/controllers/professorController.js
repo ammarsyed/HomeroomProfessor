@@ -4,6 +4,9 @@ export const create = async (req, res) =>
 {
 
     var professor = new Professor(req.body);
+    
+    res.send(professor);
+    
     professor.fullName = professor.firstName + " " + professor.lastName;
 
     professor.save(function (err, result)

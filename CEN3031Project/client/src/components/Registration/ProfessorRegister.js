@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const API_URL = 'http://localhost:5000/api/professors';
 
-const ProfessorRegister = (props) =>
-{
+const ProfessorRegister = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -47,9 +46,30 @@ const ProfessorRegister = (props) =>
 
     const browse_history = useHistory();
 
-    const handleSubmit = (event) =>
-    {
+    //splits a string and capitalizes the first letter of every word
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
+    }
+
+    const handleSubmit = (event) => {
         event.preventDefault();
+
+        let subjArr = [];
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        for (var checkbox of checkboxes) {
+            let temp = checkbox.value;
+            temp = temp.replace('{', '');
+            temp = temp.replace('}', '');
+            if (temp.includes('science')) temp = temp.replace("science", " Science");
+            temp = titleCase(temp);
+
+            subjArr.push(temp);
+        }
+        let subjectString = subjArr.join(', ');
 
         const newprofessor =
         {
@@ -64,6 +84,7 @@ const ProfessorRegister = (props) =>
             "department": department,
             "city": city,
             "state": state,
+            "subjectString": subjectString,
             "subjects": {
                 "computerscience": computerscience,
                 "english": english,
@@ -89,9 +110,10 @@ const ProfessorRegister = (props) =>
             }
         };
 
+        console.log(newprofessor)
+
         axios.post(API_URL, newprofessor)
-            .then(res =>
-            {
+            .then(res => {
                 console.log(res);
                 console.log(res.data);
             })
@@ -99,22 +121,18 @@ const ProfessorRegister = (props) =>
         browse_history.push("/")
     };
 
-    const backButton = (event) =>
-    {
+    const backButton = (event) => {
         event.preventDefault();
         browse_history.push("/")
     }
 
     //Function to change the input type for password entries to allow for show/hide checkbox
-    function showPassword()
-    {
+    function showPassword() {
         let x = document.getElementById("inputPassword");
 
-        if(x.type === "password")
-        {
+        if (x.type === "password") {
             x.type = "text";
-        } else
-        {
+        } else {
             x.type = "password";
         }
     }
@@ -228,7 +246,7 @@ const ProfessorRegister = (props) =>
                         <div className="form-row">
                             <div className="form-check form-check-inline">
                                 <label><input type="checkbox" name="subject" className="form-check-input"
-                                    checked={computerscience} onChange={() => setComputerScience(!computerscience)} />Computer Science</label>
+                                    value="{computerscience}" onChange={() => setComputerScience(!computerscience)} />Computer Science</label>
                             </div>
                             <div className="form-check form-check-inline">
                                 <label><input type="checkbox" name="subject" className="form-check-input"
