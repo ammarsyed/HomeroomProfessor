@@ -21,6 +21,7 @@ const ProfessorSchema = new Schema({
     department: {type: String, uppercase: true, required: true},
     city: {type: String, uppercase: true, required: true},
     state: {type: String, uppercase: true, required: true},
+    subjectString: {type: String},
     subjects: {
         computerscience: {type: Boolean, default: false},
         english: {type: Boolean, default: false},

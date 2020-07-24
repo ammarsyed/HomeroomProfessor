@@ -120,12 +120,10 @@ const ProfessorLookup = (props) => {
             verticalAlign: 'middle'
         }
     }, {
-        dataField: "subjects",
-        formatter: subjectFormatter,
+        dataField: "subjectString",
         text: 'Tutoring Subjects',
         headerAlign: 'center',
-        style: { textAlign: 'center' },
-        filterValue: newFilter
+        style: { textAlign: 'center' }
     }, {
         dataField: 'request',
         text: 'Request Professor',

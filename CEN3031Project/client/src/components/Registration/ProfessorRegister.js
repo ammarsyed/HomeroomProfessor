@@ -47,9 +47,31 @@ const ProfessorRegister = (props) =>
 
     const browse_history = useHistory();
 
+//splits a string and capitalizes the first letter of every word
+function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
+}
+
     const handleSubmit = (event) =>
     {
         event.preventDefault();
+
+        let subjArr = [];
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        for (var checkbox of checkboxes) {
+            let temp = checkbox.value;
+            temp = temp.replace('{', '');
+            temp = temp.replace('}', '');
+            if (temp.includes('science')) temp = temp.replace("science", " Science");
+            temp = titleCase(temp);
+
+            subjArr.push(temp);
+        }
+        let subjectString = subjArr.join(', ');
 
         const newprofessor =
         {
@@ -64,6 +86,7 @@ const ProfessorRegister = (props) =>
             "department": department,
             "city": city,
             "state": state,
+            "subjectString": subjectString,
             "subjects": {
                 "computerscience": computerscience,
                 "english": english,
@@ -228,7 +251,7 @@ const ProfessorRegister = (props) =>
                         <div className="form-row">
                             <div className="form-check form-check-inline">
                                 <label><input type="checkbox" name="subject" className="form-check-input"
-                                    checked={computerscience} onChange={() => setComputerScience(!computerscience)} />Computer Science</label>
+                                    value="{computerscience}" onChange={() => setComputerScience(!computerscience)} />Computer Science</label>
                             </div>
                             <div className="form-check form-check-inline">
                                 <label><input type="checkbox" name="subject" className="form-check-input"
