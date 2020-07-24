@@ -37,63 +37,63 @@ const ProfessorLookup = (props) => {
         }
     }
 
-    function subjectFormatter(cell, row, rowIndex) {
-        var arr = [];
+    // function subjectFormatter(cell, row, rowIndex) {
+    //     var arr = [];
 
-        var keys = Object.keys(professorArray[rowIndex].subjects)
+    //     var keys = Object.keys(professorArray[rowIndex].subjects)
 
-        var filtered = keys.filter(function (key) {
-            return professorArray[rowIndex].subjects[key]
-        });
+    //     var filtered = keys.filter(function (key) {
+    //         return professorArray[rowIndex].subjects[key]
+    //     });
 
-        for (var key in filtered) {
-            let temp;
+    //     for (var key in filtered) {
+    //         let temp;
 
-            if (filtered[key].includes('science')) {
+    //         if (filtered[key].includes('science')) {
 
-                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-                temp = temp.replace("science", " Science");
-            }
-            else {
-                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-            }
+    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+    //             temp = temp.replace("science", " Science");
+    //         }
+    //         else {
+    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+    //         }
 
-            arr.push(<td className="lookup" key={key}>{temp}</td>)
-        }
+    //         arr.push(<td className="lookup" key={key}>{temp}</td>)
+    //     }
 
-        return (
-            <table className="lookup">
-                <tbody>
-                    <tr className="lookup">
-                        {arr}
-                    </tr>
-                </tbody>
-            </table>
-        )
-    }
+    //     return (
+    //         <table className="lookup">
+    //             <tbody>
+    //                 <tr className="lookup">
+    //                     {arr}
+    //                 </tr>
+    //             </tbody>
+    //         </table>
+    //     )
+    // }
 
-    function newFilter(cell, row, rowIndex) {
-        var arr = [];
-        const keys = Object.keys(professorArray[row].subjects);
-        var filtered = keys.filter(function (key) {
-            return professorArray[rowIndex].subjects[key]
-        });
-        for (var key in filtered) {
-            let temp;
+    // function newFilter(cell, row, rowIndex) {
+    //     var arr = [];
+    //     const keys = Object.keys(professorArray[row].subjects);
+    //     var filtered = keys.filter(function (key) {
+    //         return professorArray[rowIndex].subjects[key]
+    //     });
+    //     for (var key in filtered) {
+    //         let temp;
 
-            if (filtered[key].includes('science')) {
+    //         if (filtered[key].includes('science')) {
 
-                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-                temp = temp.replace("science", " Science");
-            }
-            else {
-                temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-            }
+    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+    //             temp = temp.replace("science", " Science");
+    //         }
+    //         else {
+    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
+    //         }
 
-            arr.push(<td className="lookup" key={key}>{temp}</td>)
-        }
-        return arr;
-    }
+    //         arr.push(<td className="lookup" key={key}>{temp}</td>)
+    //     }
+    //     return arr;
+    // }
 
     const columns = [{
         dataField: 'fullName',
