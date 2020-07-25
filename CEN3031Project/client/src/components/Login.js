@@ -48,8 +48,12 @@ const Login = (props) =>
         //     })
 
         const fields = {username: username, password: hash}
-        const user = await studenthttpUser.login(fields);
+        console.log('print fields')
+        console.log(fields);
 
+        const user = await studenthttpUser.logIn(fields); //getting error here
+        console.log('called login in studenthttpuser')
+        console.log(user)
         // axios.get(STUDENT_API_URL) //TODO, fix this, send stuff to appjs (set current user stuff) which sends it to dashboard which needs to print it out like hello fullname! 
         //     .then(res =>
         //     {
@@ -64,8 +68,11 @@ const Login = (props) =>
         //                 console.log("Log In Succeed, Student")
         if(user)
         {
+            console.log('on login success function called')
             props.onLoginSuccess(user);
+            console.log('calling updateLogin')
             updateLogin(true);
+            console.log('push')
             history.push("/student")
         }
         // }
