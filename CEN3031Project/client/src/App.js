@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
-import HomeProfessor from './components/HomeProfessor';
+import ProfessorDashboard from './components/ProfessorDashboard';
 import Register from './components/Registration/Register';
 import ProfessorLookup from './components/ProfessorLookup';
+import ProfessorAccount from './components/ProfessorAccount';
 import StudentDashboard from './components/StudentDashboard';
 import Footer from './common/Footer.js'
 import HomeNavbar from './common/HomeNavbar.js'
@@ -54,15 +55,21 @@ const App = (props) => {
                     )}
                 />
                 <Route
-                        path="/student/professor-lookup"
-                        render={(props) => (
-                            <ProfessorLookup {...props} profs={professorProps} location={props.location} />
-                        )}
-                    />
+                    path="/student/professor-lookup"
+                    render={(props) => (
+                        <ProfessorLookup {...props} profs={professorProps} location={props.location} />
+                    )}
+                />
                 <Route
                     path="/professor"
                     render={(props) => (
-                        <HomeProfessor {...props} />
+                        <ProfessorDashboard {...props} />
+                    )}
+                />
+                <Route
+                    path="/professor/account"
+                    render={(props) => (
+                        <ProfessorAccount {...props} />
                     )}
                 />
             </Router>
