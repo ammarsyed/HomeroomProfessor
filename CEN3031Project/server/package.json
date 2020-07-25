@@ -2,7 +2,6 @@
   "name": "homeroomprofessor",
   "version": "1.0.0",
   "description": "Software Engineering Project using MERN Stack",
-  "type": "module",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",

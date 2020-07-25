@@ -1,5 +1,5 @@
 // import mongoose from "mongoose";
-var mongoose = requires('mongoose');
+var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // const uniqueValidator = require('mongoose-unique-validator');
@@ -55,5 +55,5 @@ const ProfessorSchema = new Schema({
 // ProfessorSchema.plugin(uniqueValidator);
 
 // export default mongoose.model('Professor', ProfessorSchema);
-
-module.exports = mongoose.model('Professor', ProfessorSchema);;
+const Professor = mongoose.model('Professor', ProfessorSchema);
+module.exports = Professor;

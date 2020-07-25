@@ -3,11 +3,12 @@
 
 // import {verifyToken} from '../authHelperFunctions.js';
 
-var express = require(express);
+var express = require('express');
 var students = require('../controllers/studentController.js');
-var verifyToken = require('../authHelperFunctions');
+var verifyToken = require('../authHelperFunctions').verifyToken;
 
-const studentRouter = express.Router();
+// const studentRouter = express.Router();
+const studentRouter = new express.Router();
 
 studentRouter.post('/', students.create);
 
@@ -24,4 +25,4 @@ studentRouter.use(verifyToken);//middleware to protect routes
 
 // export default studentRouter;
 
-module.exports.studentRouter = studentRouter;
+module.exports = studentRouter;

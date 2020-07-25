@@ -2,7 +2,7 @@
 // import {signToken} from '../authHelperFunctions.js';
 
 var Student = require('../models/studentModel.js');
-var signToken = require('../authHelperFunctions')
+var signToken = require('../authHelperFunctions').signToken;
 
 const create = async (req, res) =>
 {
