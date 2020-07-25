@@ -6,14 +6,13 @@ import ProfessorLookup from './components/ProfessorLookup';
 import StudentDashboard from './components/StudentDashboard';
 import Footer from './common/Footer.js'
 import HomeNavbar from './common/HomeNavbar.js'
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import axios from "axios";
 
 const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
-const App = (props) =>
-{
+const App = (props) => {
     const [professorProps, setProfessorProps] = useState("");
     const [loginState, setLoginState] = useState(false);
 
@@ -36,31 +35,36 @@ const App = (props) =>
         <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }} className="h-100">
             <Router>
                 <HomeNavbar profs={professorProps} loginState={loginState} />
-                    <Route
-                        exact path="/"
-                        render={(props) => (
-                            <Login {...props} sendLogin={loginStateUpdate} />
-                        )}
-                    />
-                    <Route path="/register" component={Register} />
-                    <Route
-                        path="/student"
-                        render={(props) => (
-                            <StudentDashboard {...props} profs={professorProps} sendProfs={professorUpdate} />
-                        )}
-                    />
-                    <Route
+                <Route
+                    exact path="/"
+                    render={(props) => (
+                        <Login {...props} sendLogin={loginStateUpdate} />
+                    )}
+                />
+                <Route path="/register" component={Register} />
+                <Route
+                    path="/student"
+                    render={(props) => (
+                        <StudentDashboard
+                            {...props}
+                            profs={professorProps}
+                            location={props.location}
+                            sendProfs={professorUpdate}
+                        />
+                    )}
+                />
+                <Route
                         path="/student/professor-lookup"
                         render={(props) => (
                             <ProfessorLookup {...props} profs={professorProps} location={props.location} />
                         )}
                     />
-                    <Route
-                        path="/professor"
-                        render={(props) => (
-                            <HomeProfessor {...props} />
-                        )}
-                    />
+                <Route
+                    path="/professor"
+                    render={(props) => (
+                        <HomeProfessor {...props} />
+                    )}
+                />
             </Router>
             <Footer />
         </Container>

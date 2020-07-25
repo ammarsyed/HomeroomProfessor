@@ -4,6 +4,7 @@ import { Button, Container, Card, CardDeck } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
+import ProfessorLookup from './ProfessorLookup';
 
 const StudentDashboard = (props) => {
 
@@ -17,14 +18,12 @@ const StudentDashboard = (props) => {
 
     const history = useHistory();
 
-    const handleClick = () => {
+    function hideAll() {
+        var x = document.getElementById("calendar");
+        var y = document.getElementById("nextFeature");
 
-        //profsUpdate(professorProps);
-
-        history.push({
-            pathname: "/student/professor-lookup",
-            state: { detail: props.profs }
-        })
+        x.style.display = "block";
+        y.style.display = "block";
     }
 
     const handleDateClick = (arg) => {
@@ -38,8 +37,21 @@ const StudentDashboard = (props) => {
         let temp = info.event.url.replace("")
 
         if (info.event.url) {
-          window.open(info.event.url);
+            window.open(info.event.url);
         }
+    }
+
+    function hideDashboard() {
+        var x = document.getElementById("calendar");
+        var y = document.getElementById("nextFeature");
+
+        x.style.display = "none";
+        y.style.display = "none";
+
+        history.push({
+            pathname: "/student/professor-lookup",
+            state: { detail: props.profs }
+        })
     }
 
     return (
@@ -48,15 +60,23 @@ const StudentDashboard = (props) => {
                 <Card className="mt-3" border="primary" bg="white" text="primary">
                     <Card.Body>
                         <Card.Title>
-                            <Link to="/student">Student Dashboard</Link>
-                            <Button className="float-right" onClick={handleClick}>Professor Lookup</Button>
+                            <Link to="/student" onClick={hideAll}>Student Dashboard</Link>
+                            <Button className="float-right" onClick={hideDashboard}>Professor Lookup</Button>
                         </Card.Title>
                         <Card.Text>
                         </Card.Text>
                     </Card.Body>
                 </Card>
+                {/* <Card className="mt-3" border="primary" bg="white" text="primary">
+                    <ProfessorLookup
+                        {...props}
+                        profs={props.profs}
+                        location={props.location}
+                        display="none"
+                    />
+                </Card> */}
                 <CardDeck>
-                    <Card className="mt-3" border="primary" bg="white" text="primary">
+                    <Card id="nextFeature" className="mt-3" border="primary" bg="white" text="primary">
                         <Card.Header className="text-center" text="primary">
                             <Card.Title>
                                 Next Feature
@@ -68,7 +88,7 @@ const StudentDashboard = (props) => {
                             </Card.Title>
                         </Card.Body>
                     </Card>
-                    <Card className="mt-3" border="primary" bg="white" text="primary">
+                    <Card id="calendar" className="mt-3" border="primary" bg="white" text="primary">
                         <Card.Body>
                             <Card.Title>
                                 <FullCalendar
@@ -79,12 +99,22 @@ const StudentDashboard = (props) => {
                                         {
                                             title: 'UF Session',
                                             date: '2020-07-21',
-                                            url: 'ufl.edu'
+                                            url: 'https://www.ufl.edu'
+                                        },
+                                        {
+                                            title: 'UF Session',
+                                            date: '2020-07-21',
+                                            url: 'https://www.ufl.edu'
+                                        },
+                                        {
+                                            title: 'UF Session',
+                                            date: '2020-07-21',
+                                            url: 'https://www.ufl.edu'
                                         },
                                         {
                                             title: 'Google Session',
                                             date: '2020-07-02',
-                                            url: 'google.com'
+                                            url: 'https://www.google.com'
                                         }
                                     ]}
                                     eventClick={customEventClick}
