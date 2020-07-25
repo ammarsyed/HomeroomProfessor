@@ -1,31 +1,48 @@
-import Student from '../models/studentModel.js';
-import {signToken} from '../authHelperFunctions.js';
+// import Student from '../models/studentModel.js';
+// import {signToken} from '../authHelperFunctions.js';
 
-export const create = async (req, res) =>
+var Student = require('../models/studentModel.js');
+var signToken = require('../authHelperFunctions')
+
+const create = async (req, res) =>
 {
-
+    console.log("reached create function")
+    console.log(req.body);
     var student = new Student(req.body);
 
     student.fullName = student.firstName + " " + student.lastName;
 
+    console.log(student);
+    // try
+    // {
     const token = await signToken(student); //not sure if i need await
+    // }
+    // catch(err)
+    // {
+    //     res.json({success: false, code: err.code})
+    // }
+    console.log('get token')
+    console.log(token);
 
     student.save(function (err, result)
     {
+        console.log('in save function')
         if(err)
         {
+            console.log('error')
             // res.send(err);
             res.json({success: false, code: err.code});
         }
         else
         {
+            console.log('save else')
             // res.send({'success': true, 'message': 'Student retrieved for save', result});
             res.json({success: true, message: "User created with token", token});
         }
     });
 };
 
-export const checkLogin = (req, res) =>
+const checkLogin = (req, res) =>
 {
 
     const blank = {};
@@ -46,7 +63,7 @@ export const checkLogin = (req, res) =>
 };
 
 
-export const getAllStudents = async (req, res) =>
+const getAllStudents = async (req, res) =>
 {
     try
     {
@@ -61,7 +78,7 @@ export const getAllStudents = async (req, res) =>
 };
 
 
-export const getOneStudent = async (req, res) =>
+const getOneStudent = async (req, res) =>
 {
     try
     {
@@ -78,7 +95,7 @@ export const getOneStudent = async (req, res) =>
 
 // update a student user
 
-export const updateOneStudent = async (req, res) =>
+const updateOneStudent = async (req, res) =>
 {
     try
     {
@@ -95,7 +112,7 @@ export const updateOneStudent = async (req, res) =>
 }
 
 // delete a student
-export const deleteOneStudent = async (req, res) =>
+const deleteOneStudent = async (req, res) =>
 {
     try
     {
@@ -111,9 +128,9 @@ export const deleteOneStudent = async (req, res) =>
 
 // Authenticate
 
-export const authenticateStudent = async (req, res) =>
+const authenticateStudent = async (req, res) =>
 {
-    const user = await Student.findOne({email: req.body.email});
+    const user = await Student.findOne({username: req.body.username}); //changed from email to username
 
     if(!user || !user.validPassword(req.body.password))
     {
@@ -124,3 +141,10 @@ export const authenticateStudent = async (req, res) =>
     res.json({success: true, message: "Token attached", token});
 
 }
+
+module.exports.create = create;
+module.exports.checkLogin = checkLogin;
+module.exports.getOneStudent = getOneStudent;
+module.exports.updateOneStudent = updateOneStudent;
+module.exports.deleteOneStudent = deleteOneStudent;
+module.exports.authenticateStudent = authenticateStudent;

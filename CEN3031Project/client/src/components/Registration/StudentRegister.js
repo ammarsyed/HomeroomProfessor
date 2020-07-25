@@ -5,7 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import {Container} from 'react-bootstrap';
 
-import httpUser from '../../studenthttpUser.js'
+import studenthttpUser from '../../studenthttpUser.js'
 const API_URL = 'http://localhost:5000/api/students';
 
 const StudentRegister = (props) =>
@@ -104,11 +104,16 @@ const StudentRegister = (props) =>
 
         //     })
         //added below stuff
-        const studentUser = await httpUser.signUp(newstudent);
+        console.log(newstudent.username);
+        console.log(newstudent.password);
+        const studentUser = await studenthttpUser.signUp(newstudent);
+        console.log(studentUser);
         //empty newStudent ??? not sure
         if(studentUser)
         {
+            props.onSignUpSuccess(studentUser);
             // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
+            // im not sure if push should go inside this function or outside
         }
 
         browse_history.push("/")

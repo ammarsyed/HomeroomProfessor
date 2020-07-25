@@ -1,6 +1,7 @@
-import Professor from '../models/professorModel.js';
+// import Professor from '../models/professorModel.js';
+var Professor = require('../models/professorModel')
 
-export const create = async (req, res) =>
+const create = async (req, res) =>
 {
 
     var professor = new Professor(req.body);
@@ -19,7 +20,7 @@ export const create = async (req, res) =>
     });
 };
 
-export const checkLogin = (req, res) =>
+const checkLogin = (req, res) =>
 {
 
     const blank = {};
@@ -39,10 +40,11 @@ export const checkLogin = (req, res) =>
 
 };
 
-export const addStudentToProfessor = (req, res) => {
+const addStudentToProfessor = (req, res) =>
+{
 
     var query = Professor.findOneAndUpdate(
-        { "_id": req.params.id },
+        {"_id": req.params.id},
         {
             $push: {
                 students: {
@@ -52,12 +54,19 @@ export const addStudentToProfessor = (req, res) => {
             }
         });
 
-    query.exec(function (err, result) {
-        if (err) {
+    query.exec(function (err, result)
+    {
+        if(err)
+        {
             res.status(404).send(err);
         }
-        else {
+        else
+        {
             console.log(result)
         }
     });
 };
+
+module.exports.create = create;
+module.exports.checkLogin = checkLogin;
+module.exports.addStudentToProfessor = addStudentToProfessor;

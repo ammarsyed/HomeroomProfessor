@@ -1,7 +1,10 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
-import bcrypt from 'bcryptjs';
+// import mongoose from "mongoose";
+// const Schema = mongoose.Schema;
+// import bcrypt from 'bcryptjs';
 
+var mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 //const bcrypt = require(bcrypt);
 //const SALT_WORK_FACTOR = 10;
 
@@ -14,6 +17,7 @@ const StudentSchema = new Schema({
     lastName: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
     fullName: {type: String},
     username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+    userType: {type: String, default: "student"},
 
     // Passwords
     password: {type: String}, //changed from hash to password
@@ -76,8 +80,9 @@ StudentSchema.pre('save', function (next)
 // const User = mongoose.model('user', userSchema);
 // module.exports = User;
 
-export default mongoose.model('Student', StudentSchema);
+// export default mongoose.model('Student', StudentSchema);
 
+module.exports = mongoose.model('Student', StudentSchema);;
 
 
 

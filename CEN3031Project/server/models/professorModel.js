@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+var mongoose = requires('mongoose');
 const Schema = mongoose.Schema;
 
 // const uniqueValidator = require('mongoose-unique-validator');
@@ -10,7 +11,7 @@ const ProfessorSchema = new Schema({
     lastName: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
     fullName: {type: String},
     username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
-
+    userType: {type: String, default: "professor"},
     // Passwords
     hash: {type: String},
     salt: {type: String},
@@ -45,12 +46,14 @@ const ProfessorSchema = new Schema({
         geography: {type: Boolean, default: false}
     },
     students: {
-        studentFirstName: { type: String },
-        studentLastName: { type: String }
+        studentFirstName: {type: String},
+        studentLastName: {type: String}
     }
 });
 
 
 // ProfessorSchema.plugin(uniqueValidator);
 
-export default mongoose.model('Professor', ProfessorSchema);
+// export default mongoose.model('Professor', ProfessorSchema);
+
+module.exports = mongoose.model('Professor', ProfessorSchema);;
