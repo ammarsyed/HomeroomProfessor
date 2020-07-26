@@ -1,6 +1,10 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+// import mongoose from "mongoose";
+// const Schema = mongoose.Schema;
+// import bcrypt from 'bcryptjs';
 
+var mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 //const bcrypt = require(bcrypt);
 //const SALT_WORK_FACTOR = 10;
 
@@ -13,9 +17,10 @@ const StudentSchema = new Schema({
     lastName: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
     fullName: {type: String},
     username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
+    userType: {type: String, default: "student"},
 
     // Passwords
-    hash: {type: String},
+    password: {type: String}, //changed from hash to password
     salt: {type: String},
 
     email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
@@ -48,6 +53,54 @@ const StudentSchema = new Schema({
         geography: {type: Boolean, default: false}
     }
 });
+
+
+// adds method to user to create hashed password
+StudentSchema.methods.generateHash = function (password)
+{
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+};
+
+// adds method to user to check if password is correct
+StudentSchema.methods.validPassword = function (password)
+{
+    return bcrypt.compareSync(password, this.password);
+};
+
+// had to add this, checks if password was changed before saving
+StudentSchema.pre('save', function (next)
+{
+    if(this.isModified('password'))
+    {
+        this.password = this.generateHash(this.password);
+    }
+    next();
+});
+
+// const User = mongoose.model('user', userSchema);
+// module.exports = User;
+
+// export default mongoose.model('Student', StudentSchema);
+
+// module.exports = mongoose.model('Student', StudentSchema);
+
+const Student = mongoose.model('Student', StudentSchema);
+module.exports = Student;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // bcrypt functions asynchronous, synchronous versions available if needed
 //StudentSchema.methods.setPassword = function(password) {
@@ -107,4 +160,3 @@ const StudentSchema = new Schema({
 // Plugin for validating unique fields
 // StudentSchema.plugin(uniqueValidator, {message: 'is already taken.'});
 
-export default mongoose.model('Student', StudentSchema);

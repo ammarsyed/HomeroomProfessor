@@ -1,14 +1,24 @@
-import path from 'path';
-import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import config from './config/config.js';
-import studentRouter from './routes/studentRouter.js';
-import professorRouter from './routes/professorRouter.js';
+// var path = require('path')
+const express = require('express');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
+var cors = require('cors');
+var config = require('./config/config.js');
+var studentRouter = require('./routes/studentRouter.js')
+var professorRouter = require('./routes/professorRouter.js')
+
+// import path from 'path';
+// import express from 'express';
+// import mongoose from 'mongoose';
+// import bodyParser from 'body-parser';
+// import cors from 'cors';
+// import config from './config/config.js';
+// import studentRouter from './routes/studentRouter.js';
+// import professorRouter from './routes/professorRouter.js';
 
 //Changed method of connecting to MongoDB to get rid of DeprecationWarning
-mongoose.connect(config.db.uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }).then(() => {
+mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() =>
+{
     console.log(`Successfully connected to MongoDB.`)
 });
 
@@ -36,6 +46,7 @@ app.get('/', (req, res) =>
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+app.listen(port, () =>
+{
     console.log(`Server listening on: http://localhost:${port}`);
 });

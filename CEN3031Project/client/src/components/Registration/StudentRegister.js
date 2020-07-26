@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Container } from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 
-
+import studenthttpUser from '../../studenthttpUser.js'
 const API_URL = 'http://localhost:5000/api/students';
 
 const StudentRegister = (props) =>
@@ -54,7 +54,7 @@ const StudentRegister = (props) =>
 
     const browse_history = useHistory();
 
-    const handleSubmit = (event) =>
+    const handleSubmit = async (event) => //made async
     {
         event.preventDefault();
 
@@ -63,8 +63,9 @@ const StudentRegister = (props) =>
             "firstName": firstName,
             "lastName": lastName,
             "username": username,
-            "hash": hash,
+            "password": hash, //changed to password
             "salt": salt,
+            "userType": "student",
             "email": email,
             "age": age,
             "phoneNumber": phoneNumber,
@@ -96,12 +97,29 @@ const StudentRegister = (props) =>
             }
         };
 
-        axios.post(API_URL, newstudent)
-            .then(res =>
-            {
-                console.log(res);
-                console.log(res.data);
-            })
+        // axios.post(API_URL, newstudent)
+        //     .then(res =>
+        //     {
+        //         console.log(res);
+        //         console.log(res.data);
+
+        //     })
+        //added below stuff
+        console.log(newstudent.username);
+        console.log(newstudent.password);
+        const studentUser = await studenthttpUser.signUp(newstudent);
+        console.log(studentUser);
+        //empty newStudent ??? not sure
+        if(studentUser)
+        {
+            console.log('printing prop in student register')
+            console.log(props);
+            console.log('printed props')
+            props.onSignUpSuccess(studentUser);
+            console.log('finished props.onsignupsuccess')
+            // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
+            // im not sure if push should go inside this function or outside
+        }
 
         browse_history.push("/")
     };

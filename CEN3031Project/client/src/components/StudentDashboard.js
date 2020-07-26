@@ -6,7 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import ProfessorLookup from './ProfessorLookup';
 
-const StudentDashboard = (props) => {
+const StudentDashboard = (props) =>
+{
 
     // Can use profsUpdate to update professor props in App.js if needed.
 
@@ -50,7 +51,7 @@ const StudentDashboard = (props) => {
 
         history.push({
             pathname: "/student/professor-lookup",
-            state: { detail: props.profs }
+            state: {detail: props.profs}
         })
     }
 
@@ -63,7 +64,8 @@ const StudentDashboard = (props) => {
                             <Link to="/student" onClick={hideAll}>Student Dashboard</Link>
                             <Button className="float-right" onClick={hideDashboard}>Professor Lookup</Button>
                         </Card.Title>
-                        <Card.Text>
+                    <Card.Text>
+                        <h1>Welcome to your Dashboard, {props.currentUser.fullName}!</h1>
                         </Card.Text>
                     </Card.Body>
                 </Card>

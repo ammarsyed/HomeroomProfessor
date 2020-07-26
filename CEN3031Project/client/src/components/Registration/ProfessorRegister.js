@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
-
+import studenthttpUser from '../../studenthttpUser';
 const API_URL = 'http://localhost:5000/api/professors';
 
 const ProfessorRegister = (props) =>
@@ -47,26 +47,30 @@ const ProfessorRegister = (props) =>
 
     const browse_history = useHistory();
 
-//splits a string and capitalizes the first letter of every word
-function titleCase(str) {
-    var splitStr = str.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    //splits a string and capitalizes the first letter of every word
+    function titleCase(str)
+    {
+        var splitStr = str.toLowerCase().split(' ');
+        for(var i = 0; i < splitStr.length; i++)
+        {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
     }
-    return splitStr.join(' ');
-}
 
-    const handleSubmit = (event) =>
+
+    const handleSubmit = async (event) =>
     {
         event.preventDefault();
 
         let subjArr = [];
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        for (var checkbox of checkboxes) {
+        for(var checkbox of checkboxes)
+        {
             let temp = checkbox.value;
             temp = temp.replace('{', '');
             temp = temp.replace('}', '');
-            if (temp.includes('science')) temp = temp.replace("science", " Science");
+            if(temp.includes('science')) temp = temp.replace("science", " Science");
             temp = titleCase(temp);
 
             subjArr.push(temp);
@@ -78,8 +82,9 @@ function titleCase(str) {
             "firstName": firstName,
             "lastName": lastName,
             "username": username,
-            "hash": hash,
+            "password": hash,
             "salt": salt,
+            "userType": "professor",
             "email": email,
             "phoneNumber": phoneNumber,
             "university": university,
@@ -112,12 +117,27 @@ function titleCase(str) {
             }
         };
 
-        axios.post(API_URL, newprofessor)
-            .then(res =>
-            {
-                console.log(res);
-                console.log(res.data);
-            })
+        // axios.post(API_URL, newprofessor)
+        //     .then(res =>
+        //     {
+        //         console.log(res);
+        //         console.log(res.data);
+        //     })
+
+        const professorUser = await studenthttpUser.signUp(newprofessor);
+        if(professorUser)
+        {
+            console.log('printing prop in student register')
+            console.log(props);
+            console.log('printed props')
+
+            props.onSignUpSuccess(professorUser);
+
+            console.log('finished props.onsignupsuccess')
+            // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
+            // im not sure if push should go inside this function or outside
+        }
+
 
         browse_history.push("/")
     };
