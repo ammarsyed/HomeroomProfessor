@@ -111,7 +111,11 @@ const StudentRegister = (props) =>
         //empty newStudent ??? not sure
         if(studentUser)
         {
+            console.log('printing prop in student register')
+            console.log(props);
+            console.log('printed props')
             props.onSignUpSuccess(studentUser);
+            console.log('finished props.onsignupsuccess')
             // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
             // im not sure if push should go inside this function or outside
         }

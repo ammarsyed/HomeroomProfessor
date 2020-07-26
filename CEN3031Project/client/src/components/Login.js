@@ -80,27 +80,29 @@ const Login = (props) =>
 
         // })
         //to be updated later
-        axios.get(PROFESSOR_API_URL)
-            .then(res =>
-            {
 
-                for(var i = 0; i < res.data.length; i++)
-                {
-                    //console.log(res.data[i].username);
-                    //console.log(res.data[i].hash);
+        // axios.get(PROFESSOR_API_URL)
+        //     .then(res =>
+        //     {
 
-                    if(res.data[i].username === username && res.data[i].hash === hash)
-                    {
-                        console.log("Log In Succeed, Professor")
-                        updateLogin(true);
-                        history.push("/professor")
-                    }
-                }
+        //         for(var i = 0; i < res.data.length; i++)
+        //         {
+        //             //console.log(res.data[i].username);
+        //             //console.log(res.data[i].hash);
 
-            })
+        //             if(res.data[i].username === username && res.data[i].hash === hash)
+        //             {
+        //                 console.log("Log In Succeed, Professor")
+        //                 updateLogin(true);
+        //                 history.push("/professor")
+        //             }
+        //         }
 
-        console.log("Log In Failed")
-        history.push("/")
+        //     })
+
+        // commented this shit
+        // console.log("Log In Failed")
+        // history.push("/")
 
     };
 

@@ -36,6 +36,7 @@ const StudentDashboard = (props) =>
                             <Button className="float-right" onClick={handleClick}>Professor Lookup</Button>
                         </Card.Title>
                         <Card.Text>
+                            <h1>Welcome to your Dashboard, {props.currentUser.fullName}!</h1>
                         </Card.Text>
                     </Card.Body>
                 </Card>

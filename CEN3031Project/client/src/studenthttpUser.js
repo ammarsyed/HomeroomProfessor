@@ -63,12 +63,15 @@ studenthttpUser.signUp = async function (userInfo)
     if(token)
     {
         console.log('true if')
+        console.log('able to sign up')
         this.defaults.headers.common.token = this.setToken(token);
         return jwtDecode(token);
     } else
     {
         console.log('else')
+        console.log('unable to sign up');
         return false;
+
     }
 };
 
