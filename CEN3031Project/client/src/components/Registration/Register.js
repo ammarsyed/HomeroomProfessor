@@ -14,7 +14,7 @@ const Register = (props) =>
         ? <StudentRegister onSignUpSuccess={props.onSignUpSuccess} />
         : null;
     const showProfessorRegister = displayProfessor
-        ? <ProfessorRegister /> //need to add sign up success to professor too later
+        ? <ProfessorRegister onSignUpSuccess={props.onSignUpSuccess}/> //need to add sign up success to professor too later
         : null;
 
 

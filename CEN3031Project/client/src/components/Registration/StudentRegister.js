@@ -65,6 +65,7 @@ const StudentRegister = (props) =>
             "username": username,
             "password": hash, //changed to password
             "salt": salt,
+            "userType": "student",
             "email": email,
             "age": age,
             "phoneNumber": phoneNumber,

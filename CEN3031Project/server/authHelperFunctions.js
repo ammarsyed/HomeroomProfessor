@@ -11,6 +11,8 @@ var jwt = require('jsonwebtoken');
 var Student = require('./models/studentModel.js')
 var config = require('./config/config.js')
 
+var Professor = require('./models/professorModel.js')
+
 const jwt_secret = process.env.secret || config.secret;
 // const jwt = require('jsonwebtoken'),
 //     User = require('./models/user.js'),
@@ -20,6 +22,7 @@ const jwt_secret = process.env.secret || config.secret;
 // function to create tokens
 function signToken(user)
 {
+
     console.log("in sign token function")
     console.log(user);
     const userData = user.toObject();
@@ -47,6 +50,17 @@ function verifyToken(req, res, next)
 
         // find user associated with token
         Student.findById(decodedData._id, (err, user) =>
+        {
+            // reject token if no user
+            // if(!user) return res.json({success: false, message: "Error with token"}); commented this out
+            if(user)
+            {
+                req.user = user;
+                next();
+            }
+        })
+        //added
+        Professor.findById(decodedData._id, (err, user) =>
         {
             // reject token if no user
             if(!user) return res.json({success: false, message: "Error with token"});

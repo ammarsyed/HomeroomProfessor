@@ -42,7 +42,7 @@ const create = async (req, res) =>
     });
 };
 
-const checkLogin = (req, res) =>
+const checkLogin = (req, res) =>       //fake
 {
 
     const blank = {};

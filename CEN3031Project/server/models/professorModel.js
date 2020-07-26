@@ -1,6 +1,7 @@
 // import mongoose from "mongoose";
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 
 // const uniqueValidator = require('mongoose-unique-validator');
 // const crypto = require('crypto');
@@ -13,7 +14,7 @@ const ProfessorSchema = new Schema({
     username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
     userType: {type: String, default: "professor"},
     // Passwords
-    hash: {type: String},
+    password: {type: String}, //changed from hash to password
     salt: {type: String},
 
     email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
@@ -50,6 +51,30 @@ const ProfessorSchema = new Schema({
         studentLastName: {type: String}
     }
 });
+
+// adds method to user to create hashed password
+ProfessorSchema.methods.generateHash = function (password)
+{
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+};
+
+// adds method to user to check if password is correct
+ProfessorSchema.methods.validPassword = function (password)
+{
+    return bcrypt.compareSync(password, this.password);
+};
+
+// had to add this, checks if password was changed before saving
+ProfessorSchema.pre('save', function (next)
+{
+    if(this.isModified('password'))
+    {
+        this.password = this.generateHash(this.password);
+    }
+    next();
+});
+
+
 
 
 // ProfessorSchema.plugin(uniqueValidator);

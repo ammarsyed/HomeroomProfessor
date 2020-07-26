@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
-
+import studenthttpUser from '../../studenthttpUser';
 const API_URL = 'http://localhost:5000/api/professors';
 
 const ProfessorRegister = (props) =>
@@ -47,7 +47,7 @@ const ProfessorRegister = (props) =>
 
     const browse_history = useHistory();
 
-    const handleSubmit = (event) =>
+    const handleSubmit = async (event) =>
     {
         event.preventDefault();
 
@@ -56,8 +56,9 @@ const ProfessorRegister = (props) =>
             "firstName": firstName,
             "lastName": lastName,
             "username": username,
-            "hash": hash,
+            "password": hash,
             "salt": salt,
+            "userType": "professor",
             "email": email,
             "phoneNumber": phoneNumber,
             "university": university,
@@ -89,12 +90,27 @@ const ProfessorRegister = (props) =>
             }
         };
 
-        axios.post(API_URL, newprofessor)
-            .then(res =>
-            {
-                console.log(res);
-                console.log(res.data);
-            })
+        // axios.post(API_URL, newprofessor)
+        //     .then(res =>
+        //     {
+        //         console.log(res);
+        //         console.log(res.data);
+        //     })
+
+        const professorUser = await studenthttpUser.signUp(newprofessor);
+        if(professorUser)
+        {
+            console.log('printing prop in student register')
+            console.log(props);
+            console.log('printed props')
+
+            props.onSignUpSuccess(professorUser);
+
+            console.log('finished props.onsignupsuccess')
+            // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
+            // im not sure if push should go inside this function or outside
+        }
+
 
         browse_history.push("/")
     };

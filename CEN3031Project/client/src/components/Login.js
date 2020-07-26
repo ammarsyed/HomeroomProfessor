@@ -68,12 +68,21 @@ const Login = (props) =>
         //                 console.log("Log In Succeed, Student")
         if(user)
         {
+
             console.log('on login success function called')
             props.onLoginSuccess(user);
             console.log('calling updateLogin')
             updateLogin(true);
             console.log('push')
-            history.push("/student")
+
+            if(user.userType == 'student')
+            {
+                history.push("/student")
+            }
+            else if(user.userType == 'professor')   //added this in
+            {
+                history.push("/professor")
+            }
         }
         // }
         // }

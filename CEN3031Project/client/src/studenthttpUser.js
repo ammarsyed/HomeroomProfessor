@@ -26,22 +26,38 @@ studenthttpUser.logIn = async function (credentials)
     try
     {
         console.log('entered login http function')
-        const response = await axios.post('http://localhost:5000/api/students/authenticate', credentials);
+        let response = await axios.post('http://localhost:5000/api/students/authenticate', credentials);
         console.log('got response')
-        const token = response.data.token;
+        let token = response.data.token;
         console.log('got token')
+        console.log(token)
+        // if didn't get token (bc not student)
+        if(!token)
+        {
+            console.log('inside not token function')
+            response = await axios.post('http://localhost:5000/api/professors/authenticate', credentials);
+            console.log(response);
+            token = response.data.token;
+            console.log(token);
+        }
+        console.log(token);
+        // if got token (bc ur student or professor)
         if(token)
         {
             console.log('if token')
             this.defaults.headers.common.token = this.setToken(token);
             console.log('got token about to decode')
             return jwtDecode(token);
-        } else
+
+        }
+        // not student or professor (bc both db searched now)
+        else
         {
             console.log('else false wrong password')
             return false;
         }
-    } catch(err)
+    }
+    catch(err)
     {
         console.log('error rip')
         console.log(err);
@@ -52,8 +68,16 @@ studenthttpUser.logIn = async function (credentials)
 studenthttpUser.signUp = async function (userInfo)
 {
     console.log(userInfo);
+    let response;
+    if(userInfo.userType == 'student')
+    {
+        response = await axios.post('http://localhost:5000/api/students', userInfo);
+    }
+    else if(userInfo.userType == 'professor')
+    {
+        response = await axios.post('http://localhost:5000/api/professors', userInfo);
 
-    const response = await axios.post('http://localhost:5000/api/students', userInfo);
+    }
 
     console.log(response);
 

@@ -21,7 +21,8 @@ const App = (props) =>
 
     const [currentUser, setCurrentUser] = useState(studenthttpUser.getCurrentUser());
 
-    const onLoginSuccess = () =>
+    //good idea to use student and professor check
+    const onLoginSuccess = (userType) =>
     {
         console.log('reached onLoginSuccess')
         setCurrentUser(studenthttpUser.getCurrentUser());
@@ -100,7 +101,7 @@ const App = (props) =>
                 <Route
                     path="/professor"
                     render={(props) => (
-                        <HomeProfessor {...props} />
+                        <HomeProfessor {...props} currentUser={currentUser} />
                     )}
                 />
                 {/* probably need to add a logout route */}
