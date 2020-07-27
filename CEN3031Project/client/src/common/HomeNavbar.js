@@ -33,7 +33,7 @@ const HomeNavbar = (props) => {
     }
 
     return (
-        <Navbar bg="dark" className="navbar-expand" variant="dark" >
+        <Navbar className="navbar-expand color-cobalt" variant="dark" >
             <Navbar.Brand>
                 <img
                     alt=""
@@ -42,7 +42,9 @@ const HomeNavbar = (props) => {
                     height="60"
                     className="d-inline-block align-bot"
                 />
-                <Link to="/" className="text-white nounderline">HOMEROOM PROFESSOR</Link>
+                <Link to="/" className="text-white nounderline">
+                    <b> Homeroom Professor</b>
+                </Link>
 
             </Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav">

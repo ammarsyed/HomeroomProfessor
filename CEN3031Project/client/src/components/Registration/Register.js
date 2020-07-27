@@ -43,10 +43,10 @@ const Register = (props) =>
                             <Card.Title> Would you like to register as a student or professor? </Card.Title>
                             <Row className="justify-content-md-center">
                                 <Col md="auto">
-                                    <Button onClick={handleStudent}>Student</Button>
+                                    <Button className="cobalt-button" onClick={handleStudent}>Student</Button>
                                 </Col>
                                 <Col md="auto">
-                                    <Button onClick={handleProfessor}>Professor</Button>
+                                    <Button className="cobalt-button" onClick={handleProfessor}>Professor</Button>
                                 </Col>
                             </Row>
                         </Card.Body>

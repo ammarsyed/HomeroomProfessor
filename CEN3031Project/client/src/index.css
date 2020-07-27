@@ -25,19 +25,19 @@ label2 {
 	color: #ffffff !important;
  }
 
+
+
 .main-section{
 	margin: 0 auto !important; 
-	margin-top: 130px !important;
+	margin-top: 100px !important;
 	padding: 0 !important;
 }
 
 .modal-content{
-
 	background-color: #365E7D !important;
-	padding: 0 18px !important;
-	border-radius: 10px !important;
+	padding: 0 12px !important;
+	border-radius: 20px !important;
 	padding-bottom: 20px !important;
-
 }
 
 .user-img img{
@@ -47,7 +47,7 @@ label2 {
 
 .user-img {
 	margin-top: -60px;
-	margin-bottom: 45px;
+	margin-bottom: 25px;
 }
 
 .form-group2{
@@ -104,6 +104,24 @@ label2 {
 }
 
 
+/* Colors based on Icon */
+.color-cobalt {
+	background-color: #365E7D !important;
+}
+.cobalt-button {
+	background-color: #365E7D !important;
+	color: #ffffff !important;
+	border: 2px solid #365E7D !important;
+	border-radius: 8px;
+}
+.cobalt-button:hover {
+	background-color: #ffffff !important;
+	color: #365E7D !important;
+	border: 2px solid #365E7D !important;
+	border-radius: 4px;
+}
+
+
 
 
 
@@ -128,12 +146,8 @@ code {
 /* ##### header ##### */
 .bd-navbar {
 	min-height: 4rem;
-	background-color: #394263;
+	background-color: #365E7D;
 	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
-}
-
-.orange {
-	color: #FA4616;
 }
 
 
@@ -163,19 +177,6 @@ main {
 	float: left;
 	width: 50%;
 	padding: 10px;
-}
-.column2 {
-	padding: 1 0rem;
-	float: left;
-	width: 50%;
-	padding: 20px;
-	background-color: #e9984d;
-}
-.column2_gap{
-	float: left;
-	width: 50%;
-	padding: 5px;
-	background-color: #1c5ec0;
 }
 
 /* ##### Rows ##### */
@@ -224,43 +225,35 @@ button {
 }
 
 button:hover {
-	background: #4A80AA !important;
-	color: #1c5ec0;
-	border: #1c5ec0;
+	background: #4A80AA;
+	color: #ffffff;
 }
 
 .button {
-	background: #ffffff;
-	color: #4A80AA;
+	background: #ffffff !important;
+	color: #4A80AA !important;
 	padding: 0.3rem 0.5rem;
 	font-size: inherit;
 	transition-duration: 0.4s;
-	border: outset #4A80AA;
+	border: outset #4A80AA !important;
 	margin: 0.5rem 0.5rem;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	border-radius: 5px;
 	outline: none;
+}
+
+.button:hover {
+	background: #4A80AA !important;
+	color: #ffffff !important;
 }
 
 #buttonForm {
 	background: #ffffff;
-	color: #000000;
+	color: #365E7D;
 	transition-duration: 0.4s;
 	font-size: inherit;
 	border-radius: 5px;
-	border: solid #9c9c9c;
+	border: solid #365E7D;
 	outline: none;
-}
-
-#buttonForm:hover {
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-.button:hover {
-	background: #4A80AA;
-	color: #ffffff;
-	box-shadow: 0 8px 16px 0 rgb(255, 255, 255);
-	border: outset #4A80AA;
 }
 
 .nounderline {
@@ -405,6 +398,10 @@ input[type='password'] {
 .loginPasswordField {
 	width: 30;
 }
+
+.text-large {
+	font-size: 150%;
+  }
 
 /* #### Dropdown ####*/
 

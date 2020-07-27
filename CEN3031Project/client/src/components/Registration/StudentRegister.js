@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import axios from "axios";
 import {useHistory} from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import {Container} from 'react-bootstrap';
+import { Container, Row, Button, Col } from 'react-bootstrap';
 
 import studenthttpUser from '../../studenthttpUser.js'
 const API_URL = 'http://localhost:5000/api/students';
@@ -240,7 +239,6 @@ const StudentRegister = (props) =>
                             <label htmlFor="inputGrade" className="ml-0 mb-2">Grade</label>
                             <DropdownButton
                                 title={gradeDisplay}
-                                variant="secondary"
                                 onSelect={handleSelect}
                                 id="buttonForm"
                             >
@@ -403,13 +401,23 @@ const StudentRegister = (props) =>
                             <br />
                         </div>
                     </div>
-                    <br />
+                    {/* <br />
                     <div className="form-row">
                         <div className="form-group col-md-6 ml-3">
                             <button className="button" onClick={backButton}>Back</button>
                             <input className="button" type="submit" value="Submit" />
                         </div>
-                    </div>
+                    </div> */}
+                    <Row className="justify-content-md-center">
+                        <Col md="auto">
+                            <Button className="cobalt-button" onClick={backButton}>Back</Button>
+                        </Col>
+                        <Col md="auto">
+                            <Button className="cobalt-button" type="submit" value="Submit">
+                                Submit
+                                    </Button>
+                        </Col>
+                    </Row>
 
                 </form>
             </Container>
