@@ -14,7 +14,7 @@ professorRouter.get('/', professors.checkLogin);//not to be used anymore
 
 professorRouter.post('/authenticate', professors.authenticateProfessor);
 
-professorRouter.get('/getStudent/:id', professors.getOneProfessor);
+professorRouter.get('/getProfessor/:id', professors.getOneProfessor); //fixed typo to getProfessor
 
 professorRouter.use(verifyToken);//middleware to protect routes
 
