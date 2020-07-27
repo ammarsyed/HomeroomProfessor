@@ -64,7 +64,7 @@ const addStudentToProfessor = (req, res) =>
             $push: {
                 students: {
                     studentFirstName: req.firstName,
-                    studentLastName: req.lastName, 
+                    studentLastName: req.lastName,
                     request: true,
                     approved: false
                 }
@@ -171,3 +171,4 @@ module.exports.getOneProfessor = getOneProfessor;
 module.exports.updateOneProfessor = updateOneProfessor;
 module.exports.deleteOneProfessor = deleteOneProfessor;
 module.exports.authenticateProfessor = authenticateProfessor;
+module.exports.getAllProfessors = getAllProfessors;

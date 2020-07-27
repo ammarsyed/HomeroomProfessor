@@ -12,7 +12,10 @@ professorRouter.post('/addRequest', professors.addStudentToProfessor)
 
 professorRouter.post('/authenticate', professors.authenticateProfessor);
 
-professorRouter.get('/getProfessor/:id', professors.getOneProfessor); //fixed typo to getProfessor
+professorRouter.get('/getProfessor/:id', professors.getOneProfessor);
+
+professorRouter.get('/getAllProfessors', professors.getAllProfessors);
+
 
 professorRouter.use(verifyToken);//middleware to protect routes
 

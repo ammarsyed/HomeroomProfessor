@@ -137,3 +137,4 @@ module.exports.getOneStudent = getOneStudent;
 module.exports.updateOneStudent = updateOneStudent;
 module.exports.deleteOneStudent = deleteOneStudent;
 module.exports.authenticateStudent = authenticateStudent;
+module.exports.getAllStudents = getAllStudents;

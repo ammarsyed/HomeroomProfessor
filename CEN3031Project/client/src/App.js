@@ -24,7 +24,8 @@ const App = (props) =>
     const [currentUser, setCurrentUser] = useState("");
 
     //good idea to use student and professor check
-    const onLoginSuccess = (userType) => {
+    const onLoginSuccess = (userType) =>
+    {
         console.log('reached onLoginSuccess')
         setCurrentUser(studenthttpUser.getCurrentUser());
     };
@@ -35,27 +36,33 @@ const App = (props) =>
         setCurrentUser("");
     };
 
-    const professorUpdate = (profs) => {
+    const professorUpdate = (profs) =>
+    {
         setProfessorProps(profs);
     };
 
-    const loginStateUpdate = (value) => {
+    const loginStateUpdate = (value) =>
+    {
         setLoginState(value);
     };
 
-    const updateProfsDatabase = () => {
-        axios.get(PROFESSOR_API_URL)
-            .then(res => {
+    const updateProfsDatabase = () =>
+    {
+        axios.get(PROFESSOR_API_URL + "/getAllProfessors")
+            .then(res =>
+            {
                 setProfessorProps(res.data)
             })
 
-        axios.get(STUDENT_API_URL)
-            .then(res => {
+        axios.get(STUDENT_API_URL + "/getAllStudents")
+            .then(res =>
+            {
                 setStudentProps(res.data)
             })
     };
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         updateProfsDatabase()
 
     }, [])
