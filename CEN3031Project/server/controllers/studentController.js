@@ -35,6 +35,23 @@ const create = async (req, res) =>
 };
 
 
+const checkLogin = (req, res) =>
+{
+
+    const blank = {};
+    var query = Student.find(blank);
+
+    query.exec(function (err, all) {
+        if (err) {
+            res.status(404).send(err);
+        }
+        else {
+            res.json(all);
+        }
+    });
+
+};
+
 const getAllStudents = async (req, res) =>
 {
     try
@@ -115,6 +132,7 @@ const authenticateStudent = async (req, res) =>
 }
 
 module.exports.create = create;
+module.exports.checkLogin = checkLogin;
 module.exports.getOneStudent = getOneStudent;
 module.exports.updateOneStudent = updateOneStudent;
 module.exports.deleteOneStudent = deleteOneStudent;

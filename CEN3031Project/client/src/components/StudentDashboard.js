@@ -19,14 +19,6 @@ const StudentDashboard = (props) =>
 
     const history = useHistory();
 
-    function hideAll() {
-        var x = document.getElementById("calendar");
-        var y = document.getElementById("nextFeature");
-
-        x.style.display = "block";
-        y.style.display = "block";
-    }
-
     const handleDateClick = (arg) => {
         alert(arg.dateStr)
     }
@@ -57,7 +49,7 @@ const StudentDashboard = (props) =>
                     <Card.Body>
                         <Row className="d-flex align-items-center mt-0 mb-0">
                             <Col xs={12}md={10}>
-                                <Link to="/student" onClick={hideAll} className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
+                                <Link to="/student" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
                             </Col>
                             <Col xs={12} md={2}>
                                 <Button className="float-right">Placeholder Button</Button>

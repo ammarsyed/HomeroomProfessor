@@ -6,6 +6,8 @@ const professorRouter = new express.Router();
 
 professorRouter.post('/', professors.create);
 
+professorRouter.get('/', professors.checkLogin);
+
 professorRouter.post('/addRequest', professors.addStudentToProfessor)
 
 professorRouter.post('/authenticate', professors.authenticateProfessor);

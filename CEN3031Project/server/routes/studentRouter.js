@@ -6,6 +6,8 @@ const studentRouter = new express.Router();
 
 studentRouter.post('/', students.create);
 
+studentRouter.get('/', students.checkLogin);
+
 studentRouter.post('/authenticate', students.authenticateStudent);
 
 studentRouter.get('/getStudent/:id', students.getOneStudent);

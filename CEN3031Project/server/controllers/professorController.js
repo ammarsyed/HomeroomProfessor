@@ -33,6 +33,23 @@ const create = async (req, res) =>
     });
 };
 
+const checkLogin = (req, res) =>
+{
+
+    const blank = {};
+    var query = Professor.find(blank);
+
+    query.exec(function (err, all) {
+        if (err) {
+            res.status(404).send(err);
+        }
+        else {
+            res.json(all);
+        }
+    });
+
+};
+
 const addStudentToProfessor = (req, res) =>
 {
     //console.log(req);
@@ -149,7 +166,7 @@ const authenticateProfessor = async (req, res) =>
 
 module.exports.create = create;
 module.exports.addStudentToProfessor = addStudentToProfessor;
-
+module.exports.checkLogin = checkLogin;
 module.exports.getOneProfessor = getOneProfessor;
 module.exports.updateOneProfessor = updateOneProfessor;
 module.exports.deleteOneProfessor = deleteOneProfessor;
