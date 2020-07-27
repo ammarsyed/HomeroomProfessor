@@ -111,7 +111,7 @@ const ProfessorLookup = (props) => {
         isDummyField: true,
         formatter: (cellContent, row) => (
             //<Button onClick={() => buttonTest(row)}>Make Appointment</Button>
-            <Button onClick={() => updateAndShow(row)}>Make Appointment</Button>
+            <Button className="cobalt-button" onClick={() => updateAndShow(row)}>Make Appointment</Button>
         )
     }];
 

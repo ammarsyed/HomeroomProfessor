@@ -27,20 +27,20 @@ const ScheduleModal = (props) => {
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
+                <Modal.Title id="contained-modal-title-vcenter" className="white-text">
                     Student Appointment Request
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h5>What would you like to do?</h5>
-                <ListGroup className="flex-xl-row justify-content-between align-items-center" variant="flush">
-                    <ListGroup.Item className="dashlist"><Button onClick={updateSchedule}>Schedule Appointment</Button></ListGroup.Item>
-                    <ListGroup.Item className="dashlist"><Button onClick={updateContact}>Contact Student</Button></ListGroup.Item>
-                    <ListGroup.Item className="dashlist"><Button onClick={updateDeny}>Deny Request</Button></ListGroup.Item>
+                <h5 className="white-text">What would you like to do?</h5>
+                <ListGroup className="flex-xl-row justify-content-between align-items-center color-cobalt">
+                    <ListGroup.Item className="color-cobalt"><Button className="cobalt-button" onClick={updateSchedule}>Schedule Appointment</Button></ListGroup.Item>
+                    <ListGroup.Item className="color-cobalt"><Button className="cobalt-button" onClick={updateContact}>Contact Student</Button></ListGroup.Item>
+                    <ListGroup.Item className="color-cobalt"><Button className="cobalt-button" onClick={updateDeny}>Deny Request</Button></ListGroup.Item>
                 </ListGroup>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={closeModal}>Close</Button>
+                <Button className="cobalt-button" onClick={closeModal}>Close</Button>
             </Modal.Footer>
         </Modal>
     );

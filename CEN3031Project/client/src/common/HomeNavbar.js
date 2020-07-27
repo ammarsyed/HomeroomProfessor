@@ -44,8 +44,20 @@ const HomeNavbar = (props) =>
          : <Link to="/"><Button variant="outline-light">Sign In</Button></Link>;
 
     return (
-        <Navbar bg="primary" className="navbar-expand" variant="dark">
-            <Navbar.Brand><Link to="/" className="text-white nounderline">HOMEROOM PROFESSOR</Link></Navbar.Brand>
+        <Navbar className="navbar-expand color-cobalt" variant="dark" >
+            <Navbar.Brand>
+                <img
+                    alt=""
+                    src="logo.svg"
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-bot"
+                />{' '}
+                <Link to="/" className="text-white nounderline">
+                    <b>Homeroom Professor</b>
+                </Link>
+
+            </Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     {buttonToggle}

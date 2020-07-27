@@ -45,14 +45,14 @@ const StudentDashboard = (props) =>
     return (
         <>
             <Container fluid>
-                <Card className="mt-3" border="primary" bg="white" text="primary">
+                <Card className="mt-3 cobalt-card">
                     <Card.Body>
                         <Row className="d-flex align-items-center mt-0 mb-0">
                             <Col xs={12}md={10}>
                                 <Link to="/student" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
                             </Col>
                             <Col xs={12} md={2}>
-                                <Button className="float-right">Placeholder Button</Button>
+                                <Button className="float-right cobalt-button">Placeholder Button</Button>
                             </Col>
                         </Row>
                     </Card.Body>
@@ -66,7 +66,7 @@ const StudentDashboard = (props) =>
                     />
                 </Card> */}
                 <CardDeck>
-                    <Card id="nextFeature" className="mt-3" border="primary" bg="white" text="primary">
+                    <Card id="nextFeature" className="mt-3 cobalt-card">
                         <Card.Header className="text-center" text="primary">
                             <Card.Title>
                                 Next Feature
@@ -74,18 +74,20 @@ const StudentDashboard = (props) =>
                         </Card.Header>
                         <Card.Body>
                             <ListGroup className="flex-xl-row justify-content-center border-bottom align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist"><h3>Search Available Professors:</h3></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button onClick={professorClick}>Professor Lookup</Button></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><h3 className="cobalt-text">Search Available Professors:</h3></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={professorClick}>Professor Lookup</Button></ListGroup.Item>
                             </ListGroup>
                         </Card.Body>
                     </Card>
-                    <Card id="calendar" className="mt-3" border="primary" bg="white" text="primary">
+                    <Card id="calendar" className="mt-3 cobalt-card">
                         <Card.Body>
                             <Card.Title>
                                 <FullCalendar
                                     plugins={[dayGridPlugin, interactionPlugin]}
                                     dateClick={handleDateClick}
                                     initialView="dayGridMonth"
+                                    className="cobalt-card"
+                                    eventClassNames="cobalt-calendar-events"
                                     events={[
                                         {
                                             title: 'UF Session',

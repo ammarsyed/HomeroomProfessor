@@ -11,10 +11,10 @@ const Register = (props) =>
 
     const registerHidden = initialContainer ? '' : 'hidden';
     const showStudentRegister = displayStudent
-        ? <StudentRegister />
+        ? <StudentRegister onSignUpSuccess={props.onSignUpSuccess} />
         : null;
     const showProfessorRegister = displayProfessor
-        ? <ProfessorRegister /> //need to add sign up success to professor too later
+        ? <ProfessorRegister onSignUpSuccess={props.onSignUpSuccess}/> //need to add sign up success to professor too later
         : null;
 
 
@@ -43,10 +43,10 @@ const Register = (props) =>
                             <Card.Title> Would you like to register as a student or professor? </Card.Title>
                             <Row className="justify-content-md-center">
                                 <Col md="auto">
-                                    <Button onClick={handleStudent}>Student</Button>
+                                    <Button className="cobalt-button" onClick={handleStudent}>Student</Button>
                                 </Col>
                                 <Col md="auto">
-                                    <Button onClick={handleProfessor}>Professor</Button>
+                                    <Button className="cobalt-button" onClick={handleProfessor}>Professor</Button>
                                 </Col>
                             </Row>
                         </Card.Body>

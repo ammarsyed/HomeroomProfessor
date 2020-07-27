@@ -6,7 +6,7 @@ const ProfessorAccount = (props) => {
     return (
         <>
             <Container>
-                <Card className="mt-3" border="primary" bg="white" text="primary">
+                <Card className="mt-3 cobalt-card">
                     <Card.Header className="text-center" text="primary">
                         <Card.Title>
                             <h3>Account Information</h3>

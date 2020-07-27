@@ -61,20 +61,22 @@ const ProfessorDashboard = (props) => {
     return (
         <>
             <Container fluid>
-                <Card className="mt-3" border="primary" bg="white" text="primary">
+                <Card className="mt-3 cobalt-card">
                     <Card.Body>
                         <Row className="d-flex align-items-center mt-0 mb-0">
                             <Col xs={12} md={10}>
                                 <Link to="/professor" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
                             </Col>
                             <Col xs={12} md={2}>
-                                <Button className="float-right">Placeholder Button</Button>
+                                <Button className="float-right cobalt-button">Placeholder Button</Button>
                             </Col>
                         </Row>
                     </Card.Body>
                 </Card>
-                <CardDeck >
-                    <Card id="requests" className="mt-3" border="primary" bg="white" text="primary">
+                <Card>
+                    <Row>
+                        <Col>
+                    <Card id="requests" className="mt-3 cobalt-card">
                         <Card.Header className="text-center" text="primary">
                             <Card.Title>
                                 New Requests
@@ -83,19 +85,19 @@ const ProfessorDashboard = (props) => {
                         <Card.Body>
                             <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
                                 <ListGroup.Item className="dashlist"><h5>Student Request 1</h5></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
                             </ListGroup>
                             <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
                                 <ListGroup.Item className="dashlist"><h5>Student Request 2</h5></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
                             </ListGroup>
                             <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
                                 <ListGroup.Item className="dashlist"><h5>Student Request 3</h5></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
                             </ListGroup>
                         </Card.Body>
                     </Card>
-                    <Card id="sessions" className="mt-3" border="primary" bg="white" text="primary">
+                    <Card id="sessions" className="mt-3 cobalt-card">
                         <Card.Header className="text-center" text="primary">
                             <Card.Title>
                                 Upcoming Tutoring Sessions
@@ -103,28 +105,22 @@ const ProfessorDashboard = (props) => {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>
-                                Here we could place upcoming tutoring requests with students.
+                                Here we could place upcoming tutoring sessions with students.
                             </Card.Title>
                         </Card.Body>
                     </Card>
-                    <Card id="calendar" className="mt-3" border="primary" bg="white" text="primary">
+                    </Col>
+                    <Col>
+                    <Card id="calendar" className="mt-3 cobalt-card">
                         <Card.Body>
                             <Card.Title>
                                 <FullCalendar
                                     plugins={[dayGridPlugin, interactionPlugin]}
                                     dateClick={handleDateClick}
                                     initialView="dayGridMonth"
+                                    className="cobalt-card"
+                                    eventClassNames="cobalt-calendar-events"
                                     events={[
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
                                         {
                                             title: 'UF Session',
                                             date: '2020-07-21',
@@ -141,7 +137,9 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Body>
                     </Card>
-                </CardDeck>
+                    </Col>
+                    </Row>
+                    </Card>
                 <ScheduleModal
                     show={displayModal}
                     onHide={updateAndHide}
