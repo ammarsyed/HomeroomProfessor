@@ -11,10 +11,10 @@ const Register = (props) =>
 
     const registerHidden = initialContainer ? '' : 'hidden';
     const showStudentRegister = displayStudent
-        ? <StudentRegister onSignUpSuccess={props.onSignUpSuccess} />
+        ? <StudentRegister />
         : null;
     const showProfessorRegister = displayProfessor
-        ? <ProfessorRegister onSignUpSuccess={props.onSignUpSuccess}/> //need to add sign up success to professor too later
+        ? <ProfessorRegister /> //need to add sign up success to professor too later
         : null;
 
 

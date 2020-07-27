@@ -1,12 +1,3 @@
-// import {jsonwebtoken as jwt} from 'jsonwebtoken';
-// var jwt = require('jsonwebtoken');
-// import * as jwt from 'jsonwebtoken';
-
-// import Student from './models/studentModel.js';
-
-// import {secret as jwt_secret} from './config/config.js';
-// import config from './config/config.js'; //config.secret
-
 var jwt = require('jsonwebtoken');
 var Student = require('./models/studentModel.js')
 var config = require('./config/config.js')

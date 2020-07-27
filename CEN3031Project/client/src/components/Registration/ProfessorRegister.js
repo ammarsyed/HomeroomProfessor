@@ -117,27 +117,13 @@ const ProfessorRegister = (props) =>
             }
         };
 
-        // axios.post(API_URL, newprofessor)
-        //     .then(res =>
-        //     {
-        //         console.log(res);
-        //         console.log(res.data);
-        //     })
 
         const professorUser = await studenthttpUser.signUp(newprofessor);
-        if(professorUser)
+
+        if (professorUser)
         {
-            console.log('printing prop in student register')
-            console.log(props);
-            console.log('printed props')
-
-            props.onSignUpSuccess(professorUser);
-
-            console.log('finished props.onsignupsuccess')
-            // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
-            // im not sure if push should go inside this function or outside
+            // Maybe pop up saying successful registration here?
         }
-
 
         browse_history.push("/")
     };

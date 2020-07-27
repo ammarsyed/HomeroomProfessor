@@ -1,4 +1,4 @@
-// import Professor from '../models/professorModel.js';
+
 var Professor = require('../models/professorModel')
 var signToken = require('../authHelperFunctions').signToken;
 
@@ -9,14 +9,9 @@ const create = async (req, res) =>
     professor.fullName = professor.firstName + " " + professor.lastName;
 
     console.log(professor);
-    // try
-    // {
+
     const token = await signToken(professor); //not sure if i need await
-    // }
-    // catch(err)
-    // {
-    //     res.json({success: false, code: err.code})
-    // }
+
     console.log('get token')
     console.log(token);
 
@@ -26,48 +21,35 @@ const create = async (req, res) =>
         if(err)
         {
             console.log('error')
-            // res.send(err);
+
             res.json({success: false, code: err.code});
         }
         else
         {
             console.log('save else')
-            // res.send({'success': true, 'message': 'Student retrieved for save', result});
+
             res.json({success: true, message: "User created with token", token});
         }
     });
 };
 
-const checkLogin = (req, res) =>  //fake
-{
-
-    const blank = {};
-    var query = Professor.find(blank);
-
-    query.exec(function (err, all)
-    {
-        if(err)
-        {
-            res.status(404).send(err);
-        }
-        else
-        {
-            res.json(all);
-        }
-    });
-
-};
-
 const addStudentToProfessor = (req, res) =>
 {
-
+    console.log(req);
+    console.log(req.body);
+    console.log(req.params.id);
     var query = Professor.findOneAndUpdate(
+        console.log(req);
+        console.log(req.body);
+        console.log(req.params.id);
         {"_id": req.params.id},
         {
             $push: {
                 students: {
                     studentFirstName: req.firstName,
-                    studentLastName: req.lastName
+                    studentLastName: req.lastName, 
+                    request: true,
+                    approved: false
                 }
             }
         });
@@ -85,7 +67,6 @@ const addStudentToProfessor = (req, res) =>
     });
 };
 
-// 
 
 const getAllProfessors = async (req, res) =>
 {

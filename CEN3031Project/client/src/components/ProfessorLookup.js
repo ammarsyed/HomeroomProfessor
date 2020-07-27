@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import AppointmentModal from './AppointmentModal';
+import axios from "axios";
+
+const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
 
 const ProfessorLookup = (props) => {
 
     //Leaving setProfessorArray for now despite unused notice, state/hooks are usually
     //defined this way and we may need to update it later
     const [professorArray, setProfessorArray] = useState(props.location.state.detail);
+    const [displayModal, setDisplayModal] = useState(false);
+    const [currentProfessor, setCurrentProfessor] = useState({});
 
     const { SearchBar } = Search;
 
@@ -37,63 +43,33 @@ const ProfessorLookup = (props) => {
         }
     }
 
-    // function subjectFormatter(cell, row, rowIndex) {
-    //     var arr = [];
+    const updateAndShow = (id) => {
 
-    //     var keys = Object.keys(professorArray[rowIndex].subjects)
+        setCurrentProfessor({ id });
 
-    //     var filtered = keys.filter(function (key) {
-    //         return professorArray[rowIndex].subjects[key]
-    //     });
+        setDisplayModal(true);
+    }
 
-    //     for (var key in filtered) {
-    //         let temp;
+    const updateAndHide = (value) => {
+        console.log(currentProfessor);
+        console.log(props.currentUser);
 
-    //         if (filtered[key].includes('science')) {
+        console.log(value);
 
-    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-    //             temp = temp.replace("science", " Science");
-    //         }
-    //         else {
-    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-    //         }
+        if (value === 1) {
+            let response = axios.post(PROFESSOR_API_URL + '/addRequest', props.currentUser, currentProfessor);
 
-    //         arr.push(<td className="lookup" key={key}>{temp}</td>)
-    //     }
+            if (response) {
+                // Maybe say submitted successfully, or just redirect to dashboard?
+                console.log(response);
+            }
+            else {
+                // Unable to make appointment at this time?
+            }
+        }
 
-    //     return (
-    //         <table className="lookup">
-    //             <tbody>
-    //                 <tr className="lookup">
-    //                     {arr}
-    //                 </tr>
-    //             </tbody>
-    //         </table>
-    //     )
-    // }
-
-    // function newFilter(cell, row, rowIndex) {
-    //     var arr = [];
-    //     const keys = Object.keys(professorArray[row].subjects);
-    //     var filtered = keys.filter(function (key) {
-    //         return professorArray[rowIndex].subjects[key]
-    //     });
-    //     for (var key in filtered) {
-    //         let temp;
-
-    //         if (filtered[key].includes('science')) {
-
-    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-    //             temp = temp.replace("science", " Science");
-    //         }
-    //         else {
-    //             temp = filtered[key].charAt(0).toUpperCase() + filtered[key].slice(1);
-    //         }
-
-    //         arr.push(<td className="lookup" key={key}>{temp}</td>)
-    //     }
-    //     return arr;
-    // }
+        setDisplayModal(false);
+    }
 
     const columns = [{
         dataField: 'fullName',
@@ -128,10 +104,14 @@ const ProfessorLookup = (props) => {
         dataField: 'request',
         text: 'Request Professor',
         headerAlign: 'center',
-        style: { textAlign: 'center' },
+        style: { 
+            textAlign: 'center',
+            verticalAlign: 'middle'
+        },
         isDummyField: true,
         formatter: (cellContent, row) => (
-            <Button>Make Appointment</Button>
+            //<Button onClick={() => buttonTest(row)}>Make Appointment</Button>
+            <Button onClick={() => updateAndShow(row)}>Make Appointment</Button>
         )
     }];
 
@@ -158,6 +138,10 @@ const ProfessorLookup = (props) => {
                         )
                     }
                 </ToolkitProvider>
+                <AppointmentModal
+                    show={displayModal}
+                    onHide={updateAndHide}
+                />
             </Container>
         </>
     );

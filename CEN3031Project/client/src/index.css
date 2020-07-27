@@ -60,6 +60,12 @@ main {
   background: #ffffff
 }
 
+/* #### Dashboard #### */
+
+.dashlist {
+	border: none !important;
+}
+
 /* ##### Columns ##### */
 .column1 {
 	float: left;
@@ -168,9 +174,8 @@ button:hover {
 	text-decoration: none !important
 }
 
-.navbar-expand .navbar-nav .nav-link > a:hover,
-.navbar-brand > a:hover
-{
+.navbar .navbar-nav > a:hover,
+.navbar-brand > a:hover {
 	color: lightgrey !important;
 }
 

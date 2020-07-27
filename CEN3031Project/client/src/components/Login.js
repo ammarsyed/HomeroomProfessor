@@ -4,13 +4,6 @@ import {useHistory} from "react-router-dom";
 
 import studenthttpUser from '../studenthttpUser';
 
-
-const STUDENT_API_URL = 'http://localhost:5000/api/students';
-const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
-
-
-
-
 const Login = (props) =>
 {
     const [username, setUsername] = useState("");
@@ -26,26 +19,6 @@ const Login = (props) =>
     const handleSubmit = async (event) =>
     {
         event.preventDefault();
-        // will be moved to backend when we do authentication and protected routes. also looks like it wont work if professor and student have the same name
-        //changing NOW
-        // axios.get(STUDENT_API_URL)
-        //     .then(res =>
-        //     {
-        //         //setProfessorProps()
-        //         for(var i = 0; i < res.data.length; i++)
-        //         {
-        //             //console.log(res.data[i].username);
-        //             //console.log(res.data[i].hash);
-
-        //             if(res.data[i].username === username && res.data[i].hash === hash)
-        //             {
-        //                 console.log("Log In Succeed, Student")
-        //                 updateLogin(true);
-        //                 history.push("/student")
-        //             }
-        //         }
-
-        //     })
 
         const fields = {username: username, password: hash}
         console.log('print fields')
@@ -54,18 +27,7 @@ const Login = (props) =>
         const user = await studenthttpUser.logIn(fields); //getting error here
         console.log('called login in studenthttpuser')
         console.log(user)
-        // axios.get(STUDENT_API_URL) //TODO, fix this, send stuff to appjs (set current user stuff) which sends it to dashboard which needs to print it out like hello fullname! 
-        //     .then(res =>
-        //     {
-        //         //setProfessorProps()
-        //         for(var i = 0; i < res.data.length; i++)
-        //         {
-        //             //console.log(res.data[i].username);
-        //             //console.log(res.data[i].hash);
 
-        //             if(res.data[i].username === username && res.data[i].hash === hash)
-        //             {
-        //                 console.log("Log In Succeed, Student")
         if(user)
         {
 
@@ -84,34 +46,6 @@ const Login = (props) =>
                 history.push("/professor")
             }
         }
-        // }
-        // }
-
-        // })
-        //to be updated later
-
-        // axios.get(PROFESSOR_API_URL)
-        //     .then(res =>
-        //     {
-
-        //         for(var i = 0; i < res.data.length; i++)
-        //         {
-        //             //console.log(res.data[i].username);
-        //             //console.log(res.data[i].hash);
-
-        //             if(res.data[i].username === username && res.data[i].hash === hash)
-        //             {
-        //                 console.log("Log In Succeed, Professor")
-        //                 updateLogin(true);
-        //                 history.push("/professor")
-        //             }
-        //         }
-
-        //     })
-
-        // commented this shit
-        // console.log("Log In Failed")
-        // history.push("/")
 
     };
 

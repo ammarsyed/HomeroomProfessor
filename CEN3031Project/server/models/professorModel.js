@@ -1,10 +1,6 @@
-// import mongoose from "mongoose";
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
-
-// const uniqueValidator = require('mongoose-unique-validator');
-// const crypto = require('crypto');
 
 
 const ProfessorSchema = new Schema({
@@ -49,7 +45,9 @@ const ProfessorSchema = new Schema({
     },
     students: {
         studentFirstName: {type: String},
-        studentLastName: {type: String}
+        studentLastName: {type: String},
+        request: {type: Boolean, default: false},
+        approved: { type: Boolean, default: false }
     }
 });
 
@@ -76,10 +74,5 @@ ProfessorSchema.pre('save', function (next)
 });
 
 
-
-
-// ProfessorSchema.plugin(uniqueValidator);
-
-// export default mongoose.model('Professor', ProfessorSchema);
 const Professor = mongoose.model('Professor', ProfessorSchema);
 module.exports = Professor;

@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory, Link } from "react-router-dom";
-import { Button, Container, Card, CardDeck } from 'react-bootstrap';
+import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
+import ScheduleModal from './ScheduleModal';
 
 const ProfessorDashboard = (props) => {
 
+    const [displayModal, setDisplayModal] = useState(false);
+
     const history = useHistory();
-
-    function hideAll() {
-        var x = document.getElementById("calendar");
-        var y = document.getElementById("requests");
-        var z = document.getElementById("sessions");
-
-        x.style.display = "block";
-        y.style.display = "block";
-        z.style.display = "block";
-    }
 
     const handleDateClick = (arg) => {
         alert(arg.dateStr)
@@ -33,18 +26,36 @@ const ProfessorDashboard = (props) => {
         }
     }
 
-    function hideDashboard() {
-        var x = document.getElementById("calendar");
-        var y = document.getElementById("requests");
-        var z = document.getElementById("sessions");
-
-        x.style.display = "none";
-        y.style.display = "none";
-        z.style.display = "none";
-
+    function accountClick() {
+        
         history.push({
             pathname: "/professor/account"
         })
+    }
+
+    const updateAndShow = (id) => {
+
+        //setCurrentProfessor({ id });
+
+        setDisplayModal(true);
+    }
+
+    const updateAndHide = (value) => {
+
+        if (value === 1) {
+            // Handle Schedule Appointment
+            console.log(value);
+        }
+        else if (value === 2) {
+            // Handle Contact Student
+            console.log(value);
+        }
+        else if (value === 3) {
+            // Handle Deny Request
+            console.log(value);
+        }
+        console.log(value);
+        setDisplayModal(false);
     }
 
     return (
@@ -52,15 +63,38 @@ const ProfessorDashboard = (props) => {
             <Container fluid>
                 <Card className="mt-3" border="primary" bg="white" text="primary">
                     <Card.Body>
-                        <Card.Title>
-                            <Link to="/professor" onClick={hideAll}>Professor Dashboard</Link>
-                            <Button className="float-right" onClick={hideDashboard}>My Account</Button>
-                        </Card.Title>
-                        <Card.Text>
-                        </Card.Text>
+                        <Row className="d-flex align-items-center mt-0 mb-0">
+                            <Col xs={12} md={10}>
+                                <Link to="/professor" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
+                            </Col>
+                            <Col xs={12} md={2}>
+                                <Button className="float-right">Placeholder Button</Button>
+                            </Col>
+                        </Row>
                     </Card.Body>
                 </Card>
                 <CardDeck >
+                    <Card id="requests" className="mt-3" border="primary" bg="white" text="primary">
+                        <Card.Header className="text-center" text="primary">
+                            <Card.Title>
+                                New Requests
+                            </Card.Title>
+                        </Card.Header>
+                        <Card.Body>
+                            <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                <ListGroup.Item className="dashlist"><h5>Student Request 1</h5></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                            </ListGroup>
+                            <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                <ListGroup.Item className="dashlist"><h5>Student Request 2</h5></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                            </ListGroup>
+                            <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                <ListGroup.Item className="dashlist"><h5>Student Request 3</h5></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                            </ListGroup>
+                        </Card.Body>
+                    </Card>
                     <Card id="sessions" className="mt-3" border="primary" bg="white" text="primary">
                         <Card.Header className="text-center" text="primary">
                             <Card.Title>
@@ -107,19 +141,11 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Body>
                     </Card>
-                    <Card id="requests" className="mt-3" border="primary" bg="white" text="primary">
-                        <Card.Header className="text-center" text="primary">
-                            <Card.Title>
-                                New Requests
-                            </Card.Title>
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Title>
-                                Here we could place new tutoring requests from students.
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
                 </CardDeck>
+                <ScheduleModal
+                    show={displayModal}
+                    onHide={updateAndHide}
+                />
             </Container>
         </>
 

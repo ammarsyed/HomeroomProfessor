@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, Link } from "react-router-dom";
-import { Button, Container, Card, CardDeck } from 'react-bootstrap';
+import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
@@ -42,12 +42,7 @@ const StudentDashboard = (props) =>
         }
     }
 
-    function hideDashboard() {
-        var x = document.getElementById("calendar");
-        var y = document.getElementById("nextFeature");
-
-        x.style.display = "none";
-        y.style.display = "none";
+    function professorClick() {
 
         history.push({
             pathname: "/student/professor-lookup",
@@ -60,13 +55,14 @@ const StudentDashboard = (props) =>
             <Container fluid>
                 <Card className="mt-3" border="primary" bg="white" text="primary">
                     <Card.Body>
-                        <Card.Title>
-                            <Link to="/student" onClick={hideAll}>Student Dashboard</Link>
-                            <Button className="float-right" onClick={hideDashboard}>Professor Lookup</Button>
-                        </Card.Title>
-                    <Card.Text>
-                        <h1>Welcome to your Dashboard, {props.currentUser.fullName}!</h1>
-                        </Card.Text>
+                        <Row className="d-flex align-items-center mt-0 mb-0">
+                            <Col xs={12}md={10}>
+                                <Link to="/student" onClick={hideAll} className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
+                            </Col>
+                            <Col xs={12} md={2}>
+                                <Button className="float-right">Placeholder Button</Button>
+                            </Col>
+                        </Row>
                     </Card.Body>
                 </Card>
                 {/* <Card className="mt-3" border="primary" bg="white" text="primary">
@@ -85,9 +81,10 @@ const StudentDashboard = (props) =>
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <Card.Title>
-
-                            </Card.Title>
+                            <ListGroup className="flex-xl-row justify-content-center border-bottom align-items-center" variant="flush">
+                                <ListGroup.Item className="dashlist"><h3>Search Available Professors:</h3></ListGroup.Item>
+                                <ListGroup.Item className="dashlist"><Button onClick={professorClick}>Professor Lookup</Button></ListGroup.Item>
+                            </ListGroup>
                         </Card.Body>
                     </Card>
                     <Card id="calendar" className="mt-3" border="primary" bg="white" text="primary">
