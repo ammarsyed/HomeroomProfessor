@@ -7,15 +7,6 @@ var config = require('./config/config.js');
 var studentRouter = require('./routes/studentRouter.js')
 var professorRouter = require('./routes/professorRouter.js')
 
-// import path from 'path';
-// import express from 'express';
-// import mongoose from 'mongoose';
-// import bodyParser from 'body-parser';
-// import cors from 'cors';
-// import config from './config/config.js';
-// import studentRouter from './routes/studentRouter.js';
-// import professorRouter from './routes/professorRouter.js';
-
 //Changed method of connecting to MongoDB to get rid of DeprecationWarning
 mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() =>
 {
