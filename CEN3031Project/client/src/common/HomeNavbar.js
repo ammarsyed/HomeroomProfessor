@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {Navbar, Nav, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const HomeNavbar = (props) =>
-{
+const HomeNavbar = (props) => {
 
     const [useLogout, setUseLogout] = useState(false);
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         setUseLogout(props.loginState);
     }, [props.loginState]);
 
-    const handleLogout = () =>
-    {
+    const handleLogout = () => {
         setUseLogout(false);
         props.logOut();
     };
@@ -28,18 +25,26 @@ const HomeNavbar = (props) =>
     //     : <Link to="/"><Button variant="outline-light">Sign In</Button></Link>;
 
     let showButton;
-    if(props.currentUser && useLogout)
-    {
+    if (props.currentUser && useLogout) {
         showButton = <Link to="/"><Button variant="outline-light" onClick={handleLogout}>Logout</Button></Link>;
     }
-    else
-    {
+    else {
         showButton = <Link to="/"><Button variant="outline-light">Sign In</Button></Link>;
     }
 
     return (
-        <Navbar bg="primary" className="navbar-expand" variant="dark">
-            <Navbar.Brand><Link to="/" className="text-white nounderline">HOMEROOM PROFESSOR</Link></Navbar.Brand>
+        <Navbar bg="dark" className="navbar-expand" variant="dark" >
+            <Navbar.Brand>
+                <img
+                    alt=""
+                    src="logo.svg"
+                    width="60"
+                    height="60"
+                    className="d-inline-block align-bot"
+                />
+                <Link to="/" className="text-white nounderline">HOMEROOM PROFESSOR</Link>
+
+            </Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     {studentButtonToggle}
