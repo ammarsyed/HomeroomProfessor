@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { Row, Button, Col } from 'react-bootstrap';
 import studenthttpUser from '../../studenthttpUser';
 const API_URL = 'http://localhost:5000/api/professors';
 
-const ProfessorRegister = (props) =>
-{
+const ProfessorRegister = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -48,29 +48,25 @@ const ProfessorRegister = (props) =>
     const browse_history = useHistory();
 
     //splits a string and capitalizes the first letter of every word
-    function titleCase(str)
-    {
+    function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
-        for(var i = 0; i < splitStr.length; i++)
-        {
+        for (var i = 0; i < splitStr.length; i++) {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         return splitStr.join(' ');
     }
 
 
-    const handleSubmit = async (event) =>
-    {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         let subjArr = [];
         var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        for(var checkbox of checkboxes)
-        {
+        for (var checkbox of checkboxes) {
             let temp = checkbox.value;
             temp = temp.replace('{', '');
             temp = temp.replace('}', '');
-            if(temp.includes('science')) temp = temp.replace("science", " Science");
+            if (temp.includes('science')) temp = temp.replace("science", " Science");
             temp = titleCase(temp);
 
             subjArr.push(temp);
@@ -117,47 +113,28 @@ const ProfessorRegister = (props) =>
             }
         };
 
-        // axios.post(API_URL, newprofessor)
-        //     .then(res =>
-        //     {
-        //         console.log(res);
-        //         console.log(res.data);
-        //     })
 
         const professorUser = await studenthttpUser.signUp(newprofessor);
-        if(professorUser)
-        {
-            console.log('printing prop in student register')
-            console.log(props);
-            console.log('printed props')
 
-            props.onSignUpSuccess(professorUser);
-
-            console.log('finished props.onsignupsuccess')
-            // update CURRENT STUDENT STATE AND LOGIN STATE IN APPJS???
-            // im not sure if push should go inside this function or outside
+        if (professorUser) {
+            // Maybe pop up saying successful registration here?
         }
-
 
         browse_history.push("/")
     };
 
-    const backButton = (event) =>
-    {
+    const backButton = (event) => {
         event.preventDefault();
         browse_history.push("/")
     }
 
     //Function to change the input type for password entries to allow for show/hide checkbox
-    function showPassword()
-    {
+    function showPassword() {
         let x = document.getElementById("inputPassword");
 
-        if(x.type === "password")
-        {
+        if (x.type === "password") {
             x.type = "text";
-        } else
-        {
+        } else {
             x.type = "password";
         }
     }
@@ -391,13 +368,24 @@ const ProfessorRegister = (props) =>
                             <br />
                         </div>
                     </div>
-                    <br />
+                    {/* <br />
                     <div className="form-row">
                         <div className="form-group col-md-6 ml-3">
                             <button className="button" onClick={backButton}>Back</button>
                             <input className="button" type="submit" value="Submit" />
                         </div>
-                    </div>
+                    </div> */}
+
+                    <Row className="justify-content-md-center">
+                        <Col md="auto">
+                            <Button className="cobalt-button" onClick={backButton}>Back</Button>
+                        </Col>
+                        <Col md="auto">
+                            <Button className="cobalt-button" type="submit" value="Submit">
+                                Submit
+                                    </Button>
+                        </Col>
+                    </Row>
 
                 </form>
             </div>

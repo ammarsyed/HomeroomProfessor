@@ -1,16 +1,6 @@
-// import mongoose from "mongoose";
-// const Schema = mongoose.Schema;
-// import bcrypt from 'bcryptjs';
-
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
-//const bcrypt = require(bcrypt);
-//const SALT_WORK_FACTOR = 10;
-
-// const uniqueValidator = require('mongoose-unique-validator');
-// const jwt = require('jsonwebtoken');
-// const secret = require('../config').secret;
 
 const StudentSchema = new Schema({
     firstName: {type: String, lowercase: true, required: [true, "can't be blank"], match: [/^[a-zA-Z]+$/, 'is invalid'], index: true},
@@ -76,13 +66,6 @@ StudentSchema.pre('save', function (next)
     }
     next();
 });
-
-// const User = mongoose.model('user', userSchema);
-// module.exports = User;
-
-// export default mongoose.model('Student', StudentSchema);
-
-// module.exports = mongoose.model('Student', StudentSchema);
 
 const Student = mongoose.model('Student', StudentSchema);
 module.exports = Student;

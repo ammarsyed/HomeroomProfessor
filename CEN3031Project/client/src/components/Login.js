@@ -4,13 +4,6 @@ import {useHistory} from "react-router-dom";
 
 import studenthttpUser from '../studenthttpUser';
 
-
-const STUDENT_API_URL = 'http://localhost:5000/api/students';
-const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
-
-
-
-
 const Login = (props) =>
 {
     const [username, setUsername] = useState("");
@@ -26,26 +19,6 @@ const Login = (props) =>
     const handleSubmit = async (event) =>
     {
         event.preventDefault();
-        // will be moved to backend when we do authentication and protected routes. also looks like it wont work if professor and student have the same name
-        //changing NOW
-        // axios.get(STUDENT_API_URL)
-        //     .then(res =>
-        //     {
-        //         //setProfessorProps()
-        //         for(var i = 0; i < res.data.length; i++)
-        //         {
-        //             //console.log(res.data[i].username);
-        //             //console.log(res.data[i].hash);
-
-        //             if(res.data[i].username === username && res.data[i].hash === hash)
-        //             {
-        //                 console.log("Log In Succeed, Student")
-        //                 updateLogin(true);
-        //                 history.push("/student")
-        //             }
-        //         }
-
-        //     })
 
         const fields = {username: username, password: hash}
         console.log('print fields')
@@ -54,18 +27,7 @@ const Login = (props) =>
         const user = await studenthttpUser.logIn(fields); //getting error here
         console.log('called login in studenthttpuser')
         console.log(user)
-        // axios.get(STUDENT_API_URL) //TODO, fix this, send stuff to appjs (set current user stuff) which sends it to dashboard which needs to print it out like hello fullname! 
-        //     .then(res =>
-        //     {
-        //         //setProfessorProps()
-        //         for(var i = 0; i < res.data.length; i++)
-        //         {
-        //             //console.log(res.data[i].username);
-        //             //console.log(res.data[i].hash);
 
-        //             if(res.data[i].username === username && res.data[i].hash === hash)
-        //             {
-        //                 console.log("Log In Succeed, Student")
         if(user)
         {
 
@@ -84,34 +46,6 @@ const Login = (props) =>
                 history.push("/professor")
             }
         }
-        // }
-        // }
-
-        // })
-        //to be updated later
-
-        // axios.get(PROFESSOR_API_URL)
-        //     .then(res =>
-        //     {
-
-        //         for(var i = 0; i < res.data.length; i++)
-        //         {
-        //             //console.log(res.data[i].username);
-        //             //console.log(res.data[i].hash);
-
-        //             if(res.data[i].username === username && res.data[i].hash === hash)
-        //             {
-        //                 console.log("Log In Succeed, Professor")
-        //                 updateLogin(true);
-        //                 history.push("/professor")
-        //             }
-        //         }
-
-        //     })
-
-        // commented this shit
-        // console.log("Log In Failed")
-        // history.push("/")
 
     };
 
@@ -137,57 +71,69 @@ const Login = (props) =>
     }
 
     return (
-        <>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6">
-                        <div className="row">
-                            <img src="../../1200px-Florida_Gators_gator_logo.png" className="img-max" alt="Florida Gator Logo"></img>
-                        </div>
+
+        <div className="modal-dialog text-center">
+            <div className="col-sm-9 main-section">
+
+                <div className="modal-content">
+
+                    <div className="col-12 user-img">
+                        <img src="logo.svg">
+                        </img>
                     </div>
-                    <div className="col-md-6">
-                        <div className="row">
-                            <form id="login" onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <h2>Sign In</h2>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="inputUsername" className="font-weight-bold mb-0">Username:</label>
-                                    <input
-                                        className="ml-0"
-                                        type="text"
-                                        id="inputUsername"
-                                        placeholder="Enter Username"
-                                        value={username}
-                                        onChange={event => setUsername(event.target.value)}
-                                    />
-                                    <label htmlFor="inputPassword" className="font-weight-bold mb-0">Password:</label>
-                                    <input
-                                        className="ml-0"
-                                        id="inputPassword"
-                                        type="password"
-                                        placeholder="Enter Password"
-                                        value={hash}
-                                        onChange={event => setHash(event.target.value)}
-                                    />
-                                    <br />
-                                    <label>
-                                        <input type="checkbox" className="ml-1"
-                                            onChange={event => showPassword(event.target.value)}
-                                        /> Show Password
-                                    </label>
-                                    <br />
-                                </div>
-                                <div className="form-group">
-                                    <input className="button" type="submit" value="Login" />
-                                    <button className="button" onClick={handleRegister}>Register</button>
-                                </div>
-                            </form>
+
+                    <label2 htmlFor="inputUsername" className="font-weight-bold mb-0 text-large">
+                        <b>Homeroom Professor</b>
+                    </label2>
+                    <br/>
+
+                    <form id="login" onSubmit={handleSubmit}>
+
+
+
+                        <div className="form-group2">
+                            {/* <label htmlFor="inputUsername" className="font-weight-bold mb-0">Username:</label> */}
+                            <input
+                                className="ml-0"
+                                type="text"
+                                id="inputUsername"
+                                placeholder="Enter Username"
+                                value={username}
+                                onChange={event => setUsername(event.target.value)}
+                            />
+
                         </div>
-                    </div>
+
+                        <div className="form-group3">
+                            {/* <label htmlFor="inputPassword" className="font-weight-bold mb-0">Password:</label> */}
+                            <input
+                                className="ml-0"
+                                id="inputPassword"
+                                type="password"
+                                placeholder="Enter Password"
+                                value={hash}
+                                onChange={event => setHash(event.target.value)}
+                            />
+                        </div>
+
+                        <label3>
+                            <input type="checkbox" className="ml-1" onChange={event => showPassword(event.target.value)}/>
+                            &nbsp; Show Password
+                        </label3>
+                        <div>
+                            <br/>
+                            <input className="button" type="submit" value="Login" />
+                            <button className="button" onClick={handleRegister}>Register</button>
+                        </div>
+
+                    </form>
+
+
+
                 </div>
             </div>
-        </>
+        </div>
+
     );
 
 

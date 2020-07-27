@@ -1,6 +1,3 @@
-// import Student from '../models/studentModel.js';
-// import {signToken} from '../authHelperFunctions.js';
-
 var Student = require('../models/studentModel.js');
 var signToken = require('../authHelperFunctions').signToken;
 
@@ -13,14 +10,9 @@ const create = async (req, res) =>
     student.fullName = student.firstName + " " + student.lastName;
 
     console.log(student);
-    // try
-    // {
+
     const token = await signToken(student); //not sure if i need await
-    // }
-    // catch(err)
-    // {
-    //     res.json({success: false, code: err.code})
-    // }
+
     console.log('get token')
     console.log(token);
 
@@ -30,38 +22,35 @@ const create = async (req, res) =>
         if(err)
         {
             console.log('error')
-            // res.send(err);
+
             res.json({success: false, code: err.code});
         }
         else
         {
             console.log('save else')
-            // res.send({'success': true, 'message': 'Student retrieved for save', result});
+
             res.json({success: true, message: "User created with token", token});
         }
     });
 };
 
-const checkLogin = (req, res) =>       //fake
+
+const checkLogin = (req, res) =>
 {
 
     const blank = {};
     var query = Student.find(blank);
 
-    query.exec(function (err, all)
-    {
-        if(err)
-        {
+    query.exec(function (err, all) {
+        if (err) {
             res.status(404).send(err);
         }
-        else
-        {
+        else {
             res.json(all);
         }
     });
 
 };
-
 
 const getAllStudents = async (req, res) =>
 {

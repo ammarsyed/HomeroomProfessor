@@ -9,7 +9,139 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFFFF !important;
 }
+
+
+
+
+
+
+label2 { 
+	color: #ffffff !important;
+ }
+
+ label3 { 
+	color: #ffffff !important;
+ }
+
+
+
+.main-section{
+	margin: 0 auto !important; 
+	margin-top: 100px !important;
+	padding: 0 !important;
+}
+
+.modal-content{
+	background-color: #365E7D !important;
+	padding: 0 12px !important;
+	border-radius: 20px !important;
+	padding-bottom: 20px !important;
+}
+
+.user-img img{
+	height: 120px !important;
+	width: 120px !important;
+}
+
+.user-img {
+	margin-top: -60px;
+	margin-bottom: 25px;
+}
+
+.form-group2{
+	margin-bottom: 10px !important;
+	padding-left: 5px;
+}
+
+.form-group3{
+	margin-bottom: 10px !important;
+	padding-left: 5px;
+}
+
+.form-group2 input{
+
+	height: 42px;
+	border-radius: 5px;
+	border: 0;
+	font-size: 18px;
+	letter-spacing: 2px;
+	padding-left: 54px !important;
+
+}
+
+.form-group3 input{
+
+	height: 42px;
+	border-radius: 5px;
+	border: 0;
+	font-size: 18px;
+	letter-spacing: 2px;
+	padding-left: 54px !important;
+
+}
+
+.form-group2::before{
+
+    font-family: 'Font Awesome\ 5 Free';
+    content: "\f007";
+	position: absolute !important;
+	font-size: 22px;
+	left: 45px;
+	padding-top: 12.5px;
+	color: #4A80AA;
+}
+
+.form-group3::before {
+	font-family: 'Font Awesome\ 5 Free';
+	content: "\f023";
+	position: absolute !important;
+	font-size: 22px;
+	left: 45px;
+	padding-top: 12.5px;
+	color: #4A80AA;
+}
+
+/* Colors based on Icon */
+.color-cobalt {
+	background-color: #365E7D !important;
+	border: #365E7D !important;
+}
+.cobalt-text {
+	color: #365E7D !important;
+}
+.white-text {
+	color: #ffffff !important;
+}
+.cobalt-button {
+	background-color: #4A80AA !important;
+	color: #ffffff !important;
+	border: 2px solid #4A80AA !important;
+	border-radius: 8px;
+}
+.cobalt-button:hover {
+	background-color: #ffffff !important;
+	color: #4A80AA !important;
+	border: 2px solid #4A80AA !important;
+	border-radius: 4px;
+}
+.cobalt-card {
+	border:2px solid #365E7D !important;
+	background-color:"white" !important; 
+	color: #365E7D !important;
+}
+.cobalt-calendar-events {
+	background-color: #4A80AA !important;
+	color: #ffffff !important;
+	border: 2px solid #4A80AA !important;
+	border-radius: 2px;
+}
+
+
+
+
+
 
 footer {
 	position:absolute;
@@ -30,12 +162,8 @@ code {
 /* ##### header ##### */
 .bd-navbar {
 	min-height: 4rem;
-	background-color: #394263;
+	background-color: #365E7D;
 	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
-}
-
-.orange {
-	color: #FA4616;
 }
 
 
@@ -65,19 +193,6 @@ main {
 	float: left;
 	width: 50%;
 	padding: 10px;
-}
-.column2 {
-	padding: 1 0rem;
-	float: left;
-	width: 50%;
-	padding: 20px;
-	background-color: #e9984d;
-}
-.column2_gap{
-	float: left;
-	width: 50%;
-	padding: 5px;
-	background-color: #1c5ec0;
 }
 
 /* ##### Rows ##### */
@@ -112,6 +227,7 @@ main {
 	vertical-align: middle !important;
 }
 
+
 /* ##### Buttons ##### */
 button {
 	background: #ffffff;
@@ -125,48 +241,41 @@ button {
 }
 
 button:hover {
-	background: #e9984d;
-	color: #1c5ec0;
-	border: #1c5ec0;
+	background: #4A80AA;
+	color: #ffffff;
 }
 
 .button {
-	background: #ffffff;
-	color: #ff5e00;
+	background: #ffffff !important;
+	color: #4A80AA !important;
 	padding: 0.3rem 0.5rem;
 	font-size: inherit;
 	transition-duration: 0.4s;
-	border: outset #ff5e00;
+	border: outset #4A80AA !important;
 	margin: 0.5rem 0.5rem;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	border-radius: 5px;
 	outline: none;
+}
+
+.button:hover {
+	background: #4A80AA !important;
+	color: #ffffff !important;
 }
 
 #buttonForm {
 	background: #ffffff;
-	color: #000000;
+	color: #365E7D;
 	transition-duration: 0.4s;
 	font-size: inherit;
 	border-radius: 5px;
-	border: solid #9c9c9c;
+	border: solid #365E7D;
 	outline: none;
-}
-
-#buttonForm:hover {
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-.button:hover {
-	background: #ff5e00;
-	color: #ffffff;
-	box-shadow: 0 8px 16px 0 rgb(255, 255, 255);
-	border: outset #ff5e00;
 }
 
 .nounderline {
 	text-decoration: none !important
 }
+
 
 .navbar-expand .navbar-nav .nav-link > a:hover,
 .navbar-brand > a:hover
@@ -305,6 +414,10 @@ input[type='password'] {
 .loginPasswordField {
 	width: 30;
 }
+
+.text-large {
+	font-size: 150%;
+  }
 
 /* #### Dropdown ####*/
 
