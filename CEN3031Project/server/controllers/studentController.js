@@ -115,7 +115,6 @@ const authenticateStudent = async (req, res) =>
 }
 
 module.exports.create = create;
-module.exports.checkLogin = checkLogin;
 module.exports.getOneStudent = getOneStudent;
 module.exports.updateOneStudent = updateOneStudent;
 module.exports.deleteOneStudent = deleteOneStudent;

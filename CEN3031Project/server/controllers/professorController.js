@@ -35,13 +35,13 @@ const create = async (req, res) =>
 
 const addStudentToProfessor = (req, res) =>
 {
-    console.log(req);
-    console.log(req.body);
-    console.log(req.params.id);
+    //console.log(req);
+    //console.log(req.body);
+    //console.log(req.params.id);
     var query = Professor.findOneAndUpdate(
-        console.log(req);
-        console.log(req.body);
-        console.log(req.params.id);
+        //console.log(req);
+        //console.log(req.body);
+        //console.log(req.params.id);
         {"_id": req.params.id},
         {
             $push: {
@@ -148,7 +148,6 @@ const authenticateProfessor = async (req, res) =>
 }
 
 module.exports.create = create;
-module.exports.checkLogin = checkLogin;
 module.exports.addStudentToProfessor = addStudentToProfessor;
 
 module.exports.getOneProfessor = getOneProfessor;
