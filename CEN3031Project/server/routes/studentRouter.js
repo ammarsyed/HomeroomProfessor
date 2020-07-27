@@ -10,6 +10,8 @@ studentRouter.post('/authenticate', students.authenticateStudent);
 
 studentRouter.get('/getStudent/:id', students.getOneStudent);
 
+studentRouter.get('/getAllStudents', students.getAllStudents);
+
 studentRouter.use(verifyToken);//middleware to protect routes
 
 // did not do /:id to update/delete yet
