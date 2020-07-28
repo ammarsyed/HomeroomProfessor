@@ -82,9 +82,9 @@ const Login = (props) =>
                         </img>
                     </div>
 
-                    <label2 htmlFor="inputUsername" className="font-weight-bold mb-0 text-large">
+                    <label htmlFor="inputUsername" className="font-weight-bold mb-0 text-large text-white">
                         <b>Homeroom Professor</b>
-                    </label2>
+                    </label>
                     <br/>
 
                     <form id="login" onSubmit={handleSubmit}>
@@ -116,10 +116,10 @@ const Login = (props) =>
                             />
                         </div>
 
-                        <label3>
+                        <label className="mb-0 text-white">
                             <input type="checkbox" className="ml-1" onChange={event => showPassword(event.target.value)}/>
                             &nbsp; Show Password
-                        </label3>
+                        </label>
                         <div>
                             <br/>
                             <input className="button" type="submit" value="Login" />

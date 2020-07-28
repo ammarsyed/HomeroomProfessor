@@ -73,7 +73,7 @@ const ProfessorDashboard = (props) => {
                         </Row>
                     </Card.Body>
                 </Card>
-                <Card>
+                <Card className="border-0">
                     <Row>
                         <Col>
                     <Card id="requests" className="mt-3 cobalt-card">
@@ -84,15 +84,15 @@ const ProfessorDashboard = (props) => {
                         </Card.Header>
                         <Card.Body>
                             <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist"><h5>Student Request 1</h5></ListGroup.Item>
+                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request 1</h5></ListGroup.Item>
                                 <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
                             </ListGroup>
                             <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist"><h5>Student Request 2</h5></ListGroup.Item>
+                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request 2</h5></ListGroup.Item>
                                 <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
                             </ListGroup>
                             <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist"><h5>Student Request 3</h5></ListGroup.Item>
+                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request 3</h5></ListGroup.Item>
                                 <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
                             </ListGroup>
                         </Card.Body>

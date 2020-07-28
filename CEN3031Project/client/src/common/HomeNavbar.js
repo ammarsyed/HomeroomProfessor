@@ -17,10 +17,10 @@ const HomeNavbar = (props) =>
         props.logOut();
     };
 
-    const studentButtonToggle = useLogout
-        ? <Link to="/student" className="text-white nounderline navhover nav-link">Dashboard</Link>
-        : <><Link to="/" className="text-white nounderline navhover nav-link">About</Link>
-            <Link to="/register" className="text-white nounderline navhover nav-link">Register</Link></>;
+    //const studentButtonToggle = useLogout
+    //    ? <Link to="/student" className="text-white nounderline navhover nav-link">Dashboard</Link>
+    //    : <><Link to="/" className="text-white nounderline navhover nav-link">About</Link>
+    //        <Link to="/register" className="text-white nounderline navhover nav-link">Register</Link></>;
 
     let buttonToggle;
 
