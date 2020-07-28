@@ -144,7 +144,8 @@ label2 {
 
 
 footer {
-	position:absolute;
+	position:fixed;
+	display:flex;
 	margin-top: 100vh;
 	bottom: 0;
 	width: 100%;
