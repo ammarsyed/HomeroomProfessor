@@ -6,9 +6,10 @@ var cors = require('cors');
 var config = require('./config/config.js');
 var studentRouter = require('./routes/studentRouter.js')
 var professorRouter = require('./routes/professorRouter.js')
+const path = require('path');
 
 //Changed method of connecting to MongoDB to get rid of DeprecationWarning
-mongoose.connect(config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() =>
+mongoose.connect(process.env.MONGODB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() =>
 {
     console.log(`Successfully connected to MongoDB.`)
 });
@@ -34,6 +35,20 @@ app.get('/', (req, res) =>
 {
     res.send("Server working");
 });
+
+
+if(process.env.NODE_ENV === 'production')
+{
+    // cd CEN3031Project/client npm run build
+    app.use(express.static('../client/build'));
+
+    app.get('*', (req, res) =>
+    {
+        res.sendFile(path.join(__dirname, '../', 'client', 'build', 'index.html'));
+    })
+
+}
+
 
 const port = process.env.PORT || 5000;
 
