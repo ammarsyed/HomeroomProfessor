@@ -1,10 +1,10 @@
 var jwt = require('jsonwebtoken');
 var Student = require('./models/studentModel.js')
-var config = require('./config/config.js')
+// var config = require('./config/config.js')
 
 var Professor = require('./models/professorModel.js')
 
-const jwt_secret = process.env.secret || config.secret;
+const jwt_secret = process.env.secret || require('./config/config.js').secret;
 // const jwt = require('jsonwebtoken'),
 //     User = require('./models/user.js'),
 //     jwt_secret = process.env.secret || require('./config/config.js').secret;

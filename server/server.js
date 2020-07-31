@@ -3,13 +3,13 @@ const express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var cors = require('cors');
-var config = require('./config/config.js');
+// var config = require('./config/config.js');
 var studentRouter = require('./routes/studentRouter.js')
 var professorRouter = require('./routes/professorRouter.js')
 const path = require('path');
 
 //Changed method of connecting to MongoDB to get rid of DeprecationWarning
-mongoose.connect(process.env.DB_URI || config.db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() =>
+mongoose.connect(process.env.DB_URI || require('./config/config.js').db.uri, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).then(() =>
 {
     console.log(`Successfully connected to MongoDB.`)
 });
@@ -44,7 +44,7 @@ if(process.env.NODE_ENV === 'production')
 
     // app.use(express.static(path.join(__dirname, '../client/build')));
 
-    app.use(express.static('../client/build'));
+    app.use(express.static(path.join(__dirname, '../client/build')));
 
 
     app.get('*', (req, res) =>
