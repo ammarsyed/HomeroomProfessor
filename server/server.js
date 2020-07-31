@@ -31,10 +31,10 @@ app.use('/api/students', studentRouter);
 app.use('/api/professors', professorRouter);
 
 //home route
-app.get('/', (req, res) =>
-{
-    res.send("Server working");
-});
+// app.get('/', (req, res) =>
+// {
+//     res.send("Server working");
+// });
 
 
 if(process.env.NODE_ENV === 'production')
@@ -42,11 +42,14 @@ if(process.env.NODE_ENV === 'production')
     // cd CEN3031Project/client npm run build
     // app.use(express.static('../client/build'));
 
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    // app.use(express.static(path.join(__dirname, '../client/build')));
+
+    app.use(express.static('../client/build'));
+
 
     app.get('*', (req, res) =>
     {
-        res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, '../client/build', 'index.html')); //try path.resolve?
     })
 
 }

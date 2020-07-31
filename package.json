@@ -9,8 +9,8 @@
     "client": "cd client && npm start",
     "install-all": "concurrently \"npm install\" \"cd client && npm install\"",
     "dev": "concurrently \"nodemon server/server.js\" \"cd client && npm run start\"",
-    "build": "cd client && npm build",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
