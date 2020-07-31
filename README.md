@@ -1,38 +1,25 @@
 # HomeroomProfessor
 
-node modules has express, body-parser, mongoose, concurrently, and nodemon at the moment
+##7/31/20 Overhaul for Heroku Sprint 2 Deployment (new instructions)
 
-client folder is the frontend. everything ourside is backend stuff. 
-data base schema models are in the models folder
-client>src>components will have the react components
+###**Scripts**
 
-From the project directory (directory that has server.js and the folders) run these commands to start stuff:
+####Installing 
 
-**The first time you clone the repo, you need to run npm install in the directory that has server.js, it's configured in a way that will install both the backend/server node modules as well as the frontend/client node modules**
+--**npm install** in the directory with the client and server FOLDERS. This directory also has a package.json and will be where your node modules for the server (backend) go.
 
-npm start from the directory with server.js will start the backend server (won't need to use ever)
+--**npm install** inside the client directory will install nodemodules and stuff for the client (frontend)
+
+####Running 
+
+--**npm run server** in the directory with client and server folder will run the server via nodemon, refreshing server for any changes. 
+
+--**npm start** in the directory with client and server folder will run the server via node. You will have to restart the server after any changes in the server/backend. 
+
+--**npm start** in the client folder will start and launch the front end
 
 
+--**npm run client** from the directory with client and server folder will start the frontend(client)
 
-**Starting Server and Client**
-
-(7/6/20)
-
---**npm run server** from the directory with server.js will start the backend server using nodemon so you won't have to restart server when changes are done, just refresh
-
---**npm run client** from the directory with server.js will start the frontend(client)
-
---**npm run dev** from the directory with server.js will start both frontend and server (backend)
-
-(7/19/20)
-
---Backend and Frontend are now connected, two terminals will need to be ran for server and client.
-
---**npm start** from inside directory /client/ will launch the server connected to MongoDB.
-
---**npm start** from inside directory /client/ will launch the web app.
-
-** Misc. Notes **
-
---There seems to be an image issue with the gator picture if using safari, use google chrome for now.
+--**npm run dev** from the directory with the client and server folder will start both frontend and server (backend)
 
