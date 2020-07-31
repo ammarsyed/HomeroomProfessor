@@ -26,7 +26,7 @@ studenthttpUser.logIn = async function (credentials)
     try
     {
         console.log('entered login http function')
-        let response = await axios.post('http://localhost:5000/api/students/authenticate', credentials);
+        let response = await axios.post('/api/students/authenticate', credentials);
         console.log('got response')
         let token = response.data.token;
         console.log('got token')
@@ -35,7 +35,7 @@ studenthttpUser.logIn = async function (credentials)
         if(!token)
         {
             console.log('inside not token function')
-            response = await axios.post('http://localhost:5000/api/professors/authenticate', credentials);
+            response = await axios.post('/api/professors/authenticate', credentials);
             console.log(response);
             token = response.data.token;
             console.log(token);
@@ -71,11 +71,11 @@ studenthttpUser.signUp = async function (userInfo)
     let response;
     if(userInfo.userType == 'student')
     {
-        response = await axios.post('http://localhost:5000/api/students', userInfo);
+        response = await axios.post('/api/students', userInfo);
     }
     else if(userInfo.userType == 'professor')
     {
-        response = await axios.post('http://localhost:5000/api/professors', userInfo);
+        response = await axios.post('/api/professors', userInfo);
 
     }
 

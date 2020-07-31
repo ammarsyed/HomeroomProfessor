@@ -13,8 +13,8 @@ import axios from "axios";
 
 import studenthttpUser from './studenthttpUser';
 
-const PROFESSOR_API_URL = 'http://localhost:5000/api/professors';
-const STUDENT_API_URL = 'http://localhost:5000/api/students';
+const PROFESSOR_API_URL = '/api/professors';
+const STUDENT_API_URL = '/api/students';
 
 const App = (props) =>
 {
