@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Row, Button, Col } from 'react-bootstrap';
 import studenthttpUser from '../../studenthttpUser';
-const API_URL = 'http://localhost:5000/api/professors';
+//const API_URL = 'http://localhost:5000/api/professors';
 
 const ProfessorRegister = (props) => {
     const [firstName, setFirstName] = useState("");

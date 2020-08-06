@@ -14,7 +14,8 @@ const ProfessorDashboard = (props) => {
 
     useEffect(() => {
         props.updateDB();
-
+        console.log(props.currentUser);
+        console.log(props.currentUser.students);
     }, [])
 
     const handleDateClick = (arg) => {
@@ -63,6 +64,10 @@ const ProfessorDashboard = (props) => {
         setDisplayModal(false);
     }
 
+    const displayRequests = () => {
+       
+    }
+
     return (
         <>
             <Container fluid>
@@ -88,18 +93,12 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request 1</h5></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
-                            </ListGroup>
-                            <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request 2</h5></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
-                            </ListGroup>
-                            <ListGroup className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request 3</h5></ListGroup.Item>
-                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
-                            </ListGroup>
+                            {props.currentUser.students.map(student => (
+                                <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                    <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                    <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
+                                </ListGroup>
+                            ))}
                         </Card.Body>
                     </Card>
                     <Card id="sessions" className="mt-3 cobalt-card">
