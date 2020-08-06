@@ -23,3 +23,7 @@
 
 --**npm run dev** from the directory with the client and server folder will start both frontend and server (backend)
 
+##8/6/20
+
+1. Added picture, summary, availability, and zoom url to the professor schema. 
+2. The professor registration page now is 2 pages where the second can submit and the first can return to login. Next/Previous buttons appear from a innerHTML change, not another component. 
