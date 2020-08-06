@@ -8,25 +8,24 @@ const create = async (req, res) =>
     var professor = new Professor(req.body);
     professor.fullName = professor.firstName + " " + professor.lastName;
 
-    console.log(professor);
+
 
     const token = await signToken(professor); //not sure if i need await
 
-    console.log('get token')
-    console.log(token);
+
 
     professor.save(function (err, result)
     {
-        console.log('in save function')
+
         if(err)
         {
-            console.log('error')
+
 
             res.json({success: false, code: err.code});
         }
         else
         {
-            console.log('save else')
+
 
             res.json({success: true, message: "User created with token", token});
         }
@@ -39,38 +38,46 @@ const checkLogin = (req, res) =>
     const blank = {};
     var query = Professor.find(blank);
 
-    query.exec(function (err, all) {
-        if (err) {
+    query.exec(function (err, all)
+    {
+        if(err)
+        {
             res.status(404).send(err);
         }
-        else {
+        else
+        {
             res.json(all);
         }
     });
 
 };
 
-const addStudentToProfessor = (req, res) =>
+const addStudentToProfessor = async (req, res) =>
 {
-    console.log(req);
+    console.log("REACHED STUDENT TO PROFESSOR FUNCTION IN CONTROLLER")
+    console.log(req.body);
     //console.log(req.body);
-    //console.log(req.params.id);
-    var query = Professor.findOneAndUpdate(
+    //console.log(req.params.id)
+    console.log('done printing out req');
+    var query = await Professor.findOneAndUpdate(
         //console.log(req);
         //console.log(req.body);
         //console.log(req.params.id);
-        {"_id": req.params.id},
+        {"_id": req.body.id},
         {
+            // "salt": "sup"
             $push: {
                 students: {
-                    studentFirstName: req.firstName,
-                    studentLastName: req.lastName,
+                    studentFirstName: req.body.firstName,
+                    studentLastName: req.body.lastName,
                     request: true,
                     approved: false
                 }
             }
-        });
+        }
 
+    );
+    console.log('right after find and update')
     query.exec(function (err, result)
     {
         if(err)
@@ -151,7 +158,6 @@ const deleteOneProfessor = async (req, res) =>
 
 const authenticateProfessor = async (req, res) =>
 {
-    console.log('reached authenticate professor function')
     const user = await Professor.findOne({username: req.body.username}); //changed from email to username
 
     if(!user || !user.validPassword(req.body.password))

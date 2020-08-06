@@ -11,7 +11,7 @@ const PROFESSOR_API_URL = '/api/professors';
 
 const ProfessorLookup = (props) =>
 {
-
+    props.updateProfsDatabase();
     //Leaving setProfessorArray for now despite unused notice, state/hooks are usually
     //defined this way and we may need to update it later
     const [professorArray, setProfessorArray] = useState(props.location.state.detail);
@@ -21,32 +21,39 @@ const ProfessorLookup = (props) =>
     const {SearchBar} = Search;
 
     //splits a string and capitalizes the first letter of every word
-    function titleCase(str) {
+    function titleCase(str)
+    {
         var splitStr = str.toLowerCase().split(' ');
-        for(var i = 0; i < splitStr.length; i++) {
+        for(var i = 0; i < splitStr.length; i++)
+        {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         return splitStr.join(' ');
     }
 
-    for (let i = 0; i < professorArray.length; i++) {
+    for(let i = 0; i < professorArray.length; i++)
+    {
         professorArray[i].fullName = titleCase(professorArray[i].fullName);
 
-        if(professorArray[i].university.length > 4) {
+        if(professorArray[i].university.length > 4)
+        {
             professorArray[i].university = titleCase(professorArray[i].university)
         }
-        else {
+        else
+        {
             professorArray[i].university = professorArray[i].university.toUpperCase()
         }
 
         if(professorArray[i].department.length > 4) professorArray[i].department = titleCase(professorArray[i].department);
 
-        for(let j = 0; j < professorArray[i].subjects.length; i++) {
+        for(let j = 0; j < professorArray[i].subjects.length; i++)
+        {
             professorArray[i].subjects[j] = titleCase(professorArray[i].subjects[j]);
         }
     }
 
-    const updateAndShow = (professor) => {
+    const updateAndShow = (professor) =>
+    {
 
         setCurrentProfessor(professor);
 
@@ -54,29 +61,31 @@ const ProfessorLookup = (props) =>
     }
 
 
-    const updateProfessorDB = (value) => {
+    const updateProfessorDB = async (value) =>
+    {
 
         console.log(props);
         console.log(props.currentUser);
         console.log(currentProfessor._id);
 
         const newMeeting = {
-            "id" : currentProfessor._id,
-            "firstName" : props.currentUser.firstName,
+            "id": currentProfessor._id,
+            "firstName": props.currentUser.firstName,
             "lastName": props.currentUser.lastName,
             "iat": props.currentUser.iat
         };
 
         console.log(newMeeting);
 
-        let response = axios.post(PROFESSOR_API_URL + '/addRequest', newMeeting);
+        let response = await axios.post(PROFESSOR_API_URL + '/addRequest', newMeeting);
 
         console.log(response);
 
         setDisplayModal(false);
     }
 
-    const closeModal = () => {
+    const closeModal = () =>
+    {
 
         setDisplayModal(false);
 

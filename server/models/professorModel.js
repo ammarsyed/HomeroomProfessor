@@ -43,12 +43,14 @@ const ProfessorSchema = new Schema({
         government: {type: Boolean, default: false},
         geography: {type: Boolean, default: false}
     },
-    students: {
-        studentFirstName: {type: String},
-        studentLastName: {type: String},
-        request: {type: Boolean, default: false},
-        approved: { type: Boolean, default: false }
-    }
+    students: [
+        {
+            studentFirstName: {type: String},
+            studentLastName: {type: String},
+            request: {type: Boolean, default: false},
+            approved: {type: Boolean, default: false}
+        }
+    ]
 });
 
 // adds method to user to create hashed password

@@ -28,6 +28,7 @@ function signToken(user)
 // function to verify tokens
 function verifyToken(req, res, next)
 {
+    console.log('reached verify token function')
     const token = req.get('token') || req.body.token || req.query.token;
 
     // reject user if no token
