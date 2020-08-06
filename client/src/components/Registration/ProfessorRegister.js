@@ -76,7 +76,7 @@ const ProfessorRegister = (props) => {
         event.preventDefault();
 
         let subjArr = [];
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        var checkboxes = document.querySelectorAll('input[name="subject"]:checked');
         for (var checkbox of checkboxes) {
             let temp = checkbox.value;
             temp = temp.replace('{', '');
@@ -96,7 +96,7 @@ const ProfessorRegister = (props) => {
             temp = temp.replace('}', '');
             availArr.push(temp);
         }
-        let availString = subjArr.join(', ');
+        let availString = availArr.join(', ');
 
         const newprofessor =
         {
