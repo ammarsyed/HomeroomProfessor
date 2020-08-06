@@ -74,21 +74,33 @@ const addStudentToProfessor = async (req, res) =>
                     approved: false
                 }
             }
-        }
-
-    );
+        }, {'new': true}
+        , function (err, result)
+        {
+            if(err)
+            {
+                console.log('THERE IS AN ERROR IN ADDING STUDENT TO PROFESSOR')
+                res.status(404).send(err);
+            }
+            else
+            {
+                console.log("no error in student to professor")
+                console.log(result)
+                res.json(result);
+            }
+        });
     console.log('right after find and update')
-    query.exec(function (err, result)
-    {
-        if(err)
-        {
-            res.status(404).send(err);
-        }
-        else
-        {
-            console.log(result)
-        }
-    });
+    // query.exec(function (err, result)
+    // {
+    //     if(err)
+    //     {
+    //         res.status(404).send(err);
+    //     }
+    //     else
+    //     {
+    //         console.log(result)
+    //     }
+    // });
 };
 
 

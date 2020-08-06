@@ -30,6 +30,8 @@ const App = (props) =>
         setCurrentUser(studenthttpUser.getCurrentUser());
         console.log("jwt token code")
         console.log(studenthttpUser.getToken());
+        updateProfsDatabase();
+
     };
 
     const logOut = () =>
@@ -78,7 +80,7 @@ const App = (props) =>
                     <Route
                         path="/student/professor-lookup"
                         render={(props) => (
-                            <ProfessorLookup {...props} profs={professorProps} location={props.location} currentUser={currentUser} updateProfsDatabase={updateProfsDatabase}/>
+                            <ProfessorLookup {...props} profs={professorProps} location={props.location} currentUser={currentUser} />
                         )}
                     />
                     <Route

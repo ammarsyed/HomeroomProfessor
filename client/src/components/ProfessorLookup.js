@@ -11,7 +11,6 @@ const PROFESSOR_API_URL = '/api/professors';
 
 const ProfessorLookup = (props) =>
 {
-    props.updateProfsDatabase();
     //Leaving setProfessorArray for now despite unused notice, state/hooks are usually
     //defined this way and we may need to update it later
     const [professorArray, setProfessorArray] = useState(props.location.state.detail);
@@ -82,6 +81,8 @@ const ProfessorLookup = (props) =>
         console.log(response);
 
         setDisplayModal(false);
+
+        console.log('modal closed');
     }
 
     const closeModal = () =>
