@@ -21,68 +21,65 @@ const ProfessorLookup = (props) =>
     const {SearchBar} = Search;
 
     //splits a string and capitalizes the first letter of every word
-    function titleCase(str)
-    {
+    function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
-        for(var i = 0; i < splitStr.length; i++)
-        {
+        for(var i = 0; i < splitStr.length; i++) {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         return splitStr.join(' ');
     }
 
-    for(let i = 0; i < professorArray.length; i++)
-    {
+    for (let i = 0; i < professorArray.length; i++) {
         professorArray[i].fullName = titleCase(professorArray[i].fullName);
 
-        if(professorArray[i].university.length > 4)
-        {
+        if(professorArray[i].university.length > 4) {
             professorArray[i].university = titleCase(professorArray[i].university)
         }
-        else
-        {
+        else {
             professorArray[i].university = professorArray[i].university.toUpperCase()
         }
 
         if(professorArray[i].department.length > 4) professorArray[i].department = titleCase(professorArray[i].department);
 
-        for(let j = 0; j < professorArray[i].subjects.length; i++)
-        {
+        for(let j = 0; j < professorArray[i].subjects.length; i++) {
             professorArray[i].subjects[j] = titleCase(professorArray[i].subjects[j]);
         }
     }
 
-    const updateAndShow = (id) =>
-    {
+    const updateAndShow = (professor) => {
 
-        setCurrentProfessor({id});
+        setCurrentProfessor(professor);
 
         setDisplayModal(true);
     }
 
-    const updateAndHide = (value) =>
-    {
-        console.log(currentProfessor);
+
+    const updateProfessorDB = (value) => {
+
+        console.log(props);
         console.log(props.currentUser);
+        console.log(currentProfessor._id);
 
-        console.log(value);
+        const newMeeting = {
+            "id" : currentProfessor._id,
+            "firstName" : props.currentUser.firstName,
+            "lastName": props.currentUser.lastName,
+            "iat": props.currentUser.iat
+        };
 
-        if(value === 1)
-        {
-            let response = axios.post(PROFESSOR_API_URL + '/addRequest', props.currentUser, currentProfessor);
+        console.log(newMeeting);
 
-            if(response)
-            {
-                // Maybe say submitted successfully, or just redirect to dashboard?
-                console.log(response);
-            }
-            else
-            {
-                // Unable to make appointment at this time?
-            }
-        }
+        let response = axios.post(PROFESSOR_API_URL + '/addRequest', newMeeting);
+
+        console.log(response);
 
         setDisplayModal(false);
+    }
+
+    const closeModal = () => {
+
+        setDisplayModal(false);
+
     }
 
     const columns = [{
@@ -154,7 +151,9 @@ const ProfessorLookup = (props) =>
                 </ToolkitProvider>
                 <AppointmentModal
                     show={displayModal}
-                    onHide={updateAndHide}
+                    onSubmit={updateProfessorDB}
+                    onClose={closeModal}
+                    profs={currentProfessor}
                 />
             </Container>
         </>
