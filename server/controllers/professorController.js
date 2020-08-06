@@ -8,12 +8,12 @@ const create = async (req, res) =>
     var professor = new Professor(req.body);
     professor.fullName = professor.firstName + " " + professor.lastName;
 
-    console.log(professor);
+    //console.log(professor);
 
     const token = await signToken(professor); //not sure if i need await
 
-    console.log('get token')
-    console.log(token);
+    //console.log('get token')
+    //console.log(token);
 
     professor.save(function (err, result)
     {
@@ -52,19 +52,19 @@ const checkLogin = (req, res) =>
 
 const addStudentToProfessor = (req, res) =>
 {
-    console.log(req);
-    //console.log(req.body);
+    console.log("addStudentToProfessor");
+    console.log(req.body);
     //console.log(req.params.id);
     var query = Professor.findOneAndUpdate(
         //console.log(req);
         //console.log(req.body);
         //console.log(req.params.id);
-        {"_id": req.params.id},
+        {"_id": req.body.id},
         {
             $push: {
                 students: {
-                    studentFirstName: req.firstName,
-                    studentLastName: req.lastName,
+                    studentFirstName: req.body.firstName,
+                    studentLastName: req.body.lastName,
                     request: true,
                     approved: false
                 }

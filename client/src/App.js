@@ -46,7 +46,7 @@ const App = (props) =>
         setLoginState(value);
     };
 
-    const updateProfsDatabase = () =>
+    const updateDatabase = () =>
     {
         axios.get(PROFESSOR_API_URL + "/getAllProfessors")
             .then(res =>
@@ -63,7 +63,7 @@ const App = (props) =>
 
     useEffect(() =>
     {
-        updateProfsDatabase()
+        updateDatabase();
 
     }, [])
 
@@ -83,7 +83,10 @@ const App = (props) =>
                         path="/student"
                         render={(props) => (
                             currentUser ?
-                                <StudentDashboard {...props} profs={professorProps} sendProfs={professorUpdate} currentUser={currentUser} location={props.location} /> :
+                                <StudentDashboard {...props} profs={professorProps} sendProfs={professorUpdate}
+                                                  currentUser={currentUser} location={props.location}
+                                                  updateDB={updateDatabase}
+                                /> :
                                 <Redirect to="/" />
                         )}
                     />
@@ -96,7 +99,9 @@ const App = (props) =>
                     <Route
                         path="/professor"
                         render={(props) => (
-                            <ProfessorDashboard {...props} students={studentProps} currentUser={currentUser} />
+                            <ProfessorDashboard {...props} students={studentProps} currentUser={currentUser}
+                                                updateDB={updateDatabase}
+                            />
                         )}
                     />
                     <Route

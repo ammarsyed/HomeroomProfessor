@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from "react-router-dom";
 import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
@@ -11,6 +11,11 @@ const ProfessorDashboard = (props) => {
     const [displayModal, setDisplayModal] = useState(false);
 
     const history = useHistory();
+
+    useEffect(() => {
+        props.updateDB();
+
+    }, [])
 
     const handleDateClick = (arg) => {
         alert(arg.dateStr)

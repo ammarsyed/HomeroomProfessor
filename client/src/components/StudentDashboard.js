@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, Link } from "react-router-dom";
 import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
@@ -18,6 +18,11 @@ const StudentDashboard = (props) =>
     //};
 
     const history = useHistory();
+
+    useEffect(() => {
+        props.updateDB();
+
+    }, [])
 
     const handleDateClick = (arg) => {
         alert(arg.dateStr)
