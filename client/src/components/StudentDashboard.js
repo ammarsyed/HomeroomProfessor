@@ -4,7 +4,6 @@ import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bo
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
-import ProfessorLookup from './ProfessorLookup';
 
 const StudentDashboard = (props) => {
 
@@ -48,28 +47,24 @@ const StudentDashboard = (props) => {
 
     //Creating the events structure for fullCalendar API.
     var eventArray = [];
-    // let keys = [];
 
-    // studentArray && studentArray.map(student => (
-    //     keys.push(student)
-    // ));
+    for (let i = 0; i < props.profs.length; i++) {
+        for (let j = 0; j < props.profs[i].students.length; j++) {
 
-    // //URL WILL NEED UPDATE AFTER MERGING SCHEMA CHANGE.
-    // for (let student of keys) {
-    //     if (student.approved) {
-    //         let start_time = student.date.substring(0, 19);
-    //         let end_time = student.date.substring(0, 11) + student.date.substring(20, 25) + ':00';
+            let studentName = props.profs[i].students[j].studentFirstName + ' ' + props.profs[i].students[j].studentLastName;
 
-    //         console.log(start_time)
-    //         console.log(end_time)
-    //         eventArray.push({
-    //             title: student.studentFirstName + ' ' + student.studentLastName,
-    //             start: start_time,
-    //             end: end_time,
-    //             url: 'https://www.google.com'
-    //         })
-    //     }
-    // }
+            if (studentName == props.currentUser.fullName) {
+                let start_time = props.profs[i].students[j].date.substring(0, 19);
+                let end_time = props.profs[i].students[j].date.substring(0, 11) + props.profs[i].students[j].date.substring(20, 25) + ':00';
+                eventArray.push({
+                    title: props.profs[i].fullName,
+                    start: start_time,
+                    end: end_time,
+                    url: props.profs[i].zoom
+                })
+            }
+        }
+    }
 
     return (
         <>
@@ -86,14 +81,6 @@ const StudentDashboard = (props) => {
                         </Row>
                     </Card.Body>
                 </Card>
-                {/* <Card className="mt-3" border="primary" bg="white" text="primary">
-                    <ProfessorLookup
-                        {...props}
-                        profs={props.profs}
-                        location={props.location}
-                        display="none"
-                    />
-                </Card> */}
                 <CardDeck>
                     <Card id="nextFeature" className="mt-3 cobalt-card">
                         <Card.Header className="text-center" text="primary">
@@ -114,6 +101,7 @@ const StudentDashboard = (props) => {
                                 <FullCalendar
                                     plugins={[dayGridPlugin, interactionPlugin]}
                                     dateClick={handleDateClick}
+                                    eventDisplay="list-item"
                                     initialView="dayGridMonth"
                                     className="cobalt-card"
                                     eventClassNames="cobalt-calendar-events"
@@ -126,8 +114,6 @@ const StudentDashboard = (props) => {
                 </CardDeck>
             </Container>
         </>
-
-
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from "react-router-dom";
-import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bootstrap';
+import { Button, Container, Card, Row, Col, ListGroup } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
@@ -130,7 +130,7 @@ const ProfessorDashboard = (props) => {
                 title: student.studentFirstName + ' ' + student.studentLastName,
                 start: start_time,
                 end: end_time,
-                url: 'https://www.google.com'
+                url: props.currentUser.zoom
             })
         }
     }
