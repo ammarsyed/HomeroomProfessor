@@ -5,21 +5,29 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import ScheduleModal from './ScheduleModal';
+import axios from "axios";
+
+const PROFESSOR_API_URL = '/api/professors';
 
 const ProfessorDashboard = (props) => {
 
     const [displayModal, setDisplayModal] = useState(false);
+    const [displaySchedule, setDisplaySchedule] = useState(false);
+    const [currentStudent, setCurrentStudent] = useState({});
+    const [studentArray, setStudentArray] = useState();
 
     const history = useHistory();
 
     useEffect(() => {
         props.updateDB();
-        console.log(props.currentUser);
-        console.log(props.currentUser.students);
+
+        setStudentArray(props.currentUser.students);
+
     }, [])
 
     const handleDateClick = (arg) => {
         alert(arg.dateStr)
+        console.log(studentArray);
     }
 
     function customEventClick(info) {
@@ -39,33 +47,65 @@ const ProfessorDashboard = (props) => {
         })
     }
 
-    const updateAndShow = (id) => {
+    const updateAndShow = (student) => {
 
-        //setCurrentProfessor({ id });
+        setCurrentStudent(student);
+
+        console.log(student);
 
         setDisplayModal(true);
     }
 
-    const updateAndHide = (value) => {
+    const updateMeetingTime = (time) => {
 
-        if (value === 1) {
-            // Handle Schedule Appointment
-            console.log(value);
-        }
-        else if (value === 2) {
-            // Handle Contact Student
-            console.log(value);
-        }
-        else if (value === 3) {
-            // Handle Deny Request
-            console.log(value);
-        }
-        console.log(value);
+        const confirmMeeting = {
+            "id" : props.currentUser._id,
+            "student_id": currentStudent._id,
+            "approved": true,
+            "date" : time
+        };
+
+        console.log(confirmMeeting);
+
+        let response = axios.post(PROFESSOR_API_URL + '/confirmRequest', confirmMeeting);
+
+        console.log(response);
+
         setDisplayModal(false);
+        setDisplaySchedule(false);
+
+        props.updateDB();
     }
 
-    const displayRequests = () => {
-       
+    const convertDate = (dateStr) => {
+        var date = new Date(dateStr);
+
+        return "" + date.toDateString() + " " + date.toLocaleTimeString();
+    }
+
+    const closeModal = () => {
+
+        setDisplayModal(false);
+        setDisplaySchedule(false);
+
+    }
+
+    const updateSchedule = () => {
+
+        setDisplaySchedule(true);
+
+    }
+
+    const updateContact = () => {
+
+        setDisplayModal(false);
+
+    }
+
+    const updateDeny = () => {
+
+        setDisplayModal(false);
+
     }
 
     return (
@@ -93,11 +133,13 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            {props.currentUser.students.map(student => (
-                                <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                    <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
-                                    <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow()}>Schedule</Button></ListGroup.Item>
-                                </ListGroup>
+                            {studentArray && studentArray.map(student => (
+                                <>{!student.approved &&
+                                    <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                        <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                        <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow(student)}>Schedule</Button></ListGroup.Item>
+                                    </ListGroup>
+                                }</>
                             ))}
                         </Card.Body>
                     </Card>
@@ -108,9 +150,14 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <Card.Title>
-                                Here we could place upcoming tutoring sessions with students.
-                            </Card.Title>
+                            {studentArray && studentArray.map(student => (
+                                <>{student.approved &&
+                                    <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                        <ListGroup.Item className="dashlist border-bottom-0 mb-0"><h5 className="mb-0">Appointment - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                        <ListGroup.Item className="dashlist"><b>{convertDate(student.date)}</b></ListGroup.Item>
+                                    </ListGroup>
+                                }</>
+                            ))}
                         </Card.Body>
                     </Card>
                     </Col>
@@ -146,7 +193,13 @@ const ProfessorDashboard = (props) => {
                     </Card>
                 <ScheduleModal
                     show={displayModal}
-                    onHide={updateAndHide}
+                    schedule={displaySchedule}
+                    onClose={closeModal}
+                    onSchedule={updateSchedule}
+                    onContact={updateContact}
+                    onDeny={updateDeny}
+                    updateMeeting={updateMeetingTime}
+         
                 />
             </Container>
         </>

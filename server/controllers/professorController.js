@@ -52,13 +52,8 @@ const checkLogin = (req, res) =>
 
 const addStudentToProfessor = (req, res) =>
 {
-    console.log("addStudentToProfessor");
-    console.log(req.body);
-    //console.log(req.params.id);
     var query = Professor.findOneAndUpdate(
-        //console.log(req);
-        //console.log(req.body);
-        //console.log(req.params.id);
+
         {"_id": req.body.id},
         {
             $push: {
@@ -79,6 +74,32 @@ const addStudentToProfessor = (req, res) =>
         }
         else
         {
+            console.log(result)
+        }
+    });
+};
+
+const addMeetingDate = (req, res) => {
+
+    console.log("addMeetingDate");
+
+    console.log(req.body);
+
+    var query = Professor.findOneAndUpdate(
+
+        { "_id": req.body.id, "students._id": req.body.student_id },
+        {
+            "$set": {
+                "students.$.approved": req.body.approved,
+                "students.$.date": req.body.date
+            }
+        });
+
+    query.exec(function (err, result) {
+        if (err) {
+            res.status(404).send(err);
+        }
+        else {
             console.log(result)
         }
     });
@@ -166,6 +187,7 @@ const authenticateProfessor = async (req, res) =>
 
 module.exports.create = create;
 module.exports.addStudentToProfessor = addStudentToProfessor;
+module.exports.addMeetingDate = addMeetingDate;
 module.exports.checkLogin = checkLogin;
 module.exports.getOneProfessor = getOneProfessor;
 module.exports.updateOneProfessor = updateOneProfessor;

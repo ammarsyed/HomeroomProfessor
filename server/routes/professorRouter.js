@@ -8,7 +8,9 @@ professorRouter.post('/', professors.create);
 
 professorRouter.get('/', professors.checkLogin);
 
-professorRouter.post('/addRequest', professors.addStudentToProfessor)
+professorRouter.post('/addRequest', professors.addStudentToProfessor);
+
+professorRouter.post('/confirmRequest', professors.addMeetingDate);
 
 professorRouter.post('/authenticate', professors.authenticateProfessor);
 

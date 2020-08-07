@@ -99,8 +99,8 @@ const App = (props) =>
                     <Route
                         path="/professor"
                         render={(props) => (
-                            <ProfessorDashboard {...props} students={studentProps} currentUser={currentUser}
-                                                updateDB={updateDatabase}
+                            <ProfessorDashboard {...props} students={studentProps} profs={professorProps}
+                                                currentUser={currentUser} updateDB={updateDatabase}
                             />
                         )}
                     />

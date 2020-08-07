@@ -18,7 +18,7 @@ const AppointmentModal = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter" className="white-text">
                     Appointment Request
                 </Modal.Title>

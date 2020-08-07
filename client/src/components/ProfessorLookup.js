@@ -56,10 +56,6 @@ const ProfessorLookup = (props) =>
 
     const updateProfessorDB = (value) => {
 
-        console.log(props);
-        console.log(props.currentUser);
-        console.log(currentProfessor._id);
-
         const newMeeting = {
             "id" : currentProfessor._id,
             "firstName" : props.currentUser.firstName,

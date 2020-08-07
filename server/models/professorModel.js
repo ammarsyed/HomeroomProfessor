@@ -47,7 +47,8 @@ const ProfessorSchema = new Schema({
         studentFirstName: {type: String},
         studentLastName: {type: String},
         request: {type: Boolean },
-        approved: { type: Boolean }
+        approved: { type: Boolean },
+        date: { type: String }
     } ]
 });
 
