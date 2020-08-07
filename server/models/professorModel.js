@@ -14,11 +14,15 @@ const ProfessorSchema = new Schema({
     salt: {type: String},
 
     email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
-    phoneNumber: {type: String, minlength: 10, maxlength: 11, required: true}, //handle this validation in HTML form using pattern attribute of input type tel tag
+    phoneNumber: {type: String, minlength: 10, maxlength: 12, required: true}, //handle this validation in HTML form using pattern attribute of input type tel tag
     university: {type: String, uppercase: true, required: true},
     department: {type: String, uppercase: true, required: true},
     city: {type: String, uppercase: true, required: true},
     state: {type: String, uppercase: true, required: true},
+    summary: {type: String, required: true},
+    zoom: {type: String, required: true},
+    picture:  {type: String, required: true},
+    availability: {type: String},
     subjectString: {type: String},
     subjects: {
         computerscience: {type: Boolean, default: false},

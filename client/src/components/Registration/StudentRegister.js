@@ -6,7 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { Container, Row, Button, Col } from 'react-bootstrap';
 
 import studenthttpUser from '../../studenthttpUser.js'
-const API_URL = 'http://localhost:5000/api/students';
+const API_URL = 'api/students';
 
 const StudentRegister = (props) =>
 {
