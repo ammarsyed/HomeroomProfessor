@@ -6,8 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import ProfessorLookup from './ProfessorLookup';
 
-const StudentDashboard = (props) =>
-{
+const StudentDashboard = (props) => {
 
     // Can use profsUpdate to update professor props in App.js if needed.
 
@@ -43,9 +42,34 @@ const StudentDashboard = (props) =>
 
         history.push({
             pathname: "/student/professor-lookup",
-            state: {detail: props.profs}
+            state: { detail: props.profs }
         })
     }
+
+    //Creating the events structure for fullCalendar API.
+    var eventArray = [];
+    // let keys = [];
+
+    // studentArray && studentArray.map(student => (
+    //     keys.push(student)
+    // ));
+
+    // //URL WILL NEED UPDATE AFTER MERGING SCHEMA CHANGE.
+    // for (let student of keys) {
+    //     if (student.approved) {
+    //         let start_time = student.date.substring(0, 19);
+    //         let end_time = student.date.substring(0, 11) + student.date.substring(20, 25) + ':00';
+
+    //         console.log(start_time)
+    //         console.log(end_time)
+    //         eventArray.push({
+    //             title: student.studentFirstName + ' ' + student.studentLastName,
+    //             start: start_time,
+    //             end: end_time,
+    //             url: 'https://www.google.com'
+    //         })
+    //     }
+    // }
 
     return (
         <>
@@ -53,7 +77,7 @@ const StudentDashboard = (props) =>
                 <Card className="mt-3 cobalt-card">
                     <Card.Body>
                         <Row className="d-flex align-items-center mt-0 mb-0">
-                            <Col xs={12}md={10}>
+                            <Col xs={12} md={10}>
                                 <Link to="/student" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
                             </Col>
                             <Col xs={12} md={2}>
@@ -93,28 +117,7 @@ const StudentDashboard = (props) =>
                                     initialView="dayGridMonth"
                                     className="cobalt-card"
                                     eventClassNames="cobalt-calendar-events"
-                                    events={[
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'Google Session',
-                                            date: '2020-07-02',
-                                            url: 'https://www.google.com'
-                                        }
-                                    ]}
+                                    events={eventArray}
                                     eventClick={customEventClick}
                                 />
                             </Card.Title>
