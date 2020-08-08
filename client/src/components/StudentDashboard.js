@@ -46,24 +46,32 @@ const StudentDashboard = (props) => {
     }
 
     //Creating the events structure for fullCalendar API.
-    var eventArray = [];
 
-    for (let i = 0; i < props.profs.length; i++) {
-        for (let j = 0; j < props.profs[i].students.length; j++) {
+    function getEventArray(info, successCallback, failureCallback) {
+       
+        var eventArray = [];
 
-            let studentName = props.profs[i].students[j].studentFirstName + ' ' + props.profs[i].students[j].studentLastName;
+        for (let i = 0; i < props.profs.length; i++) {
+            for (let j = 0; j < props.profs[i].students.length; j++) {
 
-            if (studentName == props.currentUser.fullName) {
-                let start_time = props.profs[i].students[j].date.substring(0, 19);
-                let end_time = props.profs[i].students[j].date.substring(0, 11) + props.profs[i].students[j].date.substring(20, 25) + ':00';
-                eventArray.push({
-                    title: props.profs[i].fullName,
-                    start: start_time,
-                    end: end_time,
-                    url: props.profs[i].zoom
-                })
+                let studentName = props.profs[i].students[j].studentFirstName + ' ' + props.profs[i].students[j].studentLastName;
+
+                if (studentName == props.currentUser.fullName && props.profs[i].students[j].date != null) {
+ 
+                    let start_time = props.profs[i].students[j].date.substring(0, 19);
+                    let end_time = props.profs[i].students[j].date.substring(0, 11) + props.profs[i].students[j].date.substring(20, 25) + ':00';
+                    eventArray.push({
+                        title: props.profs[i].fullName,
+                        start: start_time,
+                        end: end_time,
+                        url: props.profs[i].zoom
+                    })
+                }
             }
         }
+
+        successCallback( eventArray )
+
     }
 
     return (
@@ -105,7 +113,7 @@ const StudentDashboard = (props) => {
                                     initialView="dayGridMonth"
                                     className="cobalt-card"
                                     eventClassNames="cobalt-calendar-events"
-                                    events={eventArray}
+                                    events={getEventArray}
                                     eventClick={customEventClick}
                                 />
                             </Card.Title>
