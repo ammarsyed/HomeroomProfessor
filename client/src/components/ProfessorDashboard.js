@@ -133,14 +133,14 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            {studentArray && studentArray.map(student => (
-                                <>{!student.approved &&
-                                    <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                        <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
-                                        <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow(student)}>Schedule</Button></ListGroup.Item>
-                                    </ListGroup>
-                                }</>
-                            ))}
+                            {studentArray && studentArray
+                                            .filter(entry => !entry.approved)
+                                            .map(student => (
+                                                <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                                    <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                                    <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow(student)}>Schedule</Button></ListGroup.Item>
+                                                </ListGroup>
+                                            ))}
                         </Card.Body>
                     </Card>
                     <Card id="sessions" className="mt-3 cobalt-card">
@@ -150,14 +150,14 @@ const ProfessorDashboard = (props) => {
                             </Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            {studentArray && studentArray.map(student => (
-                                <>{student.approved &&
-                                    <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                        <ListGroup.Item className="dashlist border-bottom-0 mb-0"><h5 className="mb-0">Appointment - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
-                                        <ListGroup.Item className="dashlist"><b>{convertDate(student.date)}</b></ListGroup.Item>
-                                    </ListGroup>
-                                }</>
-                            ))}
+                            {studentArray && studentArray
+                                            .filter(entry => entry.approved)
+                                            .map(student => (
+                                                <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                                    <ListGroup.Item className="dashlist border-bottom-0 mb-0"><h5 className="mb-0">Appointment - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                                    <ListGroup.Item className="dashlist"><b>{convertDate(student.date)}</b></ListGroup.Item>
+                                                </ListGroup>
+                                            ))}
                         </Card.Body>
                     </Card>
                     </Col>

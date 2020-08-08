@@ -1,3 +1,4 @@
+/* ##### Body ##### */
 html, body #app, #app>div {
 	height: 100% !important;
 }
@@ -12,20 +13,32 @@ body {
   background-color: #FFFFFF !important;
 }
 
+/* ##### General ##### */
+* {
+	box-sizing: border-box;
+}
 
+.background {
+	background: #ffffff
+}
 
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
 
+.hidden {
+	display: none;
+}
 
-
-label2 { 
+label2 {
 	color: #ffffff !important;
- }
+}
 
- label3 { 
+label3 {
 	color: #ffffff !important;
- }
+}
 
-
+/* ##### Main ##### */
 
 .main-section{
 	margin: 0 auto !important; 
@@ -33,22 +46,12 @@ label2 {
 	padding: 0 !important;
 }
 
-.modal-content{
-	background-color: #365E7D !important;
-	padding: 0 12px !important;
-	border-radius: 20px !important;
-	padding-bottom: 20px !important;
+main {
+	padding: 0 2rem;
 }
 
-.user-img img{
-	height: 120px !important;
-	width: 120px !important;
-}
 
-.user-img {
-	margin-top: -60px;
-	margin-bottom: 25px;
-}
+/* ##### Forms ##### */
 
 .form-group2{
 	margin-bottom: 10px !important;
@@ -122,6 +125,7 @@ textarea
 	display: none;
   }
 
+/* ##### UI ##### */
 /* Colors based on Icon */
 .color-cobalt {
 	background-color: #365E7D !important;
@@ -157,57 +161,54 @@ textarea
 	border-radius: 2px;
 }
 
-
-
-
-
-
-footer {
-	position:fixed;
-	display:flex;
-	margin-top: 100vh;
-	bottom: 0;
-	width: 100%;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.hidden {
-	display: none;
-}
-
-/* ##### header ##### */
+/* ##### Header ##### */
 .bd-navbar {
 	min-height: 4rem;
 	background-color: #365E7D;
 	box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
 }
 
-/* ##### modal ##### */
 
-/*.close { display: none; }*/
+/* ##### Footer ##### */
+footer {
+	position: fixed;
+	display: flex;
+	margin-top: 100vh;
+	bottom: 0;
+	width: 100%;
+}
 
-/* ##### images ##### */
+/* ##### Calendar ##### */
+
+
+/* ##### Modal ##### */
+.modal.modal-static .modal-dialog {
+	-webkit-transform: none !important;
+	transform: none !important;
+}
+
+.modal-content {
+	background-color: #365E7D !important;
+	padding: 0 12px !important;
+	border-radius: 20px !important;
+	padding-bottom: 20px !important;
+}
+
+/* ##### Images ##### */
 .img-max {
 	max-width: 450px;
 	width: 100%;
 	height: auto;
 }
 
-/* ##### general ##### */
-* {
-	box-sizing: border-box;
+.user-img img {
+	height: 120px !important;
+	width: 120px !important;
 }
 
-main {
-	padding: 0 2rem;
-}
-
-.background{
-  background: #ffffff
+.user-img {
+	margin-top: -60px;
+	margin-bottom: 25px;
 }
 
 /* ##### Columns ##### */

@@ -16,6 +16,7 @@ const AppointmentModal = (props) => {
             show={props.show}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
+            backdrop="static"
             centered
         >
             <Modal.Header>
@@ -26,7 +27,7 @@ const AppointmentModal = (props) => {
             <Modal.Body className="white-text">
                 <Row className="align-items-center">
                     <Col lg={3}>
-                        <Image src="https://via.placeholder.com/150" rounded />
+                        <Image height="150" width="150" src={props.profs.picture} rounded />
                     </Col>
                     <Col lg={9}>
                         <Row>
@@ -39,14 +40,15 @@ const AppointmentModal = (props) => {
                             {props.profs.department}
                         </Row>
                         <Row>
-                            Professor Availability:
-                            Placeholder Placeholder Placeholder
+                            Professor Availability: {props.profs.availability}
                         </Row>
                     </Col>
                 </Row>
                 <Row className="ml-auto">
-                    Professor Bio
-                    Placeholder
+                    Professor Profile Summary
+                </Row>
+                <Row className="ml-auto">
+                    {props.profs.summary}
                 </Row>
             </Modal.Body>
             <Modal.Header>

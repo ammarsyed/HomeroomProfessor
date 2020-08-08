@@ -67,6 +67,7 @@ const ScheduleModal = (props) => {
             show={props.show}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
+            backdrop="static"
             centered
         >
             {!props.schedule &&
@@ -105,7 +106,7 @@ const ScheduleModal = (props) => {
                             initialView="timeGrid"
                             slotMinTime="07:00:00"
                             slotMaxTime="18:00:00"
-                            //selectable={true}
+                            selectable={true}
                             validRange={constrainValidDates}
                             visibleRange={constrainVisibleDates}
                             allDaySlot={false}
