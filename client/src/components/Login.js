@@ -4,8 +4,11 @@ import {useHistory} from "react-router-dom";
 
 import studenthttpUser from '../studenthttpUser';
 
+import Alert from 'react-bootstrap/Alert'
+
 const Login = (props) =>
 {
+    const [loginError, setloginError] = useState("");
     const [username, setUsername] = useState("");
     const [hash, setHash] = useState("");
 
@@ -28,6 +31,7 @@ const Login = (props) =>
         console.log('called login in studenthttpuser')
         console.log(user)
 
+
         if(user)
         {
 
@@ -45,6 +49,10 @@ const Login = (props) =>
             {
                 history.push("/professor")
             }
+        }
+        else
+        {
+            setloginError("The username and password you entered did not match our records. Please double-check and try again.")
         }
 
     };
@@ -85,8 +93,10 @@ const Login = (props) =>
                     <label htmlFor="inputUsername" className="font-weight-bold mb-0 text-large text-white">
                         <b>Homeroom Professor</b>
                     </label>
-                    <br/>
-
+                    <br />
+                    {
+                        loginError == "" ? null : <Alert variant='danger'>{loginError}</Alert>
+                    }
                     <form id="login" onSubmit={handleSubmit}>
 
 
@@ -117,11 +127,11 @@ const Login = (props) =>
                         </div>
 
                         <label className="mb-0 text-white">
-                            <input type="checkbox" className="ml-1" onChange={event => showPassword(event.target.value)}/>
+                            <input type="checkbox" className="ml-1" onChange={event => showPassword(event.target.value)} />
                             &nbsp; Show Password
                         </label>
                         <div>
-                            <br/>
+                            <br />
                             <input className="button" type="submit" value="Login" />
                             <button className="button" onClick={handleRegister}>Register</button>
                         </div>
