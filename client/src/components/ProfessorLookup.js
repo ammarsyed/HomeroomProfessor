@@ -15,6 +15,7 @@ const ProfessorLookup = (props) => {
     //defined this way and we may need to update it later
     const [professorArray, setProfessorArray] = useState(props.location.state.detail);
     const [displayModal, setDisplayModal] = useState(false);
+    const [displaySuccess, setDisplaySuccess] = useState(false);
     const [currentProfessor, setCurrentProfessor] = useState({});
 
     const { SearchBar } = Search;
@@ -68,10 +69,12 @@ const ProfessorLookup = (props) => {
 
         console.log(response);
 
-        setDisplayModal(false);
+        setDisplaySuccess(true);
     }
 
     const closeModal = () => {
+
+        setDisplaySuccess(false);
 
         setDisplayModal(false);
 
@@ -152,6 +155,7 @@ const ProfessorLookup = (props) => {
                     onSubmit={updateProfessorDB}
                     onClose={closeModal}
                     profs={currentProfessor}
+                    showSuccess={displaySuccess}
                 />
             </Container>
         </>

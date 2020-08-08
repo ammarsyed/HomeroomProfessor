@@ -120,10 +120,14 @@ textarea
 	color:#000000;
 }
 
+.larger-font {
+	font-size: larger;
+}
+
 /* Hide all steps by default: */
 .tab {
 	display: none;
-  }
+}
 
 /* ##### UI ##### */
 /* Colors based on Icon */

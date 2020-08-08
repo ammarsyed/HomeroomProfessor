@@ -156,7 +156,7 @@ const StudentRegister = (props) =>
                         Please enter your information below to register as a student.
                     </b>
                 </div>
-                <form onSubmit={handleSubmit} className="card p-3">
+                <form onSubmit={handleSubmit} className="card p-3 larger-font">
                     <div className="form-row">
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputFName" className="ml-2 mb-0">First Name</label>

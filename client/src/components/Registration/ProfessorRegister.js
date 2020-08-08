@@ -207,7 +207,7 @@ const ProfessorRegister = (props) => {
                         Please enter your information to register as a professor.
                 </b>
                 </div>
-                <form id="addForm" onSubmit={handleSubmit} className="card p-3">
+                <form id="addForm" onSubmit={handleSubmit} className="card p-3 larger-font">
 
                     <div className={registrationHidden}>
                         <div className="form-row">

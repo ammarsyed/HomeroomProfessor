@@ -68,6 +68,7 @@ const ScheduleModal = (props) => {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             backdrop="static"
+            animation={false}
             centered
         >
             {!props.schedule &&

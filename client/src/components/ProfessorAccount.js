@@ -24,21 +24,14 @@ const ProfessorAccount = (props) => {
                         </Card.Title>
                     </Card.Header>
                     <Card.Body>
-                        <ListGroup className="flex-row align-items-center justify-content-between" variant="flush">
-                            <Figure>
-                                <Figure.Image
-                                    width={171}
-                                    height={180}
-                                    alt="171x180"
-                                    src={props.currentUser.picture} rounded
-                                />
-                            </Figure>
+                        <ListGroup className="flex-row align-items-start justify-content-left" variant="flush">
+                            <Image height="150" width="150" src={props.currentUser.picture} alt="150x150" rounded />
                             <ListGroup className="align-items-left justify-content-between" variant="flush">
-                                <ListGroup.Item >Name: {titleCase(props.currentUser.fullName)}</ListGroup.Item>
+                                <ListGroup.Item className="dashlist border-0">Name: {titleCase(props.currentUser.fullName)}</ListGroup.Item>
                                 <ListGroup.Item className="dashlist">Personal Summary: {props.currentUser.summary}</ListGroup.Item>
                             </ListGroup>
                         </ListGroup>
-                        <ListGroup className="flex-xl-row border-bottom align-items-center justify-content-between" variant="flush">
+                        <ListGroup className="flex-xl-row border-bottom align-items-center justify-content-between mt-1" variant="flush">
                             <ListGroup.Item className="dashlist">University: {titleCase(props.currentUser.university)}</ListGroup.Item>
                             <ListGroup.Item className="dashlist">Department: {props.currentUser.department}</ListGroup.Item>
                             <ListGroup.Item className="dashlist">Email: {props.currentUser.email}</ListGroup.Item>
