@@ -4,10 +4,8 @@ import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bo
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
-import ProfessorLookup from './ProfessorLookup';
 
-const StudentDashboard = (props) =>
-{
+const StudentDashboard = (props) => {
 
     // Can use profsUpdate to update professor props in App.js if needed.
 
@@ -43,8 +41,29 @@ const StudentDashboard = (props) =>
 
         history.push({
             pathname: "/student/professor-lookup",
-            state: {detail: props.profs}
+            state: { detail: props.profs }
         })
+    }
+
+    //Creating the events structure for fullCalendar API.
+    var eventArray = [];
+
+    for (let i = 0; i < props.profs.length; i++) {
+        for (let j = 0; j < props.profs[i].students.length; j++) {
+
+            let studentName = props.profs[i].students[j].studentFirstName + ' ' + props.profs[i].students[j].studentLastName;
+
+            if (studentName == props.currentUser.fullName) {
+                let start_time = props.profs[i].students[j].date.substring(0, 19);
+                let end_time = props.profs[i].students[j].date.substring(0, 11) + props.profs[i].students[j].date.substring(20, 25) + ':00';
+                eventArray.push({
+                    title: props.profs[i].fullName,
+                    start: start_time,
+                    end: end_time,
+                    url: props.profs[i].zoom
+                })
+            }
+        }
     }
 
     return (
@@ -53,7 +72,7 @@ const StudentDashboard = (props) =>
                 <Card className="mt-3 cobalt-card">
                     <Card.Body>
                         <Row className="d-flex align-items-center mt-0 mb-0">
-                            <Col xs={12}md={10}>
+                            <Col xs={12} md={10}>
                                 <Link to="/student" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
                             </Col>
                             <Col xs={12} md={2}>
@@ -62,14 +81,6 @@ const StudentDashboard = (props) =>
                         </Row>
                     </Card.Body>
                 </Card>
-                {/* <Card className="mt-3" border="primary" bg="white" text="primary">
-                    <ProfessorLookup
-                        {...props}
-                        profs={props.profs}
-                        location={props.location}
-                        display="none"
-                    />
-                </Card> */}
                 <CardDeck>
                     <Card id="nextFeature" className="mt-3 cobalt-card">
                         <Card.Header className="text-center" text="primary">
@@ -90,31 +101,11 @@ const StudentDashboard = (props) =>
                                 <FullCalendar
                                     plugins={[dayGridPlugin, interactionPlugin]}
                                     dateClick={handleDateClick}
+                                    eventDisplay="list-item"
                                     initialView="dayGridMonth"
                                     className="cobalt-card"
                                     eventClassNames="cobalt-calendar-events"
-                                    events={[
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'Google Session',
-                                            date: '2020-07-02',
-                                            url: 'https://www.google.com'
-                                        }
-                                    ]}
+                                    events={eventArray}
                                     eventClick={customEventClick}
                                 />
                             </Card.Title>
@@ -123,8 +114,6 @@ const StudentDashboard = (props) =>
                 </CardDeck>
             </Container>
         </>
-
-
     );
 };
 

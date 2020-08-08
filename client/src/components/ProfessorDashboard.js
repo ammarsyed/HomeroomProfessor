@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from "react-router-dom";
-import { Button, Container, Card, CardDeck, Row, Col, ListGroup } from 'react-bootstrap';
+import { Button, Container, Card, Row, Col, ListGroup } from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
@@ -17,6 +17,8 @@ const ProfessorDashboard = (props) => {
     const [studentArray, setStudentArray] = useState();
 
     const history = useHistory();
+
+    console.log(studentArray)
 
     useEffect(() => {
         props.updateDB();
@@ -41,7 +43,7 @@ const ProfessorDashboard = (props) => {
     }
 
     function accountClick() {
-        
+
         history.push({
             pathname: "/professor/account"
         })
@@ -59,10 +61,10 @@ const ProfessorDashboard = (props) => {
     const updateMeetingTime = (time) => {
 
         const confirmMeeting = {
-            "id" : props.currentUser._id,
+            "id": props.currentUser._id,
             "student_id": currentStudent._id,
             "approved": true,
-            "date" : time
+            "date": time
         };
 
         console.log(confirmMeeting);
@@ -108,6 +110,31 @@ const ProfessorDashboard = (props) => {
 
     }
 
+    //Creating the events structure for fullCalendar API.
+    var eventArray = [];
+    let keys = [];
+
+    studentArray && studentArray.map(student => (
+        keys.push(student)
+    ));
+
+    //URL WILL NEED UPDATE AFTER MERGING SCHEMA CHANGE.
+    for (let student of keys) {
+        if (student.approved) {
+            let start_time = student.date.substring(0, 19);
+            let end_time = student.date.substring(0, 11) + student.date.substring(20, 25) + ':00';
+
+            console.log(start_time)
+            console.log(end_time)
+            eventArray.push({
+                title: student.studentFirstName + ' ' + student.studentLastName,
+                start: start_time,
+                end: end_time,
+                url: props.currentUser.zoom
+            })
+        }
+    }
+
     return (
         <>
             <Container fluid>
@@ -126,71 +153,60 @@ const ProfessorDashboard = (props) => {
                 <Card className="border-0">
                     <Row>
                         <Col>
-                    <Card id="requests" className="mt-3 cobalt-card">
-                        <Card.Header className="text-center" text="primary">
-                            <Card.Title>
-                                New Requests
+                            <Card id="requests" className="mt-3 cobalt-card">
+                                <Card.Header className="text-center" text="primary">
+                                    <Card.Title>
+                                        New Requests
                             </Card.Title>
-                        </Card.Header>
-                        <Card.Body>
-                            {studentArray && studentArray
-                                            .filter(entry => !entry.approved)
-                                            .map(student => (
-                                                <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                                    <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
-                                                    <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow(student)}>Schedule</Button></ListGroup.Item>
-                                                </ListGroup>
-                                            ))}
-                        </Card.Body>
-                    </Card>
-                    <Card id="sessions" className="mt-3 cobalt-card">
-                        <Card.Header className="text-center" text="primary">
-                            <Card.Title>
-                                Upcoming Tutoring Sessions
+                                </Card.Header>
+                                <Card.Body>
+                                    {studentArray && studentArray.map(student => (
+                                        <>{!student.approved &&
+                                            <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                                <ListGroup.Item className="dashlist border-bottom-0"><h5>Student Request - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                                <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={() => updateAndShow(student)}>Schedule</Button></ListGroup.Item>
+                                            </ListGroup>
+                                        }</>
+                                    ))}
+                                </Card.Body>
+                            </Card>
+                            <Card id="sessions" className="mt-3 cobalt-card">
+                                <Card.Header className="text-center" text="primary">
+                                    <Card.Title>
+                                        Upcoming Tutoring Sessions
                             </Card.Title>
-                        </Card.Header>
-                        <Card.Body>
-                            {studentArray && studentArray
-                                            .filter(entry => entry.approved)
-                                            .map(student => (
-                                                <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
-                                                    <ListGroup.Item className="dashlist border-bottom-0 mb-0"><h5 className="mb-0">Appointment - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
-                                                    <ListGroup.Item className="dashlist"><b>{convertDate(student.date)}</b></ListGroup.Item>
-                                                </ListGroup>
-                                            ))}
-                        </Card.Body>
-                    </Card>
-                    </Col>
-                    <Col>
-                    <Card id="calendar" className="mt-3 cobalt-card">
-                        <Card.Body>
-                            <Card.Title>
-                                <FullCalendar
-                                    plugins={[dayGridPlugin, interactionPlugin]}
-                                    dateClick={handleDateClick}
-                                    initialView="dayGridMonth"
-                                    className="cobalt-card"
-                                    eventClassNames="cobalt-calendar-events"
-                                    events={[
-                                        {
-                                            title: 'UF Session',
-                                            date: '2020-07-21',
-                                            url: 'https://www.ufl.edu'
-                                        },
-                                        {
-                                            title: 'Google Session',
-                                            date: '2020-07-02',
-                                            url: 'https://www.google.com'
-                                        }
-                                    ]}
-                                    eventClick={customEventClick}
-                                />
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
-                    </Col>
+                                </Card.Header>
+                                <Card.Body>
+                                    {studentArray && studentArray.map(student => (
+                                        <>{student.approved &&
+                                            <ListGroup key={student._id} className="flex-xl-row border-bottom justify-content-between align-items-center" variant="flush">
+                                                <ListGroup.Item className="dashlist border-bottom-0 mb-0"><h5 className="mb-0">Appointment - {student.studentFirstName} {student.studentLastName}</h5></ListGroup.Item>
+                                                <ListGroup.Item className="dashlist"><b>{convertDate(student.date)}</b></ListGroup.Item>
+                                            </ListGroup>
+                                        }</>
+                                    ))}
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card id="calendar" className="mt-3 cobalt-card">
+                                <Card.Body>
+                                    <Card.Title>
+                                        <FullCalendar
+                                            plugins={[dayGridPlugin, interactionPlugin]}
+                                            dateClick={handleDateClick}
+                                            initialView="dayGridMonth"
+                                            className="cobalt-card"
+                                            eventClassNames="cobalt-calendar-events"
+                                            events={eventArray}
+                                            eventClick={customEventClick}
+                                        />
+                                    </Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </Col>
                     </Row>
-                    </Card>
+                </Card>
                 <ScheduleModal
                     show={displayModal}
                     schedule={displaySchedule}
@@ -199,7 +215,7 @@ const ProfessorDashboard = (props) => {
                     onContact={updateContact}
                     onDeny={updateDeny}
                     updateMeeting={updateMeetingTime}
-         
+
                 />
             </Container>
         </>
