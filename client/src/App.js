@@ -167,7 +167,8 @@ const App = (props) =>
                     <Route
                         path="/student/professor-lookup"
                         render={(props) => (
-                            <ProfessorLookup {...props} profs={professorProps} location={props.location} currentUser={currentUser} recommendedProfessors={recommendedProfessors} />
+                            <ProfessorLookup {...props} profs={professorProps} location={props.location} currentUser={currentUser}
+                                recommendedProfessors={recommendedProfessors} />
                         )}
                     />
                     <Route

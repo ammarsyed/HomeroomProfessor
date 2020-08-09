@@ -188,7 +188,7 @@ const ProfessorDashboard = (props) =>
                                 <Card.Header className="text-center" text="primary">
                                     <Card.Title>
                                         New Requests
-                            </Card.Title>
+                                    </Card.Title>
                                 </Card.Header>
                                 <Card.Body>
                                     {studentArray && studentArray.map(student => (
@@ -205,7 +205,7 @@ const ProfessorDashboard = (props) =>
                                 <Card.Header className="text-center" text="primary">
                                     <Card.Title>
                                         Upcoming Tutoring Sessions
-                            </Card.Title>
+                                    </Card.Title>
                                 </Card.Header>
                                 <Card.Body>
                                     {studentArray && studentArray.map(student => (
