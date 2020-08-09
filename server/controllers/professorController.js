@@ -178,8 +178,11 @@ const deleteOneProfessor = async (req, res) =>
 const getUpdatedProfessor = async (req, res) =>
 {
     const user = await Professor.findOne({username: req.body.username}); //changed from email to username
-    const token = await signToken(user);
-    res.json({success: true, message: "Token attached", token});
+    if(user)
+    {
+        const token = await signToken(user);
+        res.json({success: true, message: "Token attached", token});
+    }
 
 }
 

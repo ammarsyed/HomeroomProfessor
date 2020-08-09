@@ -41,6 +41,11 @@ const ProfessorDashboard = (props) =>
         console.log(timestamp);
         studenthttpUser.updateCurrentUser();
         props.setCurrentUser(studenthttpUser.getCurrentUser());
+        setStudentArray(studenthttpUser.getCurrentUser().students);
+        console.log(studenthttpUser.getCurrentUser().students);
+        console.log(studentArray);
+
+
     }
 
     setInterval(updateCurrProf, 90000); //1.5 minutes so 90000 milliseconds
