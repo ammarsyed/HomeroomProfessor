@@ -144,6 +144,7 @@ const ProfessorLookup = (props) => {
                             <div>
                                 <br />
                                 <h5>Professor Lookup</h5>
+                                <p>One of your recommended professors is shown below. Please enter a new name, university, department, or subject to search for other professors.</p>
                                 <SearchBar {...props.searchProps}/>
                                 <hr />
                                 <BootstrapTable
