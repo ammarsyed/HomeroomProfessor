@@ -1,0 +1,14 @@
+.inline-errormsg {
+  color: red ;
+  font-size: 14px;
+  
+}
+
+.hidden {
+  display: none;
+}
+
+.is-invalid{
+    border:1px solid red !important;
+    
+}

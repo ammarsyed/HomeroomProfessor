@@ -6,10 +6,19 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import {Container, Row, Button, Col} from 'react-bootstrap';
 
 import studenthttpUser from '../../studenthttpUser.js'
+
+import "bootstrap-css-only";
+import "./styles.css";
+
 const API_URL = 'api/students';
+
+
 
 const StudentRegister = (props) =>
 {
+
+    const [errors, setErrors] = useState([])
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -97,19 +106,30 @@ const StudentRegister = (props) =>
             }
         };
 
-
-        //added below stuff
-        console.log(newstudent.username);
-        console.log(newstudent.password);
-        const studentUser = await studenthttpUser.signUp(newstudent);
-        console.log(studentUser);
-        //empty newStudent ??? not sure
-        if(studentUser)
+        let errors = [];
+        if(firstName == "")
         {
-            // Maybe popup saying successful registration here?
+            errors.push("firstName");
         }
 
-        browse_history.push("/")
+        setErrors(errors);
+
+        if(errors.length == 0)
+        {
+            //added below stuff
+            console.log(newstudent.username);
+            console.log(newstudent.password);
+            const studentUser = await studenthttpUser.signUp(newstudent);
+            console.log(studentUser);
+            //empty newStudent ??? not sure
+            if(studentUser)
+            {
+                // Maybe popup saying successful registration here?
+                console.log('successful registration')
+                browse_history.push("/")
+            }
+        }
+
     };
 
     const backButton = (event) =>
@@ -145,6 +165,20 @@ const StudentRegister = (props) =>
             setGradeDisplay(event);
     }
 
+    const hasError = (key) =>
+    {
+        return errors.indexOf(key) !== -1; //true if key is in array, false if it is not
+    }
+    const [thingy, setthingy] = useState({});
+    const handleInputChange = (event) =>
+    {
+        let key = event.target.name;
+        let value = event.target.value;
+        let obj = {};
+        obj[key] = value;
+        setthingy(obj);
+    }
+
     return (
         <>
             <Container>
@@ -156,18 +190,26 @@ const StudentRegister = (props) =>
                         Please enter your information below to register as a student.
                     </b>
                 </div>
-                <form onSubmit={handleSubmit} className="card p-3 larger-font">
+                <form onSubmit={handleSubmit} className="card p-3 larger-font" >
                     <div className="form-row">
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputFName" className="ml-2 mb-0">First Name</label>
                             <input
+                                className={hasError("firstName") ? "form-control is-invalid" : null}
                                 id="inputFName"
                                 type="text"
                                 placeholder="First Name"
                                 value={firstName}
-                                onChange={event => setFirstName(event.target.value)}
+                                onChange={event =>
+                                {
+                                    setFirstName(event.target.value);
+                                    handleInputChange(event);
+                                }}
                             />
+                            <div style={{margin: "0px 0px 0px 8px"}} className={hasError("firstName") ? "inline-errormsg" : "hidden"}>Please enter a first name</div>
+
                         </div>
+
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputLName" className="ml-2 mb-0">Last Name</label>
                             <input
