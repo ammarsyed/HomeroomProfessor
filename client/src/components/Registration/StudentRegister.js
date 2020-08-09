@@ -9,6 +9,7 @@ import studenthttpUser from '../../studenthttpUser.js'
 
 import "bootstrap-css-only";
 import "./styles.css";
+import Alert from 'react-bootstrap/Alert'
 
 const API_URL = 'api/students';
 
@@ -16,6 +17,10 @@ const API_URL = 'api/students';
 
 const StudentRegister = (props) =>
 {
+
+    const [registrationSuccess, setregistrationSuccess] = useState(false);
+    const [registrationFailure, setregistrationFailure] = useState(false);
+
 
     const [errors, setErrors] = useState([])
 
@@ -107,9 +112,24 @@ const StudentRegister = (props) =>
         };
 
         let errors = [];
+
+
         if(firstName == "")
         {
             errors.push("firstName");
+        }
+
+        if(lastName == "")
+        {
+            errors.push("lastName");
+        }
+        if(username == "")
+        {
+            errors.push("username")
+        }
+        if(hash == "" || hash.length < 8)
+        {
+            errors.push("hash");
         }
 
         setErrors(errors);
@@ -126,8 +146,18 @@ const StudentRegister = (props) =>
             {
                 // Maybe popup saying successful registration here?
                 console.log('successful registration')
-                browse_history.push("/")
+                setregistrationFailure(false);
+                setregistrationSuccess(true);
+
+                setTimeout(function () {browse_history.push("/")}, 1000);
+
+                // browse_history.push("/")
             }
+        }
+        else
+        {
+            setregistrationSuccess(false);
+            setregistrationFailure(true);
         }
 
     };
@@ -182,6 +212,9 @@ const StudentRegister = (props) =>
     return (
         <>
             <Container>
+                <br></br>
+                {registrationSuccess ? <Alert variant='success'>Registration Successful!</Alert> : null}
+                {registrationFailure ? <Alert variant='danger'>Registration Unsuccessful! Double check for errors in registration form! </Alert> : null}
                 <div className="row">
                     <h2>Student Registration</h2>
                 </div>
