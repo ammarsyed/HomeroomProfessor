@@ -8,7 +8,7 @@ import {Container, Row, Button, Col} from 'react-bootstrap';
 import studenthttpUser from '../../studenthttpUser.js'
 
 import "bootstrap-css-only";
-import "./styles.css";
+import "./registratinvalidationstyle.css";
 import Alert from 'react-bootstrap/Alert'
 
 const API_URL = 'api/students';
@@ -137,15 +137,15 @@ const StudentRegister = (props) =>
         if(errors.length == 0)
         {
             //added below stuff
-            console.log(newstudent.username);
-            console.log(newstudent.password);
+            // console.log(newstudent.username);
+            // console.log(newstudent.password);
             const studentUser = await studenthttpUser.signUp(newstudent);
-            console.log(studentUser);
+            // console.log(studentUser);
             //empty newStudent ??? not sure
             if(studentUser)
             {
                 // Maybe popup saying successful registration here?
-                console.log('successful registration')
+                // console.log('successful registration')
                 setregistrationFailure(false);
                 setregistrationSuccess(true);
 
@@ -186,7 +186,7 @@ const StudentRegister = (props) =>
     //function to handle the drowndown select for grade
     const handleSelect = (event) =>
     {
-        console.log(event);
+        // console.log(event);
         setGrade(event);
 
         if(event === "0")

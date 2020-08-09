@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from "react-router-dom";
-import { Button, Container, Card, Row, Col, ListGroup } from 'react-bootstrap';
+import React, {useState, useEffect} from 'react';
+import {useHistory, Link} from "react-router-dom";
+import {Button, Container, Card, Row, Col, ListGroup} from 'react-bootstrap';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import ScheduleModal from './ScheduleModal';
 import axios from "axios";
+import studenthttpUser from '../studenthttpUser';
 
 const PROFESSOR_API_URL = '/api/professors';
 
-const ProfessorDashboard = (props) => {
+const ProfessorDashboard = (props) =>
+{
 
     const [displayModal, setDisplayModal] = useState(false);
     const [displaySchedule, setDisplaySchedule] = useState(false);
@@ -18,47 +20,69 @@ const ProfessorDashboard = (props) => {
 
     const history = useHistory();
 
-    console.log(studentArray)
+    // console.log(studentArray)
 
-    useEffect(() => {
+
+    useEffect(() =>
+    {
         props.updateDB();
 
         setStudentArray(props.currentUser.students);
 
     }, [])
 
-    const handleDateClick = (arg) => {
-        alert(arg.dateStr)
-        console.log(studentArray);
+    // COMEBACK
+    function updateCurrProf()
+    {
+
+        console.log("UPDATED CURRENT PROFESSOR USER")
+        var date = new Date();
+        var timestamp = date.getTime();
+        console.log(timestamp);
+        studenthttpUser.updateCurrentUser();
+        props.setCurrentUser(studenthttpUser.getCurrentUser());
     }
 
-    function customEventClick(info) {
+    setInterval(updateCurrProf, 90000); //1.5 minutes so 90000 milliseconds
+
+    const handleDateClick = (arg) =>
+    {
+        alert(arg.dateStr)
+        // console.log(studentArray);
+    }
+
+    function customEventClick(info)
+    {
         info.jsEvent.preventDefault(); // don't let the browser navigate
 
         let temp = info.event.url.replace("")
 
-        if (info.event.url) {
+        if(info.event.url)
+        {
             window.open(info.event.url);
         }
     }
 
-    function accountClick() {
+    function accountClick()
+    {
 
         history.push({
             pathname: "/professor/account"
         })
     }
 
-    const updateAndShow = (student) => {
+    const updateAndShow = (student) =>
+    {
 
         setCurrentStudent(student);
 
-        console.log(student);
+        // console.log(student);
 
         setDisplayModal(true);
     }
 
-    const updateMeetingTime = (time) => {
+    const updateMeetingTime = (time) =>
+    {
 
         const confirmMeeting = {
             "id": props.currentUser._id,
@@ -67,11 +91,11 @@ const ProfessorDashboard = (props) => {
             "date": time
         };
 
-        console.log(confirmMeeting);
+        // console.log(confirmMeeting);
 
         let response = axios.post(PROFESSOR_API_URL + '/confirmRequest', confirmMeeting);
 
-        console.log(response);
+        // console.log(response);
 
         setDisplayModal(false);
         setDisplaySchedule(false);
@@ -79,32 +103,37 @@ const ProfessorDashboard = (props) => {
         props.updateDB();
     }
 
-    const convertDate = (dateStr) => {
+    const convertDate = (dateStr) =>
+    {
         var date = new Date(dateStr);
 
         return "" + date.toDateString() + " " + date.toLocaleTimeString();
     }
 
-    const closeModal = () => {
+    const closeModal = () =>
+    {
 
         setDisplayModal(false);
         setDisplaySchedule(false);
 
     }
 
-    const updateSchedule = () => {
+    const updateSchedule = () =>
+    {
 
         setDisplaySchedule(true);
 
     }
 
-    const updateContact = () => {
+    const updateContact = () =>
+    {
 
         setDisplayModal(false);
 
     }
 
-    const updateDeny = () => {
+    const updateDeny = () =>
+    {
 
         setDisplayModal(false);
 
@@ -119,13 +148,15 @@ const ProfessorDashboard = (props) => {
     ));
 
     //URL WILL NEED UPDATE AFTER MERGING SCHEMA CHANGE.
-    for (let student of keys) {
-        if (student.approved) {
+    for(let student of keys)
+    {
+        if(student.approved)
+        {
             let start_time = student.date.substring(0, 19);
             let end_time = student.date.substring(0, 11) + student.date.substring(20, 25) + ':00';
 
-            console.log(start_time)
-            console.log(end_time)
+            // console.log(start_time)
+            // console.log(end_time)
             eventArray.push({
                 title: student.studentFirstName + ' ' + student.studentLastName,
                 start: start_time,

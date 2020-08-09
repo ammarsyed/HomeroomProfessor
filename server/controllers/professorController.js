@@ -17,16 +17,16 @@ const create = async (req, res) =>
 
     professor.save(function (err, result)
     {
-        console.log('in save function')
+        // console.log('in save function')
         if(err)
         {
-            console.log('error')
+            // console.log('error')
 
             res.json({success: false, code: err.code});
         }
         else
         {
-            console.log('save else')
+            // console.log('save else')
 
             res.json({success: true, message: "User created with token", token});
         }
@@ -39,11 +39,14 @@ const checkLogin = (req, res) =>
     const blank = {};
     var query = Professor.find(blank);
 
-    query.exec(function (err, all) {
-        if (err) {
+    query.exec(function (err, all)
+    {
+        if(err)
+        {
             res.status(404).send(err);
         }
-        else {
+        else
+        {
             res.json(all);
         }
     });
@@ -74,20 +77,21 @@ const addStudentToProfessor = (req, res) =>
         }
         else
         {
-            console.log(result)
+            // console.log(result)
         }
     });
 };
 
-const addMeetingDate = (req, res) => {
+const addMeetingDate = (req, res) =>
+{
 
-    console.log("addMeetingDate");
+    // console.log("addMeetingDate");
 
-    console.log(req.body);
+    // console.log(req.body);
 
     var query = Professor.findOneAndUpdate(
 
-        { "_id": req.body.id, "students._id": req.body.student_id },
+        {"_id": req.body.id, "students._id": req.body.student_id},
         {
             "$set": {
                 "students.$.approved": req.body.approved,
@@ -95,12 +99,15 @@ const addMeetingDate = (req, res) => {
             }
         });
 
-    query.exec(function (err, result) {
-        if (err) {
+    query.exec(function (err, result)
+    {
+        if(err)
+        {
             res.status(404).send(err);
         }
-        else {
-            console.log(result)
+        else
+        {
+            // console.log(result)
         }
     });
 };
@@ -168,11 +175,19 @@ const deleteOneProfessor = async (req, res) =>
 
 }
 
+const getUpdatedProfessor = async (req, res) =>
+{
+    const user = await Professor.findOne({username: req.body.username}); //changed from email to username
+    const token = await signToken(user);
+    res.json({success: true, message: "Token attached", token});
+
+}
+
 // Authenticate
 
 const authenticateProfessor = async (req, res) =>
 {
-    console.log('reached authenticate professor function')
+    // console.log('reached authenticate professor function')
     const user = await Professor.findOne({username: req.body.username}); //changed from email to username
 
     if(!user || !user.validPassword(req.body.password))
@@ -194,3 +209,4 @@ module.exports.updateOneProfessor = updateOneProfessor;
 module.exports.deleteOneProfessor = deleteOneProfessor;
 module.exports.authenticateProfessor = authenticateProfessor;
 module.exports.getAllProfessors = getAllProfessors;
+module.exports.getUpdatedProfessor = getUpdatedProfessor;

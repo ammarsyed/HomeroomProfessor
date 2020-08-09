@@ -3,31 +3,31 @@ var signToken = require('../authHelperFunctions').signToken;
 
 const create = async (req, res) =>
 {
-    console.log("reached create function")
-    console.log(req.body);
+    // console.log("reached create function")
+    // console.log(req.body);
     var student = new Student(req.body);
 
     student.fullName = student.firstName + " " + student.lastName;
 
-    console.log(student);
+    // console.log(student);
 
     const token = await signToken(student); //not sure if i need await
 
-    console.log('get token')
-    console.log(token);
+    // console.log('get token')
+    // console.log(token);
 
     student.save(function (err, result)
     {
-        console.log('in save function')
+        // console.log('in save function')
         if(err)
         {
-            console.log('error')
+            // console.log('error')
 
             res.json({success: false, code: err.code});
         }
         else
         {
-            console.log('save else')
+            // console.log('save else')
 
             res.json({success: true, message: "User created with token", token});
         }
@@ -41,11 +41,14 @@ const checkLogin = (req, res) =>
     const blank = {};
     var query = Student.find(blank);
 
-    query.exec(function (err, all) {
-        if (err) {
+    query.exec(function (err, all)
+    {
+        if(err)
+        {
             res.status(404).send(err);
         }
-        else {
+        else
+        {
             res.json(all);
         }
     });

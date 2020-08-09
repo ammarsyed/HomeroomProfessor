@@ -14,7 +14,38 @@ studenthttpUser.setToken = function (token)
     localStorage.setItem('token', token);
     return token;
 };
+// new jwt token with new information from db
+// CURRENTLY ONLY WORKS FOR PROFESSOR DATABASE
+studenthttpUser.updateCurrentUser = async function ()
+{
+    let token = this.getToken();
+    let decodedToken = jwtDecode(token);
+    let currentUserid = decodedToken._id;
+    let currentUserUsername = decodedToken.username;
+    let currentUserUserType = decodedToken.userType;
 
+    const credentials = {username: currentUserUsername};
+
+    let response = await axios.post('/api/professors/getUpdatedProfessor', credentials);
+
+    token = response.data.token;
+
+    if(token)
+    {
+
+        this.defaults.headers.common.token = this.setToken(token);
+        return jwtDecode(token);
+
+    }
+    // not student or professor (bc both db searched now)
+    else
+    {
+        return false;
+    }
+
+
+
+}
 studenthttpUser.getCurrentUser = function ()
 {
     const token = this.getToken();
@@ -25,49 +56,49 @@ studenthttpUser.logIn = async function (credentials)
 {
     try
     {
-        console.log('entered login http function')
+        // console.log('entered login http function')
         let response = await axios.post('/api/students/authenticate', credentials);
-        console.log('got response')
+        // console.log('got response')
         let token = response.data.token;
-        console.log('got token')
-        console.log(token)
+        // console.log('got token')
+        // console.log(token)
         // if didn't get token (bc not student)
         if(!token)
         {
-            console.log('inside not token function')
+            // console.log('inside not token function')
             response = await axios.post('/api/professors/authenticate', credentials);
-            console.log(response);
+            // console.log(response);
             token = response.data.token;
-            console.log(token);
+            // console.log(token);
         }
-        console.log(token);
+        // console.log(token);
         // if got token (bc ur student or professor)
         if(token)
         {
-            console.log('if token')
+            // console.log('if token')
             this.defaults.headers.common.token = this.setToken(token);
-            console.log('got token about to decode')
+            // console.log('got token about to decode')
             return jwtDecode(token);
 
         }
         // not student or professor (bc both db searched now)
         else
         {
-            console.log('else false wrong password')
+            // console.log('else false wrong password')
             return false;
         }
     }
     catch(err)
     {
-        console.log('error rip')
-        console.log(err);
+        // console.log('error rip')
+        // console.log(err);
         return false;
     }
 };
 
 studenthttpUser.signUp = async function (userInfo)
 {
-    console.log(userInfo);
+    // console.log(userInfo);
     let response;
     if(userInfo.userType == 'student')
     {
@@ -79,21 +110,21 @@ studenthttpUser.signUp = async function (userInfo)
 
     }
 
-    console.log(response);
+    // console.log(response);
 
     const token = response.data.token;
-    console.log('get token')
-    console.log(token);
+    // console.log('get token')
+    // console.log(token);
     if(token)
     {
-        console.log('true if')
-        console.log('able to sign up')
+        // console.log('true if')
+        // console.log('able to sign up')
         this.defaults.headers.common.token = this.setToken(token);
         return jwtDecode(token);
     } else
     {
-        console.log('else')
-        console.log('unable to sign up');
+        // console.log('else')
+        // console.log('unable to sign up');
         return false;
 
     }
