@@ -1,72 +1,76 @@
-import React, {useEffect} from 'react';
-import {useHistory, Link} from "react-router-dom";
-import {Button, Container, Card, CardDeck, Row, Col, ListGroup} from 'react-bootstrap';
-import FullCalendar from '@fullcalendar/react';
+import React, { useEffect } from 'react';
+import { useHistory, Link } from "react-router-dom";
+import { Button, Container, Card, CardDeck, Row, Col, ListGroup, CardGroup } from 'react-bootstrap';
+import FullCalendar, { buildNavLinkData } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
 
-const StudentDashboard = (props) =>
-{
+const StudentDashboard = (props) => {
 
-    // Can use profsUpdate to update professor props in App.js if needed.
+    const recProfs = props.recommendedProfessors;
+    console.log(recProfs)
 
-    //const [professorProps, setProfessorProps] = useState("");
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split(' ');
+        for (var i = 0; i < splitStr.length; i++) {
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        return splitStr.join(' ');
+    }
 
-    //const profsUpdate = (value) => {
-    //    props.sendProfs(value);
-    //};
+    const firstProfName = titleCase(recProfs[0].fullName);
+
 
     const history = useHistory();
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         props.updateDB();
 
     }, [])
 
-    const handleDateClick = (arg) =>
-    {
+    const handleDateClick = (arg) => {
         alert(arg.dateStr)
     }
 
-    function customEventClick(info)
-    {
+    function recommendations(n) {
+
+        if (recProfs[n]) return recProfs[n]
+
+        else return ''
+
+    } 
+
+    function customEventClick(info) {
         info.jsEvent.preventDefault(); // don't let the browser navigate
         console.log(info.event.url);
 
         let temp = info.event.url.replace("")
 
-        if(info.event.url)
-        {
+        if (info.event.url) {
             window.open(info.event.url);
         }
     }
 
-    function professorClick()
-    {
+    function professorClick() {
 
         history.push({
             pathname: "/student/professor-lookup",
-            state: {detail: props.profs}
+            state: { detail: props.profs }
         })
     }
 
     //Creating the events structure for fullCalendar API.
 
-    function getEventArray(info, successCallback, failureCallback)
-    {
+    function getEventArray(info, successCallback, failureCallback) {
 
         var eventArray = [];
 
-        for(let i = 0; i < props.profs.length; i++)
-        {
-            for(let j = 0; j < props.profs[i].students.length; j++)
-            {
+        for (let i = 0; i < props.profs.length; i++) {
+            for (let j = 0; j < props.profs[i].students.length; j++) {
 
                 let studentName = props.profs[i].students[j].studentFirstName + ' ' + props.profs[i].students[j].studentLastName;
 
-                if(studentName == props.currentUser.fullName && props.profs[i].students[j].date != null)
-                {
+                if (studentName == props.currentUser.fullName && props.profs[i].students[j].date != null) {
 
                     let start_time = props.profs[i].students[j].date.substring(0, 19);
                     let end_time = props.profs[i].students[j].date.substring(0, 11) + props.profs[i].students[j].date.substring(20, 25) + ':00';
@@ -86,7 +90,9 @@ const StudentDashboard = (props) =>
 
     return (
         <>
+
             <Container fluid>
+
                 <Card className="mt-3 cobalt-card">
                     <Card.Body>
                         <Row className="d-flex align-items-center mt-0 mb-0">
@@ -101,21 +107,50 @@ const StudentDashboard = (props) =>
                 </Card>
                 <CardDeck>
                     <Card id="nextFeature" className="mt-3 cobalt-card">
-                        <Card.Header className="text-center" text="primary">
-                            <Card.Title>
-                                Find Professors
-                            </Card.Title>
-                        </Card.Header>
                         <Card.Body>
                             <ListGroup className="flex-xl-row justify-content-center border-bottom align-items-center" variant="flush">
                                 <ListGroup.Item className="dashlist"><h3 className="cobalt-text">Search Available Professors:</h3></ListGroup.Item>
                                 <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={professorClick}>Professor Lookup</Button></ListGroup.Item>
                             </ListGroup>
 
-                            <ListGroup className="flex-xl-row justify-content-center border-bottom align-items-center" variant="flush">
+                            <ListGroup className="flex-xl-row justify-content-center align-items-center" variant="flush">
                                 <ListGroup.Item className="dashlist"><h3 className="cobalt-text">Professor Recommendations</h3></ListGroup.Item>
-
                             </ListGroup>
+
+
+                            <CardDeck>
+                                <Card>
+                                    <Card.Img variant="top" src={recommendations(1).picture} />
+                                    <Card.Body>
+                                    <Card.Title>{recommendations(1).fullName}</Card.Title>
+                                    <Card.Text>
+                                        {recommendations(1).summary}
+                                    </Card.Text>
+                                    </Card.Body>
+
+                                </Card>
+
+                                <Card>
+                                    <Card.Img variant="top" src={recommendations(0).picture}/>
+                                    <Card.Body>
+                                    <Card.Title>{recommendations(0).fullName}</Card.Title>
+                                    <Card.Text>
+                                    {recommendations(0).summary}
+                                    </Card.Text>
+                                    </Card.Body>
+                                </Card>
+
+                                <Card>
+                                    <Card.Img variant="top" src={recommendations(2).picture}/>
+                                    <Card.Body>
+                                    <Card.Title>{recommendations(2).fullName}</Card.Title>
+                                    <Card.Text>
+                                    {recommendations(2).summary}
+                                    </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </CardDeck>
+
 
                         </Card.Body>
                     </Card>

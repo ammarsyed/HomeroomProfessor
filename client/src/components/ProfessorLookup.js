@@ -127,21 +127,24 @@ const ProfessorLookup = (props) => {
         )
     }];
 
+    const defaultSearch = props.recommendedProfessors[0].fullName;
+
     return (
+        
         <>
             <Container>
                 <ToolkitProvider
                     keyField='firstName'
                     data={professorArray}
                     columns={columns}
-                    search={{ searchFormatted: true }}
+                    search={{ searchFormatted: true }, {defaultSearch} }
                 >
                     {
                         props => (
                             <div>
                                 <br />
                                 <h5>Professor Lookup</h5>
-                                <SearchBar {...props.searchProps} />
+                                <SearchBar {...props.searchProps}/>
                                 <hr />
                                 <BootstrapTable
                                     {...props.baseProps}
