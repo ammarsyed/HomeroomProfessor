@@ -36,7 +36,7 @@ const Login = (props) =>
         {
 
             console.log('on login success function called')
-            props.onLoginSuccess(user);
+            await props.onLoginSuccess(user);
             console.log('calling updateLogin')
             updateLogin(true);
             console.log('push')

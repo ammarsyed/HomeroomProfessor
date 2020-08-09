@@ -23,11 +23,97 @@ const App = (props) =>
     const [loginState, setLoginState] = useState(false);
     const [currentUser, setCurrentUser] = useState("");
 
+    const [recommendedProfessors, setrecommendedProfessors] = useState([])
+
+
+    const findRecommendedProfessors = (user) =>
+    {
+        console.log("hit find recommended professors")
+        let currentRecommendedProfessorList = [];
+
+        const studentSubjects = [];
+
+        const allStudentSubjects = user.subjects;
+        console.log('RIGHT BEFORE FOR LOOP')
+
+        console.log(allStudentSubjects)
+        for(let subjectItem in allStudentSubjects)
+        {
+            console.log("INSIDE FOR LOOP")
+            console.log('subjectItem')
+            console.log(subjectItem);
+            console.log('value')
+            console.log(allStudentSubjects[subjectItem])
+            if(allStudentSubjects[subjectItem] == true)
+            {
+                console.log('inside all students subjects true')
+                studentSubjects.push(subjectItem);
+            }
+        }
+        // filters professorlist based on common subject with student
+        console.log('STUDENT SUBJECTS')
+        console.log(studentSubjects)
+        currentRecommendedProfessorList = professorProps.filter(
+            professor =>
+            {
+                console.log(professor);
+                const allProfessorSubjects = professor.subjects;
+                for(let subjectItem in allProfessorSubjects)
+                {
+                    console.log('in first for loop')
+                    if(allProfessorSubjects[subjectItem] == true)
+                    {
+                        console.log('in first if')
+                        console.log(subjectItem)
+                        if(studentSubjects.includes(subjectItem))
+                        {
+                            console.log('TRUE');
+                            return true;
+                        }
+                    }
+                }
+
+            }
+        );
+
+        console.log("almost end of recommended prof function")
+        console.log(currentRecommendedProfessorList);
+        setrecommendedProfessors(currentRecommendedProfessorList);
+
+        // TIME TO RANDOMIZE SHIT
+        let randomizedArray = [];
+
+        if(currentRecommendedProfessorList.length > 5)
+        {
+            while(randomizedArray.length != 5)
+            {
+                let randomProfessor = currentRecommendedProfessorList[Math.floor(Math.random() * currentRecommendedProfessorList.length)];
+
+                if(!randomizedArray.includes(randomProfessor))
+                {
+                    randomizedArray.push(randomProfessor);
+                }
+            }
+            setrecommendedProfessors(currentRecommendedProfessorList);
+        }
+
+
+    }
+
     //good idea to use student and professor check
-    const onLoginSuccess = (userType) =>
+    const onLoginSuccess = async (userType) =>
     {
         console.log('reached onLoginSuccess')
-        setCurrentUser(studenthttpUser.getCurrentUser());
+        await setCurrentUser(studenthttpUser.getCurrentUser());
+        console.log(currentUser);
+        console.log("right after setcurrent user")
+        console.log('PRINTING CURRENT USER')
+        console.log(studenthttpUser.getCurrentUser().subjects);
+        if(studenthttpUser.getCurrentUser()['userType'] == "student")
+        {
+            console.log('A STUDENT')
+            findRecommendedProfessors(studenthttpUser.getCurrentUser());
+        }
     };
 
     const logOut = () =>
@@ -84,8 +170,8 @@ const App = (props) =>
                         render={(props) => (
                             currentUser ?
                                 <StudentDashboard {...props} profs={professorProps} sendProfs={professorUpdate}
-                                                  currentUser={currentUser} location={props.location}
-                                                  updateDB={updateDatabase}
+                                    currentUser={currentUser} location={props.location}
+                                    updateDB={updateDatabase} recommendedProfessors={recommendedProfessors}
                                 /> :
                                 <Redirect to="/" />
                         )}
@@ -100,7 +186,7 @@ const App = (props) =>
                         path="/professor"
                         render={(props) => (
                             <ProfessorDashboard {...props} students={studentProps} profs={professorProps}
-                                                currentUser={currentUser} updateDB={updateDatabase}
+                                currentUser={currentUser} updateDB={updateDatabase}
                             />
                         )}
                     />

@@ -3,7 +3,7 @@ import axios from "axios";
 import {useHistory} from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Container, Row, Button, Col } from 'react-bootstrap';
+import {Container, Row, Button, Col} from 'react-bootstrap';
 
 import studenthttpUser from '../../studenthttpUser.js'
 const API_URL = 'api/students';
