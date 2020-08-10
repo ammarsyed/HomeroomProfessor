@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import { Container, Row, Button, Col, Alert } from 'react-bootstrap';
+import {Container, Row, Button, Col, Alert} from 'react-bootstrap';
 import studenthttpUser from '../../studenthttpUser.js'
 
 const API_URL = 'api/students';
@@ -107,16 +107,50 @@ const StudentRegister = (props) =>
         let errors = [];
 
 
-        if(firstName == "")
+        let expression = /^[a-zA-Z]+$/;
+        var testfirstName = expression.test(String(firstName).toLowerCase());
+
+        if(firstName == "" || !testfirstName)
         {
             errors.push("firstName");
         }
+        var testLastName = expression.test(String(lastName).toLowerCase());
 
-        if(lastName == "")
+        if(lastName == "" || !testLastName)
         {
             errors.push("lastName");
         }
-        if(username == "")
+        if(city == "")
+        {
+            errors.push("city");
+        }
+        if(state == "" || state.length != 2)
+        {
+            errors.push("state");
+        }
+        if(phoneNumber == "" || phoneNumber.length < 10 || phoneNumber.length > 11)
+        {
+            errors.push("phoneNumber")
+        }
+
+        expression = /\S+@\S+\.\S+/;
+        let validEmail = expression.test(String(email).toLowerCase());
+        if(email == "" || !validEmail)
+        {
+            errors.push("email")
+        }
+        if(grade == "")
+        {
+            errors.push("grade");
+        }
+        if(age == "" || !Number(age) || Number(age) < 0 || Number(age) > 100)
+        {
+            errors.push("age")
+        }
+        expression = /^[a-zA-Z0-9]+$/;
+        let validUsername = expression.test(String(username).toLowerCase());
+
+        if(username == "" || !validUsername)
         {
             errors.push("username")
         }
