@@ -28,6 +28,15 @@ const ProfessorDashboard = (props) => {
 
     }, [])
 
+    // This should trigger wheneever props.currentUser is updated,
+    // I think.
+    //useEffect(() => {
+    //    props.updateDB();
+
+    //    setStudentArray(studenthttpUser.getCurrentUser());
+
+    //}, [props.currentUser])
+
     // COMEBACK
     function updateCurrProf()
     {
