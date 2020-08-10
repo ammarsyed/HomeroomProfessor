@@ -1,16 +1,13 @@
 import React from 'react';
-import {Modal, Button, Row, Image, Col} from 'react-bootstrap';
+import { Modal, Button, Row, Image, Col } from 'react-bootstrap';
 
-const AppointmentModal = (props) =>
-{
+const AppointmentModal = (props) => {
 
-    const submitModal = () =>
-    {
+    const submitModal = () => {
         props.onSubmit();
     }
 
-    const closeModal = () =>
-    {
+    const closeModal = () => {
         props.onClose();
     }
 

@@ -41,14 +41,11 @@ const checkLogin = (req, res) =>
     const blank = {};
     var query = Student.find(blank);
 
-    query.exec(function (err, all)
-    {
-        if(err)
-        {
+    query.exec(function (err, all) {
+        if (err) {
             res.status(404).send(err);
         }
-        else
-        {
+        else {
             res.json(all);
         }
     });

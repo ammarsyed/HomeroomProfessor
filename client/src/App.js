@@ -29,8 +29,6 @@ const App = (props) =>
     // studenthttpUser.updateCurrentUser();
     // setCurrentUser(studenthttpUser.getCurrentUser());
 
-
-
     const findRecommendedProfessors = (user) =>
     {
         // console.log("hit find recommended professors")
@@ -85,7 +83,6 @@ const App = (props) =>
         // console.log(currentRecommendedProfessorList);
         setrecommendedProfessors(currentRecommendedProfessorList);
 
-        // TIME TO RANDOMIZE SHIT
         let randomizedArray = [];
 
         if(currentRecommendedProfessorList.length > 5)

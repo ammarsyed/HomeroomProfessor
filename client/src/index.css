@@ -124,6 +124,15 @@ textarea
 	font-size: larger;
 }
 
+.inline-errormsg {
+	color: red;
+	font-size: 14px;
+}
+
+.is-invalid {
+	border: 1px solid red !important;
+}
+
 /* Hide all steps by default: */
 .tab {
 	display: none;

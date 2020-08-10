@@ -39,14 +39,11 @@ const checkLogin = (req, res) =>
     const blank = {};
     var query = Professor.find(blank);
 
-    query.exec(function (err, all)
-    {
-        if(err)
-        {
+    query.exec(function (err, all) {
+        if (err) {
             res.status(404).send(err);
         }
-        else
-        {
+        else {
             res.json(all);
         }
     });
@@ -82,8 +79,7 @@ const addStudentToProfessor = (req, res) =>
     });
 };
 
-const addMeetingDate = (req, res) =>
-{
+const addMeetingDate = (req, res) => {
 
     // console.log("addMeetingDate");
 
@@ -91,7 +87,7 @@ const addMeetingDate = (req, res) =>
 
     var query = Professor.findOneAndUpdate(
 
-        {"_id": req.body.id, "students._id": req.body.student_id},
+        { "_id": req.body.id, "students._id": req.body.student_id },
         {
             "$set": {
                 "students.$.approved": req.body.approved,
@@ -99,14 +95,11 @@ const addMeetingDate = (req, res) =>
             }
         });
 
-    query.exec(function (err, result)
-    {
-        if(err)
-        {
+    query.exec(function (err, result) {
+        if (err) {
             res.status(404).send(err);
         }
-        else
-        {
+        else {
             // console.log(result)
         }
     });

@@ -1,17 +1,14 @@
 import React from 'react';
-import {Col, Image, Container, Card, ListGroup, Figure} from 'react-bootstrap';
+import { Col, Image, Container, Card, ListGroup, Figure } from 'react-bootstrap';
 
-const ProfessorAccount = (props) =>
-{
+const ProfessorAccount = (props) => {
 
-    function titleCase(str)
-    {
+    function titleCase(str) {
         // console.log(str)
-        if(str == null) return '';
+        if (str == null) return '';
 
         var splitStr = str.toLowerCase().split(' ');
-        for(var i = 0; i < splitStr.length; i++)
-        {
+        for (var i = 0; i < splitStr.length; i++) {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         return splitStr.join(' ');

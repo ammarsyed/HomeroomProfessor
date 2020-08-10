@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useHistory} from "react-router-dom";
-import {Container, ButtonToolbar, ButtonGroup, Row, Button, Col} from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
+import { Container, ButtonToolbar, ButtonGroup, Row, Button, Col } from 'react-bootstrap';
 import studenthttpUser from '../../studenthttpUser';
 const API_URL = 'api/professors';
 
-const ProfessorRegister = (props) =>
-{
+const ProfessorRegister = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -62,31 +61,27 @@ const ProfessorRegister = (props) =>
     const rows = textRowCount + 3
 
     //splits a string and capitalizes the first letter of every word
-    function titleCase(str)
-    {
+    function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
-        for(var i = 0; i < splitStr.length; i++)
-        {
+        for (var i = 0; i < splitStr.length; i++) {
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         return splitStr.join(' ');
     }
 
 
-    const handleSubmit = async (event) =>
-    {
+    const handleSubmit = async (event) => {
         // console.log("in submit");
 
         event.preventDefault();
 
         let subjArr = [];
         var checkboxes = document.querySelectorAll('input[name="subject"]:checked');
-        for(var checkbox of checkboxes)
-        {
+        for (var checkbox of checkboxes) {
             let temp = checkbox.value;
             temp = temp.replace('{', '');
             temp = temp.replace('}', '');
-            if(temp.includes('science')) temp = temp.replace("science", " Science");
+            if (temp.includes('science')) temp = temp.replace("science", " Science");
             temp = titleCase(temp);
 
             subjArr.push(temp);
@@ -95,8 +90,7 @@ const ProfessorRegister = (props) =>
 
         let availArr = [];
         var checkboxes = document.querySelectorAll('input[name="availability"]:checked');
-        for(var checkbox of checkboxes)
-        {
+        for (var checkbox of checkboxes) {
             let temp = checkbox.value;
             temp = temp.replace('{', '');
             temp = temp.replace('}', '');
@@ -151,8 +145,7 @@ const ProfessorRegister = (props) =>
 
         const professorUser = await studenthttpUser.signUp(newprofessor);
 
-        if(professorUser)
-        {
+        if (professorUser) {
             // Maybe pop up saying successful registration here?
         }
 
@@ -160,15 +153,12 @@ const ProfessorRegister = (props) =>
     };
 
     //Function to change the input type for password entries to allow for show/hide checkbox
-    function showPassword()
-    {
+    function showPassword() {
         let x = document.getElementById("inputPassword");
 
-        if(x.type === "password")
-        {
+        if (x.type === "password") {
             x.type = "text";
-        } else
-        {
+        } else {
             x.type = "password";
         }
     }
@@ -181,8 +171,7 @@ const ProfessorRegister = (props) =>
     const registrationHidden = displayRegistration ? '' : 'hidden';
     const questionaireHidden = displayQuestionaire ? '' : 'hidden';
 
-    const handleNext = (event) =>
-    {
+    const handleNext = (event) => {
         event.preventDefault();
         setDisplayRegistration(false);
         setDisplayQuestionaire(true);
@@ -191,15 +180,12 @@ const ProfessorRegister = (props) =>
         setSubmit(true);
     }
 
-    const handlePrevious = (event) =>
-    {
+    const handlePrevious = (event) => {
         event.preventDefault();
 
-        if(displayRegistration && !displayQuestionaire)
-        {
+        if (displayRegistration && !displayQuestionaire) {
             browse_history.push("/")
-        } else
-        {
+        } else {
             setDisplayQuestionaire(false);
             setDisplayRegistration(true);
             document.getElementById("prevBttn").innerHTML = "Back";
@@ -490,23 +476,23 @@ const ProfessorRegister = (props) =>
                                 <div className="form-row ml-2 mt-2">
                                     <div className="form-check form-check-inline">
                                         <label><input type="checkbox" name="availability" className="form-check-input"
-                                            value="Monday" onChange={event => setMonday(!monday)} />Monday</label>
+                                            value="Monday" onChange={event => setMonday(!monday)}/>Monday</label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <label><input type="checkbox" name="availability" className="form-check-input"
-                                            value="Tuesday" onChange={event => setTuesday(!tuesday)} />Tuesday</label>
+                                            value="Tuesday" onChange={event => setTuesday(!tuesday)}/>Tuesday</label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <label><input type="checkbox" name="availability" className="form-check-input"
-                                            value="Wednesday" onChange={event => setWednesday(!wednesday)} />Wednesday</label>
+                                            value="Wednesday" onChange={event => setWednesday(!wednesday)}/>Wednesday</label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <label><input type="checkbox" name="availability" className="form-check-input"
-                                            value="Thursday" onChange={event => setThursday(!thursday)} />Thursday</label>
+                                            value="Thursday" onChange={event => setThursday(!thursday)}/>Thursday</label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <label><input type="checkbox" name="availability" className="form-check-input"
-                                            value="Friday" onChange={event => setFriday(!friday)} />Friday</label>
+                                            value="Friday" onChange={event => setFriday(!friday)}/>Friday</label>
                                     </div>
                                 </div>
                             </div>

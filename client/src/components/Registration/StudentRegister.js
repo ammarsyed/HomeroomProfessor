@@ -1,19 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import {Container, Row, Button, Col} from 'react-bootstrap';
-
+import { Container, Row, Button, Col, Alert } from 'react-bootstrap';
 import studenthttpUser from '../../studenthttpUser.js'
 
-import "bootstrap-css-only";
-import "./registratinvalidationstyle.css";
-import Alert from 'react-bootstrap/Alert'
-
 const API_URL = 'api/students';
-
-
 
 const StudentRegister = (props) =>
 {
@@ -223,7 +216,7 @@ const StudentRegister = (props) =>
                         Please enter your information below to register as a student.
                     </b>
                 </div>
-                <form onSubmit={handleSubmit} className="card p-3 larger-font" >
+                <form onSubmit={handleSubmit} className="card p-3 larger-font">
                     <div className="form-row">
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputFName" className="ml-2 mb-0">First Name</label>
@@ -240,9 +233,7 @@ const StudentRegister = (props) =>
                                 }}
                             />
                             <div style={{margin: "0px 0px 0px 8px"}} className={hasError("firstName") ? "inline-errormsg" : "hidden"}>Please enter a first name</div>
-
                         </div>
-
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputLName" className="ml-2 mb-0">Last Name</label>
                             <input
