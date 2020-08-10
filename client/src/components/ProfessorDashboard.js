@@ -51,7 +51,7 @@ const ProfessorDashboard = (props) => {
         console.log(studentArray);
     }
 
-    setInterval(updateCurrProf, 90000); //1.5 minutes so 90000 milliseconds
+    //setInterval(updateCurrProf, 90000); //1.5 minutes so 90000 milliseconds
 
     const handleDateClick = (arg) => {
         alert(arg.dateStr)
