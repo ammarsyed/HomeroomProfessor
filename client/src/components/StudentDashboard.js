@@ -20,7 +20,7 @@ const StudentDashboard = (props) => {
         return splitStr.join(' ');
     }
 
-    const firstProfName = titleCase(recProfs[0].fullName);
+    //const firstProfName = titleCase(recProfs[0].fullName);
 
 
     const history = useHistory();
@@ -126,7 +126,7 @@ const StudentDashboard = (props) => {
                                 </Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                {props.recommendedProfessors &&
+                                {props.recommendedProfessors[0] &&
                                     <>
                                     <ListGroup className="flex-xl-row justify-content-center border-0 align-items-center" variant="flush">
                                         <ListGroup.Item className="dashlist pt-0"><h5 className="cobalt-text">Professor Recommendations</h5></ListGroup.Item>
