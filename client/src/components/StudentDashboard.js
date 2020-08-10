@@ -101,18 +101,22 @@ const StudentDashboard = (props) => {
     return (
         <>
             <Container fluid>
-                <Card className="mt-3 cobalt-card">
-                    <Card.Body>
-                        <Row className="d-flex align-items-center mt-0 mb-0">
-                            <Col xs={12} md={10}>
-                                <Link to="/student" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
-                            </Col>
-                            <Col xs={12} md={2}>
-                                <Button className="float-right cobalt-button">Placeholder Button</Button>
-                            </Col>
-                        </Row>
-                    </Card.Body>
-                </Card>
+                <Row>
+                    <Col>
+                    <Card className="mt-3 cobalt-card">
+                        <Card.Body>
+                            <Row className="d-flex align-items-center mt-0 mb-0">
+                                <Col xs={12} md={10}>
+                                    <Link to="/student" className="h1">Welcome to your Dashboard, {props.currentUser.fullName}!</Link>
+                                </Col>
+                                <Col xs={12} md={2}>
+                                    <Button className="float-right cobalt-button">Placeholder Button</Button>
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
                         <Card id="nextFeature" className="mt-3 cobalt-card">
