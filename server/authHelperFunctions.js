@@ -14,14 +14,14 @@ const jwt_secret = process.env.secret || require('./config/config.js').secret;
 function signToken(user)
 {
 
-    console.log("in sign token function")
-    console.log(user);
+    // console.log("in sign token function")
+    // console.log(user);
     const userData = user.toObject();
-    console.log(userData)
+    // console.log(userData)
     delete userData.password;
-    console.log('after deleting password')
-    console.log(userData)
-    console.log(jwt_secret)
+    // console.log('after deleting password')
+    // console.log(userData)
+    // console.log(jwt_secret)
     return jwt.sign(userData, jwt_secret)
 }
 

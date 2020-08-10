@@ -6,10 +6,24 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import {Container, Row, Button, Col} from 'react-bootstrap';
 
 import studenthttpUser from '../../studenthttpUser.js'
+
+import "bootstrap-css-only";
+import "./registratinvalidationstyle.css";
+import Alert from 'react-bootstrap/Alert'
+
 const API_URL = 'api/students';
+
+
 
 const StudentRegister = (props) =>
 {
+
+    const [registrationSuccess, setregistrationSuccess] = useState(false);
+    const [registrationFailure, setregistrationFailure] = useState(false);
+
+
+    const [errors, setErrors] = useState([])
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -97,19 +111,55 @@ const StudentRegister = (props) =>
             }
         };
 
+        let errors = [];
 
-        //added below stuff
-        console.log(newstudent.username);
-        console.log(newstudent.password);
-        const studentUser = await studenthttpUser.signUp(newstudent);
-        console.log(studentUser);
-        //empty newStudent ??? not sure
-        if(studentUser)
+
+        if(firstName == "")
         {
-            // Maybe popup saying successful registration here?
+            errors.push("firstName");
         }
 
-        browse_history.push("/")
+        if(lastName == "")
+        {
+            errors.push("lastName");
+        }
+        if(username == "")
+        {
+            errors.push("username")
+        }
+        if(hash == "" || hash.length < 8)
+        {
+            errors.push("hash");
+        }
+
+        setErrors(errors);
+
+        if(errors.length == 0)
+        {
+            //added below stuff
+            // console.log(newstudent.username);
+            // console.log(newstudent.password);
+            const studentUser = await studenthttpUser.signUp(newstudent);
+            // console.log(studentUser);
+            //empty newStudent ??? not sure
+            if(studentUser)
+            {
+                // Maybe popup saying successful registration here?
+                // console.log('successful registration')
+                setregistrationFailure(false);
+                setregistrationSuccess(true);
+
+                setTimeout(function () {browse_history.push("/")}, 1000);
+
+                // browse_history.push("/")
+            }
+        }
+        else
+        {
+            setregistrationSuccess(false);
+            setregistrationFailure(true);
+        }
+
     };
 
     const backButton = (event) =>
@@ -136,7 +186,7 @@ const StudentRegister = (props) =>
     //function to handle the drowndown select for grade
     const handleSelect = (event) =>
     {
-        console.log(event);
+        // console.log(event);
         setGrade(event);
 
         if(event === "0")
@@ -145,9 +195,26 @@ const StudentRegister = (props) =>
             setGradeDisplay(event);
     }
 
+    const hasError = (key) =>
+    {
+        return errors.indexOf(key) !== -1; //true if key is in array, false if it is not
+    }
+    const [thingy, setthingy] = useState({});
+    const handleInputChange = (event) =>
+    {
+        let key = event.target.name;
+        let value = event.target.value;
+        let obj = {};
+        obj[key] = value;
+        setthingy(obj);
+    }
+
     return (
         <>
             <Container>
+                <br></br>
+                {registrationSuccess ? <Alert variant='success'>Registration Successful!</Alert> : null}
+                {registrationFailure ? <Alert variant='danger'>Registration Unsuccessful! Double check for errors in registration form! </Alert> : null}
                 <div className="row">
                     <h2>Student Registration</h2>
                 </div>
@@ -156,18 +223,26 @@ const StudentRegister = (props) =>
                         Please enter your information below to register as a student.
                     </b>
                 </div>
-                <form onSubmit={handleSubmit} className="card p-3 larger-font">
+                <form onSubmit={handleSubmit} className="card p-3 larger-font" >
                     <div className="form-row">
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputFName" className="ml-2 mb-0">First Name</label>
                             <input
+                                className={hasError("firstName") ? "form-control is-invalid" : null}
                                 id="inputFName"
                                 type="text"
                                 placeholder="First Name"
                                 value={firstName}
-                                onChange={event => setFirstName(event.target.value)}
+                                onChange={event =>
+                                {
+                                    setFirstName(event.target.value);
+                                    handleInputChange(event);
+                                }}
                             />
+                            <div style={{margin: "0px 0px 0px 8px"}} className={hasError("firstName") ? "inline-errormsg" : "hidden"}>Please enter a first name</div>
+
                         </div>
+
                         <div className="form-group col-md-6 mb-0">
                             <label htmlFor="inputLName" className="ml-2 mb-0">Last Name</label>
                             <input

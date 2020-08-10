@@ -25,49 +25,54 @@ const App = (props) =>
 
     const [recommendedProfessors, setrecommendedProfessors] = useState([])
 
+    // lines to update current professor user
+    // studenthttpUser.updateCurrentUser();
+    // setCurrentUser(studenthttpUser.getCurrentUser());
+
+
 
     const findRecommendedProfessors = (user) =>
     {
-        console.log("hit find recommended professors")
+        // console.log("hit find recommended professors")
         let currentRecommendedProfessorList = [];
 
         const studentSubjects = [];
 
         const allStudentSubjects = user.subjects;
-        console.log('RIGHT BEFORE FOR LOOP')
+        // console.log('RIGHT BEFORE FOR LOOP')
 
-        console.log(allStudentSubjects)
+        // console.log(allStudentSubjects)
         for(let subjectItem in allStudentSubjects)
         {
-            console.log("INSIDE FOR LOOP")
-            console.log('subjectItem')
-            console.log(subjectItem);
-            console.log('value')
-            console.log(allStudentSubjects[subjectItem])
+            // console.log("INSIDE FOR LOOP")
+            // console.log('subjectItem')
+            // console.log(subjectItem);
+            // console.log('value')
+            // console.log(allStudentSubjects[subjectItem])
             if(allStudentSubjects[subjectItem] == true)
             {
-                console.log('inside all students subjects true')
+                // console.log('inside all students subjects true')
                 studentSubjects.push(subjectItem);
             }
         }
         // filters professorlist based on common subject with student
-        console.log('STUDENT SUBJECTS')
-        console.log(studentSubjects)
+        // console.log('STUDENT SUBJECTS')
+        // console.log(studentSubjects)
         currentRecommendedProfessorList = professorProps.filter(
             professor =>
             {
-                console.log(professor);
+                // console.log(professor);
                 const allProfessorSubjects = professor.subjects;
                 for(let subjectItem in allProfessorSubjects)
                 {
-                    console.log('in first for loop')
+                    // console.log('in first for loop')
                     if(allProfessorSubjects[subjectItem] == true)
                     {
-                        console.log('in first if')
-                        console.log(subjectItem)
+                        // console.log('in first if')
+                        // console.log(subjectItem)
                         if(studentSubjects.includes(subjectItem))
                         {
-                            console.log('TRUE');
+                            // console.log('TRUE');
                             return true;
                         }
                     }
@@ -76,8 +81,8 @@ const App = (props) =>
             }
         );
 
-        console.log("almost end of recommended prof function")
-        console.log(currentRecommendedProfessorList);
+        // console.log("almost end of recommended prof function")
+        // console.log(currentRecommendedProfessorList);
         setrecommendedProfessors(currentRecommendedProfessorList);
 
         // TIME TO RANDOMIZE SHIT
@@ -103,15 +108,15 @@ const App = (props) =>
     //good idea to use student and professor check
     const onLoginSuccess = async (userType) =>
     {
-        console.log('reached onLoginSuccess')
+        // console.log('reached onLoginSuccess')
         await setCurrentUser(studenthttpUser.getCurrentUser());
-        console.log(currentUser);
-        console.log("right after setcurrent user")
-        console.log('PRINTING CURRENT USER')
-        console.log(studenthttpUser.getCurrentUser().subjects);
+        // console.log(currentUser);
+        // console.log("right after setcurrent user")
+        // console.log('PRINTING CURRENT USER')
+        // console.log(studenthttpUser.getCurrentUser().subjects);
         if(studenthttpUser.getCurrentUser()['userType'] == "student")
         {
-            console.log('A STUDENT')
+            // console.log('A STUDENT')
             findRecommendedProfessors(studenthttpUser.getCurrentUser());
         }
     };
@@ -163,7 +168,7 @@ const App = (props) =>
                         path="/student/professor-lookup"
                         render={(props) => (
                             <ProfessorLookup {...props} profs={professorProps} location={props.location} currentUser={currentUser}
-                            recommendedProfessors={recommendedProfessors} />
+                                recommendedProfessors={recommendedProfessors} />
                         )}
                     />
                     <Route
@@ -187,7 +192,7 @@ const App = (props) =>
                         path="/professor"
                         render={(props) => (
                             <ProfessorDashboard {...props} students={studentProps} profs={professorProps}
-                                currentUser={currentUser} updateDB={updateDatabase}
+                                currentUser={currentUser} setCurrentUser={setCurrentUser} updateDB={updateDatabase}
                             />
                         )}
                     />

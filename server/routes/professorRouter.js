@@ -18,6 +18,8 @@ professorRouter.get('/getProfessor/:id', professors.getOneProfessor);
 
 professorRouter.get('/getAllProfessors', professors.getAllProfessors);
 
+professorRouter.post('/getUpdatedProfessor', professors.getUpdatedProfessor);
+
 
 professorRouter.use(verifyToken);//middleware to protect routes
 

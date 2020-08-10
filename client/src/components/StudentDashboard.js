@@ -35,7 +35,7 @@ const StudentDashboard = (props) => {
 
     function customEventClick(info) {
         info.jsEvent.preventDefault(); // don't let the browser navigate
-        console.log(info.event.url);
+        // console.log(info.event.url);
 
         let temp = info.event.url.replace("")
 
