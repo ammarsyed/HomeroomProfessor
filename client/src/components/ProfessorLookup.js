@@ -127,7 +127,7 @@ const ProfessorLookup = (props) => {
         )
     }];
 
-    const defaultSearch = props.recommendedProfessors[0].fullName;
+    const defaultSearch = props.recommendedProfessors[0] ? props.recommendedProfessors[0].fullName : "";
 
     return (
         
