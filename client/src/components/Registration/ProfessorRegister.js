@@ -439,11 +439,11 @@ const ProfessorRegister = (props) => {
                     <div className={questionaireHidden}>
                         <div className="form-row">
                             <div className="form-group col-md-6 mb-0">
-                                <label htmlFor="inputPicture" className="ml-2 mb-0">Profile Picture</label>
+                                <label htmlFor="inputPicture" className="ml-2 mb-0">Profile Picture Link</label>
                                 <input
                                     id="inputPicture"
                                     type="text"
-                                    placeholder="My_Profile_Picture.png"
+                                    placeholder="https://www.website.com/My_Profile_Picture.png"
                                     value={picture}
                                     onChange={event => setPicture(event.target.value)}
                                 />
