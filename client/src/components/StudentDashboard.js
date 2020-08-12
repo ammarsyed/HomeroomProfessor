@@ -175,8 +175,8 @@ const StudentDashboard = (props) => {
                                     </>
                                 }
                                 <ListGroup className="flex-xl-row justify-content-center border-bottom border-top align-items-center" variant="flush">
-                                    <ListGroup.Item className="dashlist"><h3 className="cobalt-text">Search Available Professors:</h3></ListGroup.Item>
-                                    <ListGroup.Item className="dashlist"><Button className="cobalt-button" onClick={professorClick}>Professor Lookup</Button></ListGroup.Item>
+                                    <ListGroup.Item className="dashlist border-0"><h3 className="cobalt-text">Search Available Professors:</h3></ListGroup.Item>
+                                    <ListGroup.Item className="dashlist border-0"><Button className="cobalt-button" onClick={professorClick}>Professor Lookup</Button></ListGroup.Item>
                                 </ListGroup>
                             </Card.Body>
                         </Card>
