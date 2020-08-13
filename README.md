@@ -8,7 +8,7 @@ The purpose of Homeroom Professor was to provide a volunteer service for faculty
 
 The website has been built with a variety of different features including but not limited to, unique student and professor dashboards, requesting and scheduling appointments, a professor lookup table, an integrated calendar, professor profile pages, and zoom meeting support. Additional features could be incorporated in future versions, and the dashboard layout on the site provides an easy interface to build off of. 
 
-##Tech Stack
+## Tech Stack
 This full stack web application was developed using the MERN (MongoDB, Express, React, and Nodejs) Stack.
 
 
