@@ -12,15 +12,15 @@ The website has been built with a variety of different features including but no
 This full stack web application was developed using the MERN (MongoDB, Express, React, and Nodejs) Stack.
 
 
-###**Scripts**
+### **Scripts**
 
-####Installing 
+#### Installing 
 
 --**npm install** in the directory with the client and server FOLDERS. This directory also has a package.json and will be where your node modules for the server (backend) go.
 
 --**npm install** inside the client directory will install nodemodules and stuff for the client (frontend)
 
-###Running 
+### Running 
 
 --**npm run server** in the directory with client and server folder will run the server via nodemon, refreshing server for any changes. 
 
@@ -33,5 +33,5 @@ This full stack web application was developed using the MERN (MongoDB, Express, 
 
 --**npm run dev** from the directory with the client and server folder will start both frontend and server (backend)
 
-###Deployment
+### Deployment
 --The application was deployed using Heroku. The link is: homeroomprofessor-autodeploy.herokuapp.com
