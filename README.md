@@ -11,6 +11,8 @@ The website has been built with a variety of different features including but no
 ## Tech Stack
 This full stack web application was developed using the MERN (MongoDB, Express, React, and Nodejs) Stack.
 
+## System Requirements Specification Document
+There is an SRS Document in pdf format that further explains the navigation and features of this web application.
 
 ### **Scripts**
 
@@ -27,7 +29,6 @@ This full stack web application was developed using the MERN (MongoDB, Express, 
 --**npm start** in the directory with client and server folder will run the server via node. You will have to restart the server after any changes in the server/backend. 
 
 --**npm start** in the client folder will start and launch the front end
-
 
 --**npm run client** from the directory with client and server folder will start the frontend(client)
 
